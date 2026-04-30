@@ -1,25 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
-import look1 from "@/assets/look-1.jpg";
-import look2 from "@/assets/look-2.jpg";
-import look3 from "@/assets/look-3.jpg";
-import look4 from "@/assets/look-4.jpg";
-import look5 from "@/assets/look-5.jpg";
-import look6 from "@/assets/look-6.jpg";
+import sidai1 from "@/assets/sidai-1.jpg";
+import sidai2 from "@/assets/sidai-2.jpg";
+import sidai3 from "@/assets/sidai-3.jpg";
+import sidai4 from "@/assets/sidai-4.jpg";
+import sidai5 from "@/assets/sidai-5.jpg";
+import sidai6 from "@/assets/sidai-6.jpg";
+import sidai7 from "@/assets/sidai-7.jpg";
 
 export const Route = createFileRoute("/sidai")({
   head: () => ({
     meta: [
-      { title: "Lulu Sidai — Everyday Fashion · Lulu Clothline" },
+      { title: "Lulu Sidai — Maasai Couture · Lulu Clothline" },
       {
         name: "description",
         content:
-          "Shop the Lulu Sidai collection — everyday fashion made for confidence and style. Order on WhatsApp, delivery across Kenya.",
+          "Lulu Sidai — handcrafted Maasai-inspired couture. Beaded gowns, capes, and cultural statement pieces, made in Kenya. Order on WhatsApp.",
       },
-      { property: "og:title", content: "Lulu Sidai Collection" },
+      { property: "og:title", content: "Lulu Sidai — Maasai Couture" },
       {
         property: "og:description",
-        content: "Everyday fashion made for confidence and style. M-Pesa accepted.",
+        content: "Handcrafted Maasai-inspired couture. Made in Kenya 🇰🇪",
       },
+      { property: "og:image", content: "/og-sidai.jpg" },
     ],
   }),
   component: SidaiPage,
@@ -31,12 +33,55 @@ const wa = (item: string) =>
   )}`;
 
 const products = [
-  { name: "Sahara Slip Dress", price: 3500, img: look1 },
-  { name: "Oversized Camel Blazer", price: 5800, img: look2 },
-  { name: "Cream Maxi Dress", price: 3200, img: look3 },
-  { name: "Knit Turtleneck Set", price: 4200, img: look4 },
-  { name: "Earth Tone Co-ord (Men)", price: 4800, img: look5 },
-  { name: "Amber Linen Jumpsuit", price: 5200, img: look6 },
+  {
+    name: "Nashipai Beaded Gown",
+    tag: "Signature",
+    price: 12500,
+    img: sidai1,
+    desc: "Crimson maxi with hand-beaded chevron detailing and matching shawl.",
+  },
+  {
+    name: "Naserian Cape Dress",
+    tag: "Bridal",
+    price: 14800,
+    img: sidai2,
+    desc: "Scarlet mini with flowing white cape and beaded collar — statement piece.",
+  },
+  {
+    name: "Resian Heritage Maxi",
+    tag: "Cultural",
+    price: 11200,
+    img: sidai3,
+    desc: "Soft sky-blue gown with red checked sleeve and tribal embroidery.",
+  },
+  {
+    name: "Naipanoi Stage Gown",
+    tag: "Couture",
+    price: 16500,
+    img: sidai4,
+    desc: "Ceremonial white & blue gown with vibrant Maasai motif embroidery.",
+  },
+  {
+    name: "Sankau Performance Set",
+    tag: "Couture",
+    price: 15800,
+    img: sidai5,
+    desc: "Layered white skirt and structured top with multicolour beadwork.",
+  },
+  {
+    name: "Lavie Mermaid Gown",
+    tag: "Featured on TikTok",
+    price: 13900,
+    img: sidai6,
+    desc: "Off-shoulder red corset with flowing white mermaid skirt.",
+  },
+  {
+    name: "Twin Flame Cape Set",
+    tag: "Duo",
+    price: 11800,
+    img: sidai7,
+    desc: "Matching beaded red gowns with optional white cape — perfect for sisters & bridal parties.",
+  },
 ];
 
 const tiktoks = [
@@ -51,22 +96,74 @@ function SidaiPage() {
       <section className="border-b border-border/60">
         <div className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
           <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">
-            The Collection
+            Maasai Couture · Made in Kenya 🇰🇪
           </p>
-          <h1 className="font-display text-5xl md:text-7xl">Lulu Sidai Collection</h1>
+          <h1 className="font-display text-5xl leading-[0.95] md:text-7xl">
+            Lulu Sidai
+            <br />
+            <span className="italic text-accent">Heritage in every stitch.</span>
+          </h1>
           <p className="mt-6 max-w-xl text-muted-foreground">
-            Everyday fashion made for confidence and style. Curated drops, ordered straight on
-            WhatsApp, delivered to your door.
+            A couture line rooted in Maasai craftsmanship — handcrafted gowns, beaded capes
+            and cultural statement pieces, designed and made in Kenya. Each piece is
+            tailored on order.
           </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href={wa("a Lulu Sidai piece")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tracking-luxury rounded-full bg-foreground px-6 py-3 text-[11px] text-background transition-opacity hover:opacity-90"
+            >
+              Order on WhatsApp
+            </a>
+            <a
+              href="#collection"
+              className="tracking-luxury rounded-full border border-foreground/30 px-6 py-3 text-[11px] hover:bg-foreground hover:text-background"
+            >
+              View Collection
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* EDITORIAL HERO PAIR */}
+      <section className="grid grid-cols-1 md:grid-cols-2">
+        <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
+          <img
+            src={sidai1}
+            alt="Nashipai Beaded Gown — signature crimson Maasai couture"
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
+          <img
+            src={sidai4}
+            alt="Naipanoi Stage Gown — ceremonial Maasai couture"
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         </div>
       </section>
 
       {/* PRODUCT GRID */}
-      <section className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-24">
-        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      <section id="collection" className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
+        <div className="mb-12 flex items-end justify-between">
+          <div>
+            <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
+              The Sidai Collection
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl">Featured pieces</h2>
+          </div>
+          <p className="hidden max-w-xs text-sm text-muted-foreground md:block">
+            Each piece is made-to-order. Delivery 7–14 days within Kenya.
+          </p>
+        </div>
+        <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
             <div key={p.name} className="group">
-              <div className="overflow-hidden bg-muted">
+              <div className="relative overflow-hidden bg-muted">
                 <img
                   src={p.img}
                   alt={p.name}
@@ -75,22 +172,30 @@ function SidaiPage() {
                   height={1200}
                   className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <span className="tracking-luxury absolute left-3 top-3 rounded-full bg-background/85 px-3 py-1 text-[9px] text-foreground backdrop-blur">
+                  {p.tag}
+                </span>
               </div>
-              <div className="mt-5 flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-display text-xl">{p.name}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    KSh {p.price.toLocaleString()}
-                  </p>
+              <div className="mt-5">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-display text-xl leading-tight">{p.name}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      KSh {p.price.toLocaleString()}
+                    </p>
+                  </div>
+                  <a
+                    href={wa(p.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="tracking-luxury whitespace-nowrap rounded-full bg-foreground px-4 py-2.5 text-[10px] text-background transition-opacity hover:opacity-90"
+                  >
+                    Order
+                  </a>
                 </div>
-                <a
-                  href={wa(p.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="tracking-luxury whitespace-nowrap rounded-full bg-foreground px-4 py-2.5 text-[10px] text-background transition-opacity hover:opacity-90"
-                >
-                  Order
-                </a>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {p.desc}
+                </p>
               </div>
             </div>
           ))}
