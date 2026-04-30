@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TextileRouteImport } from './routes/textile'
 import { Route as SidaiRouteImport } from './routes/sidai'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TextileRoute = TextileRouteImport.update({
+  id: '/textile',
+  path: '/textile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SidaiRoute = SidaiRouteImport.update({
   id: '/sidai',
   path: '/sidai',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sidai': typeof SidaiRoute
+  '/textile': typeof TextileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sidai': typeof SidaiRoute
+  '/textile': typeof TextileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sidai': typeof SidaiRoute
+  '/textile': typeof TextileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sidai'
+  fullPaths: '/' | '/sidai' | '/textile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sidai'
-  id: '__root__' | '/' | '/sidai'
+  to: '/' | '/sidai' | '/textile'
+  id: '__root__' | '/' | '/sidai' | '/textile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SidaiRoute: typeof SidaiRoute
+  TextileRoute: typeof TextileRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/textile': {
+      id: '/textile'
+      path: '/textile'
+      fullPath: '/textile'
+      preLoaderRoute: typeof TextileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sidai': {
       id: '/sidai'
       path: '/sidai'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SidaiRoute: SidaiRoute,
+  TextileRoute: TextileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
