@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import sidai1 from "@/assets/sidai-1.jpg";
 import sidai2 from "@/assets/sidai-2.jpg";
 import sidai3 from "@/assets/sidai-3.jpg";
@@ -7,6 +8,7 @@ import sidai5 from "@/assets/sidai-5.jpg";
 import sidai6 from "@/assets/sidai-6.jpg";
 import sidai7 from "@/assets/sidai-7.jpg";
 import sidaiReel1 from "@/assets/sidai-reel-1.mp4";
+import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/sidai")({
   head: () => ({
@@ -40,6 +42,8 @@ const products = [
     price: 12500,
     img: sidai1,
     desc: "Crimson maxi with hand-beaded chevron detailing and matching shawl.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Crimson", "Black", "Ivory"],
   },
   {
     name: "Naserian Cape Dress",
@@ -47,6 +51,8 @@ const products = [
     price: 14800,
     img: sidai2,
     desc: "Scarlet mini with flowing white cape and beaded collar — statement piece.",
+    sizes: ["XS", "S", "M", "L"],
+    colors: ["Scarlet/White", "Black/White"],
   },
   {
     name: "Resian Heritage Maxi",
@@ -54,6 +60,8 @@ const products = [
     price: 11200,
     img: sidai3,
     desc: "Soft sky-blue gown with red checked sleeve and tribal embroidery.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["Sky Blue", "Sand", "Olive"],
   },
   {
     name: "Naipanoi Stage Gown",
@@ -61,6 +69,8 @@ const products = [
     price: 16500,
     img: sidai4,
     desc: "Ceremonial white & blue gown with vibrant Maasai motif embroidery.",
+    sizes: ["S", "M", "L"],
+    colors: ["White/Blue", "White/Red"],
   },
   {
     name: "Sankau Performance Set",
@@ -68,6 +78,8 @@ const products = [
     price: 15800,
     img: sidai5,
     desc: "Layered white skirt and structured top with multicolour beadwork.",
+    sizes: ["S", "M", "L"],
+    colors: ["White/Multi", "Black/Multi"],
   },
   {
     name: "Lavie Mermaid Gown",
@@ -75,6 +87,8 @@ const products = [
     price: 13900,
     img: sidai6,
     desc: "Off-shoulder red corset with flowing white mermaid skirt.",
+    sizes: ["XS", "S", "M", "L"],
+    colors: ["Red/White", "Black/White"],
   },
   {
     name: "Twin Flame Cape Set",
@@ -82,6 +96,8 @@ const products = [
     price: 11800,
     img: sidai7,
     desc: "Matching beaded red gowns with optional white cape — perfect for sisters & bridal parties.",
+    sizes: ["S", "M", "L"],
+    colors: ["Red", "Red/White Cape"],
   },
 ];
 
@@ -176,42 +192,7 @@ function SidaiPage() {
         </div>
         <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
-            <div key={p.name} className="group">
-              <div className="relative overflow-hidden bg-muted">
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  loading="lazy"
-                  width={900}
-                  height={1200}
-                  className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <span className="tracking-luxury absolute left-3 top-3 rounded-full bg-background/85 px-3 py-1 text-[9px] text-foreground backdrop-blur">
-                  {p.tag}
-                </span>
-              </div>
-              <div className="mt-5">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="font-display text-xl leading-tight">{p.name}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      KSh {p.price.toLocaleString()}
-                    </p>
-                  </div>
-                  <a
-                    href={wa(p.name)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="tracking-luxury whitespace-nowrap rounded-full bg-foreground px-4 py-2.5 text-[10px] text-background transition-opacity hover:opacity-90"
-                  >
-                    Order
-                  </a>
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {p.desc}
-                </p>
-              </div>
-            </div>
+            <ProductCard key={p.name} p={p} />
           ))}
         </div>
       </section>
@@ -325,5 +306,98 @@ function SidaiPage() {
         </a>
       </section>
     </>
+  );
+}
+
+type Product = (typeof products)[number];
+
+function ProductCard({ p }: { p: Product }) {
+  const { addItem } = useCart();
+  const [size, setSize] = useState(p.sizes[0]);
+  const [color, setColor] = useState(p.colors[0]);
+
+  const handleAdd = () => {
+    addItem({ name: p.name, price: p.price, size, color, img: p.img });
+  };
+
+  return (
+    <div className="group">
+      <div className="relative overflow-hidden bg-muted">
+        <img
+          src={p.img}
+          alt={p.name}
+          loading="lazy"
+          width={900}
+          height={1200}
+          className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <span className="tracking-luxury absolute left-3 top-3 rounded-full bg-background/85 px-3 py-1 text-[9px] text-foreground backdrop-blur">
+          {p.tag}
+        </span>
+      </div>
+      <div className="mt-5">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="font-display text-xl leading-tight">{p.name}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              KSh {p.price.toLocaleString()}
+            </p>
+          </div>
+        </div>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          {p.desc}
+        </p>
+
+        {/* Size selector */}
+        <div className="mt-4">
+          <p className="tracking-luxury mb-2 text-[9px] text-muted-foreground">Size</p>
+          <div className="flex flex-wrap gap-1.5">
+            {p.sizes.map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setSize(s)}
+                className={`rounded-full border px-3 py-1 text-[11px] transition-colors ${
+                  size === s
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border hover:border-foreground/60"
+                }`}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Color selector */}
+        <div className="mt-3">
+          <p className="tracking-luxury mb-2 text-[9px] text-muted-foreground">Color</p>
+          <div className="flex flex-wrap gap-1.5">
+            {p.colors.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setColor(c)}
+                className={`rounded-full border px-3 py-1 text-[11px] transition-colors ${
+                  color === c
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border hover:border-foreground/60"
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleAdd}
+          className="tracking-luxury mt-5 w-full rounded-full bg-foreground px-4 py-3 text-[10px] text-background transition-opacity hover:opacity-90"
+        >
+          Add to cart
+        </button>
+      </div>
+    </div>
   );
 }
