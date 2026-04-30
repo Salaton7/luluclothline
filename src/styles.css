@@ -182,3 +182,104 @@
 .animate-wa-pulse {
   animation: wa-pulse 7s ease-out infinite;
 }
+
+/* ============================================================
+   Maasai print theme — shuka checks, beadwork, tribal accents
+   ============================================================ */
+
+/* Classic Maasai red/black shuka check */
+.maasai-shuka {
+  background-color: #b3251c;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.55) 0 2px,
+      transparent 2px 38px,
+      rgba(0, 0, 0, 0.55) 38px 40px,
+      transparent 40px 78px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.55) 0 2px,
+      transparent 2px 38px,
+      rgba(0, 0, 0, 0.55) 38px 40px,
+      transparent 40px 78px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08) 0 1px,
+      transparent 1px 6px
+    );
+}
+
+/* Blue shuka variant */
+.maasai-shuka-blue {
+  background-color: #1e3a8a;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0 2px,
+      transparent 2px 38px,
+      rgba(0, 0, 0, 0.5) 38px 40px,
+      transparent 40px 78px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.5) 0 2px,
+      transparent 2px 38px,
+      rgba(0, 0, 0, 0.5) 38px 40px,
+      transparent 40px 78px
+    );
+}
+
+/* Subtle parchment-tinted shuka for light backgrounds */
+.maasai-shuka-soft {
+  background-color: oklch(0.94 0.012 75);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(179, 37, 28, 0.18) 0 2px,
+      transparent 2px 28px,
+      rgba(30, 58, 138, 0.14) 28px 30px,
+      transparent 30px 58px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(179, 37, 28, 0.18) 0 2px,
+      transparent 2px 28px,
+      rgba(30, 58, 138, 0.14) 28px 30px,
+      transparent 30px 58px
+    );
+}
+
+/* Beaded chevron / triangle band */
+.maasai-chevron {
+  background-color: #0d0d0d;
+  background-image:
+    linear-gradient(135deg, #b3251c 25%, transparent 25%) 0 0/24px 24px,
+    linear-gradient(225deg, #1e3a8a 25%, transparent 25%) 0 0/24px 24px,
+    linear-gradient(45deg, #f5c518 25%, transparent 25%) 12px 12px/24px 24px,
+    linear-gradient(315deg, #f5f3ee 25%, #0d0d0d 25%) 12px 12px/24px 24px;
+}
+
+/* Beaded dot row — like Maasai necklace beads */
+.maasai-beads {
+  background-image:
+    radial-gradient(circle, #b3251c 38%, transparent 40%),
+    radial-gradient(circle, #1e3a8a 38%, transparent 40%),
+    radial-gradient(circle, #f5c518 38%, transparent 40%),
+    radial-gradient(circle, #f5f3ee 38%, transparent 40%);
+  background-size: 16px 16px;
+  background-position: 0 0, 16px 0, 32px 0, 48px 0;
+  background-repeat: repeat-x;
+}
+
+/* Triangle accent border (top or bottom) */
+.maasai-triangles {
+  background-image:
+    linear-gradient(45deg, #b3251c 25%, transparent 25%),
+    linear-gradient(-45deg, #b3251c 25%, transparent 25%);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 0;
+  background-repeat: repeat-x;
+}
