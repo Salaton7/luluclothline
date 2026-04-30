@@ -123,8 +123,11 @@ const reels: { type: "video" | "poster"; src: string; poster?: string; caption: 
 function SidaiPage() {
   return (
     <>
-      <section className="border-b border-border/60">
-        <div className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
+      {/* Top shuka strip */}
+      <div className="maasai-shuka h-3 w-full" aria-hidden="true" />
+
+      <section className="relative overflow-hidden border-b border-border/60 maasai-shuka-soft">
+        <div className="relative mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
           <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">
             Maasai Couture · Made in Kenya 🇰🇪
           </p>
@@ -138,6 +141,7 @@ function SidaiPage() {
             and cultural statement pieces, designed and made in Kenya. Each piece is
             tailored on order.
           </p>
+          <div className="maasai-beads mt-8 h-4 w-40" aria-hidden="true" />
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href={wa("a Lulu Sidai piece")}
@@ -157,8 +161,11 @@ function SidaiPage() {
         </div>
       </section>
 
+      {/* Chevron beadwork divider */}
+      <div className="maasai-chevron h-6 w-full" aria-hidden="true" />
+
       {/* EDITORIAL HERO PAIR */}
-      <section className="grid grid-cols-1 md:grid-cols-2">
+      <section className="grid grid-cols-1 gap-1 bg-foreground md:grid-cols-2">
         <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
           <img
             src={sidai1}
@@ -177,6 +184,9 @@ function SidaiPage() {
         </div>
       </section>
 
+      {/* Blue shuka strip */}
+      <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
+
       {/* PRODUCT GRID */}
       <section id="collection" className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
         <div className="mb-12 flex items-end justify-between">
@@ -185,6 +195,7 @@ function SidaiPage() {
               The Sidai Collection
             </p>
             <h2 className="font-display text-4xl md:text-5xl">Featured pieces</h2>
+            <div className="maasai-beads mt-4 h-3 w-32" aria-hidden="true" />
           </div>
           <p className="hidden max-w-xs text-sm text-muted-foreground md:block">
             Each piece is made-to-order. Delivery 7–14 days within Kenya.
@@ -196,6 +207,9 @@ function SidaiPage() {
           ))}
         </div>
       </section>
+
+      {/* Chevron divider */}
+      <div className="maasai-chevron h-5 w-full" aria-hidden="true" />
 
       {/* TIKTOK */}
       <section className="border-y border-border/60 bg-secondary/30">
