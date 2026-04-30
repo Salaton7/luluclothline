@@ -2,6 +2,8 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 
 import appCss from "../styles.css?url";
 import luluLogo from "@/assets/lulu-logo.jpg";
+import { CartProvider } from "@/lib/cart";
+import { CartDrawer, CartTrigger } from "@/components/CartDrawer";
 
 const WHATSAPP_NUMBER = "254714844809";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -89,14 +91,17 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
-      <SiteHeader />
-      <main className="flex-1">
-        <Outlet />
-      </main>
-      <SiteFooter />
-      <StickyWhatsApp />
-    </div>
+    <CartProvider>
+      <div className="flex min-h-screen flex-col bg-background text-foreground">
+        <SiteHeader />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <SiteFooter />
+        <StickyWhatsApp />
+        <CartDrawer />
+      </div>
+    </CartProvider>
   );
 }
 
@@ -129,14 +134,17 @@ function SiteHeader() {
             Collective
           </Link>
         </nav>
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="tracking-luxury hidden rounded-full bg-foreground px-5 py-2.5 text-[10px] text-background transition-opacity hover:opacity-90 md:inline-block"
-        >
-          Order on WhatsApp
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="tracking-luxury hidden rounded-full bg-foreground px-5 py-2.5 text-[10px] text-background transition-opacity hover:opacity-90 md:inline-block"
+          >
+            Order on WhatsApp
+          </a>
+          <CartTrigger />
+        </div>
       </div>
     </header>
   );
