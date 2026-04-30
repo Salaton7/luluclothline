@@ -6,6 +6,7 @@ import sidai4 from "@/assets/sidai-4.jpg";
 import sidai5 from "@/assets/sidai-5.jpg";
 import sidai6 from "@/assets/sidai-6.jpg";
 import sidai7 from "@/assets/sidai-7.jpg";
+import sidaiReel1 from "@/assets/sidai-reel-1.mp4";
 
 export const Route = createFileRoute("/sidai")({
   head: () => ({
@@ -84,10 +85,23 @@ const products = [
   },
 ];
 
-const tiktoks = [
-  "https://www.tiktok.com/embed/v2/7300000000000000001",
-  "https://www.tiktok.com/embed/v2/7300000000000000002",
-  "https://www.tiktok.com/embed/v2/7300000000000000003",
+const reels: { type: "video" | "poster"; src: string; poster?: string; caption: string }[] = [
+  {
+    type: "poster",
+    src: sidai6,
+    caption: "Lavie Mermaid Gown — featured on @lulu_clothline",
+  },
+  {
+    type: "video",
+    src: sidaiReel1,
+    poster: sidai1,
+    caption: "Behind the scenes — Nashipai gown in motion",
+  },
+  {
+    type: "poster",
+    src: sidai3,
+    caption: "Resian Heritage Maxi — Universal Day of Culture",
+  },
 ];
 
 function SidaiPage() {
@@ -207,8 +221,8 @@ function SidaiPage() {
         <div className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
           <div className="mb-10 flex items-end justify-between">
             <div>
-              <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">As Seen</p>
-              <h2 className="font-display text-4xl md:text-5xl">Trending on TikTok</h2>
+              <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">In Motion</p>
+              <h2 className="font-display text-4xl md:text-5xl">Sidai, on screen</h2>
             </div>
             <a
               href="https://www.tiktok.com/@luluclothline"
@@ -220,17 +234,44 @@ function SidaiPage() {
             </a>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
-            {tiktoks.map((src, i) => (
-              <div key={i} className="aspect-[9/16] overflow-hidden bg-muted">
-                <iframe
-                  src={src}
-                  className="h-full w-full"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title={`TikTok video ${i + 1}`}
-                />
-              </div>
+            {reels.map((r, i) => (
+              <figure key={i} className="group relative">
+                <div className="relative aspect-[9/16] overflow-hidden bg-muted">
+                  {r.type === "video" ? (
+                    <video
+                      src={r.src}
+                      poster={r.poster}
+                      className="h-full w-full object-cover"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                    />
+                  ) : (
+                    <img
+                      src={r.src}
+                      alt={r.caption}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )}
+                </div>
+                <figcaption className="mt-3 text-xs text-muted-foreground">
+                  {r.caption}
+                </figcaption>
+              </figure>
             ))}
+          </div>
+          <div className="mt-10 flex justify-center md:hidden">
+            <a
+              href="https://www.tiktok.com/@luluclothline"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tracking-luxury text-[10px] text-muted-foreground hover:text-foreground"
+            >
+              @luluclothline on TikTok →
+            </a>
           </div>
         </div>
       </section>
