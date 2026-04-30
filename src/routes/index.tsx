@@ -65,18 +65,18 @@ function Index() {
           alt="Lulu Clothline editorial"
           width={1600}
           height={1280}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-top"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/10 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-foreground/20 to-foreground/80" />
         <div className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-5 pb-16 md:px-10 md:pb-24">
-          <p className="tracking-luxury mb-6 text-[11px] text-foreground/80">
+          <p className="tracking-luxury mb-6 text-[11px] text-background/85">
             A Kenyan Fashion Ecosystem
           </p>
-          <h1 className="font-display text-5xl leading-[1.05] text-foreground md:text-7xl lg:text-8xl">
+          <h1 className="font-display text-5xl leading-[1.05] text-background md:text-7xl lg:text-8xl">
             Style. Fabric.<br />
             <span className="italic text-accent">Creative culture.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base text-foreground/80 md:text-lg">
+          <p className="mt-6 max-w-xl text-base text-background/85 md:text-lg">
             Shop fashion. Source textiles. Join the collective.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
@@ -90,7 +90,7 @@ function Index() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="tracking-luxury rounded-full border border-foreground/40 bg-background/40 px-7 py-4 text-[11px] text-foreground backdrop-blur transition-colors hover:bg-foreground hover:text-background"
+              className="tracking-luxury rounded-full border border-background/50 bg-background/10 px-7 py-4 text-[11px] text-background backdrop-blur transition-colors hover:bg-background hover:text-foreground"
             >
               Shop on WhatsApp
             </a>
