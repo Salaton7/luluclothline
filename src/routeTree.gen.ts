@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TextileRouteImport } from './routes/textile'
 import { Route as SidaiRouteImport } from './routes/sidai'
+import { Route as CollectiveRouteImport } from './routes/collective'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TextileRoute = TextileRouteImport.update({
@@ -23,6 +24,11 @@ const SidaiRoute = SidaiRouteImport.update({
   path: '/sidai',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectiveRoute = CollectiveRouteImport.update({
+  id: '/collective',
+  path: '/collective',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +37,34 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sidai' | '/textile'
+  fullPaths: '/' | '/collective' | '/sidai' | '/textile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sidai' | '/textile'
-  id: '__root__' | '/' | '/sidai' | '/textile'
+  to: '/' | '/collective' | '/sidai' | '/textile'
+  id: '__root__' | '/' | '/collective' | '/sidai' | '/textile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CollectiveRoute: typeof CollectiveRoute
   SidaiRoute: typeof SidaiRoute
   TextileRoute: typeof TextileRoute
 }
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SidaiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collective': {
+      id: '/collective'
+      path: '/collective'
+      fullPath: '/collective'
+      preLoaderRoute: typeof CollectiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CollectiveRoute: CollectiveRoute,
   SidaiRoute: SidaiRoute,
   TextileRoute: TextileRoute,
 }
