@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import luluLogo from "@/assets/lulu-logo.jpg";
 
 const WHATSAPP_NUMBER = "254714844809";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -48,12 +49,15 @@ export const Route = createRootRoute({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { property: "og:image", content: luluLogo },
+      { name: "twitter:image", content: luluLogo },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "icon", href: luluLogo },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -101,7 +105,16 @@ function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-10">
         <Link to="/" className="font-display text-xl tracking-tight">
-          Lulu<span className="text-accent">.</span>Clothline
+          <span className="flex items-center gap-2">
+            <img
+              src={luluLogo}
+              alt="Lulu Clothline"
+              width={36}
+              height={36}
+              className="h-9 w-9 rounded-full object-cover"
+            />
+            <span>Lulu<span className="text-accent">.</span>Clothline</span>
+          </span>
         </Link>
         <nav className="hidden gap-8 md:flex">
           <Link to="/sidai" className={linkClass} activeProps={{ className: "tracking-luxury text-[11px] text-foreground" }}>
@@ -132,7 +145,16 @@ function SiteFooter() {
     <footer className="border-t border-border/60 bg-background">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:grid-cols-4 md:px-10">
         <div className="md:col-span-2">
-          <div className="font-display text-2xl">Lulu Clothline</div>
+          <div className="flex items-center gap-3">
+            <img
+              src={luluLogo}
+              alt="Lulu Clothline"
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-full object-cover"
+            />
+            <div className="font-display text-2xl">Lulu Clothline</div>
+          </div>
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
             A modern Kenyan fashion ecosystem of style, fabric, and creative culture.
           </p>
