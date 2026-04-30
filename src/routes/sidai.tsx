@@ -275,6 +275,7 @@ function SidaiPage() {
       <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
         <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Simple as that</p>
         <h2 className="font-display text-4xl md:text-5xl">How to order</h2>
+        <div className="maasai-beads mt-4 h-3 w-32" aria-hidden="true" />
         <div className="mt-14 grid gap-10 md:grid-cols-4">
           {[
             { n: "01", t: "Choose your outfit", d: "Browse the Sidai collection." },
@@ -282,7 +283,8 @@ function SidaiPage() {
             { n: "03", t: "Confirm details", d: "Share your size and location." },
             { n: "04", t: "Receive it", d: "Delivery in 24–48 hours within Nairobi." },
           ].map((s) => (
-            <div key={s.n} className="border-t border-foreground/20 pt-5">
+            <div key={s.n} className="relative pt-6">
+              <div className="maasai-triangles absolute left-0 right-0 top-0 h-2" aria-hidden="true" />
               <p className="font-display text-3xl text-accent">{s.n}</p>
               <h3 className="font-display mt-3 text-xl">{s.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
@@ -307,9 +309,11 @@ function SidaiPage() {
       </section>
 
       {/* CTA */}
+      <div className="maasai-shuka h-3 w-full" aria-hidden="true" />
       <section className="mx-auto max-w-7xl px-5 py-24 text-center md:px-10">
         <h2 className="font-display text-4xl md:text-6xl">Ready to wear it?</h2>
         <p className="mt-4 text-muted-foreground">DM us and we'll style you.</p>
+        <div className="maasai-beads mx-auto mt-6 h-3 w-40" aria-hidden="true" />
         <a
           href={wa("a piece from the Sidai collection")}
           target="_blank"
@@ -319,6 +323,7 @@ function SidaiPage() {
           Order on WhatsApp
         </a>
       </section>
+      <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
     </>
   );
 }
@@ -336,7 +341,7 @@ function ProductCard({ p }: { p: Product }) {
 
   return (
     <div className="group">
-      <div className="relative overflow-hidden bg-muted">
+      <div className="relative overflow-hidden bg-muted ring-1 ring-foreground/10">
         <img
           src={p.img}
           alt={p.name}
@@ -345,9 +350,11 @@ function ProductCard({ p }: { p: Product }) {
           height={1200}
           className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <span className="tracking-luxury absolute left-3 top-3 rounded-full bg-background/85 px-3 py-1 text-[9px] text-foreground backdrop-blur">
+        <div className="maasai-shuka absolute inset-x-0 top-0 h-1.5" aria-hidden="true" />
+        <span className="tracking-luxury absolute left-3 top-4 rounded-full bg-background/90 px-3 py-1 text-[9px] text-foreground backdrop-blur">
           {p.tag}
         </span>
+        <div className="maasai-beads absolute inset-x-0 bottom-0 h-2 opacity-90" aria-hidden="true" />
       </div>
       <div className="mt-5">
         <div className="flex items-start justify-between gap-4">
