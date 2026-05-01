@@ -9,6 +9,12 @@ import sidai6 from "@/assets/sidai-6.jpg";
 import sidai7 from "@/assets/sidai-7.jpg";
 import sidaiReel1 from "@/assets/sidai-reel-1.mp4";
 import sidaiCover from "@/assets/sidai-cover.webp";
+import sidaiNew1 from "@/assets/sidai-new-1.jpeg";
+import sidaiNew2 from "@/assets/sidai-new-2.jpeg";
+import sidaiNew3 from "@/assets/sidai-new-3.jpg";
+import sidaiNew4 from "@/assets/sidai-new-4.jpg";
+import sidaiNew5 from "@/assets/sidai-new-5.webp";
+import sidaiNew6 from "@/assets/sidai-new-6.webp";
 import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/sidai")({
@@ -99,6 +105,60 @@ const products = [
     desc: "Matching beaded red gowns with optional white cape — perfect for sisters & bridal parties.",
     sizes: ["S", "M", "L"],
     colors: ["Red", "Red/White Cape"],
+  },
+  {
+    name: "Empress Royal Beaded Gown",
+    tag: "Bridal Couture",
+    price: 18500,
+    img: sidaiNew1,
+    desc: "Royal blue gown with red shuka cape, hand-beaded collar, headpiece and intricate Maasai motif detailing.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["Royal Blue/Red"],
+  },
+  {
+    name: "Naimutie Cape Gown",
+    tag: "Bridal",
+    price: 13500,
+    img: sidaiNew2,
+    desc: "Sweetheart red maxi with flowing white cape and beaded collar — chevron embellishment from waist to hem.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Red/White"],
+  },
+  {
+    name: "Olosho Sisterhood Gown",
+    tag: "Group / Bridal Party",
+    price: 12800,
+    img: sidaiNew3,
+    desc: "Forest green off-shoulder gown with red beaded belt and statement collar — perfect for bridal parties and ceremonies.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Forest Green", "Burgundy", "Navy"],
+  },
+  {
+    name: "Ilayiok Boys Set",
+    tag: "Kids",
+    price: 4800,
+    img: sidaiNew4,
+    desc: "Royal blue and white asymmetric tunic with matching trousers for boys — perfect for ceremonies and family events.",
+    sizes: ["4Y", "6Y", "8Y", "10Y", "12Y"],
+    colors: ["Royal Blue/White"],
+  },
+  {
+    name: "Nasha Shuka Bustier",
+    tag: "Everyday",
+    price: 4500,
+    img: sidaiNew5,
+    desc: "Classic red Maasai-check shuka bustier top — strapless, structured and styled with a beaded choker.",
+    sizes: ["XS", "S", "M", "L"],
+    colors: ["Red Check"],
+  },
+  {
+    name: "Naserian Heart Corset Set",
+    tag: "Statement",
+    price: 9800,
+    img: sidaiNew6,
+    desc: "Off-shoulder red heart-cut corset with beaded fringe, paired with crisp white wide-leg trousers.",
+    sizes: ["XS", "S", "M", "L"],
+    colors: ["Red/White"],
   },
 ];
 
