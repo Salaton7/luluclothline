@@ -166,7 +166,7 @@ function SidaiPage() {
             <div className="aspect-[4/5] overflow-hidden bg-muted ring-1 ring-foreground/10">
               <img
                 src={sidaiCover}
-                alt="Lulu Sidai cover — Maasai beaded choker with red shuka print bustier"
+                alt="Lulu Sidai cover — model in red shuka bustier with Maasai beaded choker"
                 className="h-full w-full object-cover"
                 loading="eager"
                 fetchPriority="high"
