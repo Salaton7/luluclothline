@@ -39,14 +39,14 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lulu Clothline — A Modern Kenyan Fashion Ecosystem" },
+      { title: "Lulu Clothline — A Modern Maasai Fashion Ecosystem" },
       {
         name: "description",
         content:
           "Lulu Clothline — Sidai fashion, premium textiles, and the creative collective. Made in Kenya.",
       },
       { name: "author", content: "Lulu Clothline" },
-      { property: "og:title", content: "Lulu Clothline" },
+      { property: "og:title", content: "Lulu Clothline — A Modern Maasai Fashion Ecosystem" },
       {
         property: "og:description",
         content: "Shop fashion. Source textiles. Join the collective.",
@@ -55,6 +55,12 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary" },
       { property: "og:image", content: luluLogo },
       { name: "twitter:image", content: luluLogo },
+      { name: "twitter:title", content: "Lulu Clothline — A Modern Maasai Fashion Ecosystem" },
+      { name: "description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
+      { property: "og:description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
+      { name: "twitter:description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/debbfa9b-9167-4882-9fd7-598fd4a4e545/id-preview-504eae8d--69c252f2-ddb7-46f3-ab47-af2481951844.lovable.app-1777625810126.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/debbfa9b-9167-4882-9fd7-598fd4a4e545/id-preview-504eae8d--69c252f2-ddb7-46f3-ab47-af2481951844.lovable.app-1777625810126.png" },
     ],
     links: [
       {
