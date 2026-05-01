@@ -8,6 +8,7 @@ import sidai5 from "@/assets/sidai-5.jpg";
 import sidai6 from "@/assets/sidai-6.jpg";
 import sidai7 from "@/assets/sidai-7.jpg";
 import sidaiReel1 from "@/assets/sidai-reel-1.mp4";
+import sidaiCover from "@/assets/sidai-cover.webp";
 import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/sidai")({
@@ -127,7 +128,8 @@ function SidaiPage() {
       <div className="maasai-shuka h-3 w-full" aria-hidden="true" />
 
       <section className="relative overflow-hidden border-b border-border/60 maasai-shuka-soft">
-        <div className="relative mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-20 md:grid-cols-2 md:items-center md:px-10 md:py-28">
+          <div>
           <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">
             Maasai Couture · Made in Kenya 🇰🇪
           </p>
@@ -157,6 +159,20 @@ function SidaiPage() {
             >
               View Collection
             </a>
+          </div>
+          </div>
+          <div className="relative">
+            <div className="maasai-shuka absolute -inset-2 -z-10 opacity-40" aria-hidden="true" />
+            <div className="aspect-[4/5] overflow-hidden bg-muted ring-1 ring-foreground/10">
+              <img
+                src={sidaiCover}
+                alt="Lulu Sidai cover — Maasai beaded choker with red shuka print bustier"
+                className="h-full w-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+              />
+            </div>
+            <div className="maasai-beads mt-3 h-3 w-full" aria-hidden="true" />
           </div>
         </div>
       </section>
