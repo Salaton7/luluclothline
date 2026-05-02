@@ -4,6 +4,14 @@ import bts1 from "@/assets/bts-1.jpg";
 import bts2 from "@/assets/bts-2.jpg";
 import look1 from "@/assets/look-1.jpg";
 import look3 from "@/assets/look-3.jpg";
+import cNew1 from "@/assets/collective-new-1.jpeg";
+import cNew2 from "@/assets/collective-new-2.jpg";
+import cNew3 from "@/assets/collective-new-3.jpg";
+import cNew4 from "@/assets/collective-new-4.webp";
+import cNew5 from "@/assets/collective-new-5.webp";
+import cNew6 from "@/assets/collective-new-6.webp";
+import cNew7 from "@/assets/collective-new-7.jpg";
+import cNew8 from "@/assets/collective-new-8.webp";
 
 export const Route = createFileRoute("/collective")({
   head: () => ({
@@ -90,6 +98,43 @@ function CollectivePage() {
             <div className="overflow-hidden bg-muted">
               <img src={bts2} alt="Creative roundtable" loading="lazy" width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY */}
+      <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
+        <div className="mb-12">
+          <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Gallery</p>
+          <h2 className="font-display text-4xl md:text-5xl">Cultural expression.</h2>
+          <p className="mt-5 max-w-xl text-muted-foreground">
+            Stories of heritage, craftsmanship, and modern Kenyan style.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3 md:gap-6">
+          <div className="overflow-hidden bg-muted md:row-span-2">
+            <img src={cNew1} alt="Maasai bridal regalia" loading="lazy" className="aspect-[3/4] h-full w-full object-cover md:aspect-auto" />
+          </div>
+          <div className="overflow-hidden bg-muted md:col-span-2">
+            <img src={cNew2} alt="Cultural celebration" loading="lazy" className="aspect-[16/10] w-full object-cover" />
+          </div>
+          <div className="overflow-hidden bg-muted">
+            <img src={cNew4} alt="Blue beaded top" loading="lazy" className="aspect-square w-full object-cover" />
+          </div>
+          <div className="overflow-hidden bg-muted">
+            <img src={cNew5} alt="Red top with white trousers" loading="lazy" className="aspect-square w-full object-cover" />
+          </div>
+          <div className="overflow-hidden bg-muted">
+            <img src={cNew3} alt="Sisterhood in Maasai attire" loading="lazy" className="aspect-square w-full object-cover" />
+          </div>
+          <div className="overflow-hidden bg-muted">
+            <img src={cNew6} alt="Checkered tube top" loading="lazy" className="aspect-square w-full object-cover" />
+          </div>
+          <div className="overflow-hidden bg-muted">
+            <img src={cNew8} alt="Beaded statement piece" loading="lazy" className="aspect-square w-full object-cover" />
+          </div>
+          <div className="overflow-hidden bg-muted">
+            <img src={cNew7} alt="Young boys in matching attire" loading="lazy" className="aspect-square w-full object-cover" />
           </div>
         </div>
       </section>
