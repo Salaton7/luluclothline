@@ -1,9 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import collectiveImg from "@/assets/collective.jpg";
-import bts1 from "@/assets/bts-1.jpg";
-import bts2 from "@/assets/bts-2.jpg";
-import look1 from "@/assets/look-1.jpg";
-import look3 from "@/assets/look-3.jpg";
 import cNew1 from "@/assets/collective-new-1.jpeg";
 import cNew2 from "@/assets/collective-new-2.jpg";
 import cNew3 from "@/assets/collective-new-3.jpg";
@@ -73,14 +69,14 @@ function CollectivePage() {
         </div>
         <div className="grid gap-6 md:grid-cols-12">
           <div className="overflow-hidden bg-muted md:col-span-7">
-            <img src={look1} alt="Campaign one" loading="lazy" width={900} height={1200} className="aspect-[4/5] w-full object-cover" />
+            <img src={cNew1} alt="Campaign one" loading="lazy" width={900} height={1200} className="aspect-[4/5] w-full object-cover" />
           </div>
           <div className="space-y-6 md:col-span-5">
             <div className="overflow-hidden bg-muted">
-              <img src={bts1} alt="Behind the scenes" loading="lazy" width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
+              <img src={cNew3} alt="Behind the scenes" loading="lazy" width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
             </div>
             <div className="overflow-hidden bg-muted">
-              <img src={look3} alt="Campaign two" loading="lazy" width={900} height={1200} className="aspect-[4/3] w-full object-cover" />
+              <img src={cNew8} alt="Campaign two" loading="lazy" width={900} height={1200} className="aspect-[4/3] w-full object-cover" />
             </div>
           </div>
         </div>
@@ -93,10 +89,10 @@ function CollectivePage() {
           <h2 className="font-display text-4xl md:text-5xl">Behind the scenes.</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             <div className="overflow-hidden bg-muted">
-              <img src={bts1} alt="On set" loading="lazy" width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
+              <img src={cNew2} alt="On set" loading="lazy" width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
             </div>
             <div className="overflow-hidden bg-muted">
-              <img src={bts2} alt="Creative roundtable" loading="lazy" width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
+              <img src={cNew7} alt="Creative roundtable" loading="lazy" width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
             </div>
           </div>
         </div>
