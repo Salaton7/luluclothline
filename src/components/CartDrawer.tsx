@@ -200,7 +200,6 @@ export function CartDrawer() {
                 KSh {totalPrice.toLocaleString()}
               </span>
             </div>
-            <a
             <button
               type="button"
               onClick={openPayment}
