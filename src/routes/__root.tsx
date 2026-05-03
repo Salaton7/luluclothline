@@ -197,6 +197,11 @@ function SiteFooter() {
               </a>
             </li>
             <li>
+              <a href="https://www.facebook.com/profile.php?id=100085570816877" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+                Facebook
+              </a>
+            </li>
+            <li>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
                 WhatsApp · 0714 844 809
               </a>
