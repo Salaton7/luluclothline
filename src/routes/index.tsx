@@ -147,15 +147,18 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
           <div>
             <p className="tracking-luxury text-[10px] text-muted-foreground">Delivery</p>
-            <p className="font-display mt-2 text-xl">Across Kenya 🇰🇪</p>
+            <p className="font-display mt-2 text-xl">Worldwide shipping 🌍</p>
+            <p className="mt-1 text-xs text-muted-foreground">Delivery in 1 week</p>
           </div>
           <div>
             <p className="tracking-luxury text-[10px] text-muted-foreground">Payment</p>
             <p className="font-display mt-2 text-xl">M-Pesa accepted 💳</p>
+            <p className="mt-1 text-xs text-muted-foreground">60% deposit to start production</p>
           </div>
           <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">Trust</p>
-            <p className="font-display mt-2 text-xl">Cash on delivery 🚚</p>
+            <p className="tracking-luxury text-[10px] text-muted-foreground">Before delivery</p>
+            <p className="font-display mt-2 text-xl">Balance cleared 🚚</p>
+            <p className="mt-1 text-xs text-muted-foreground">Full payment before dispatch</p>
           </div>
         </div>
       </section>

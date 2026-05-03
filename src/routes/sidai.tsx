@@ -364,13 +364,16 @@ function SidaiPage() {
       <section className="border-y border-border/60 bg-secondary/40">
         <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
           <div>
-            <p className="font-display text-xl">Delivery in Kenya 🇰🇪</p>
+            <p className="font-display text-xl">Worldwide delivery 🌍</p>
+            <p className="mt-1 text-xs text-muted-foreground">Arrives in ~1 week</p>
           </div>
           <div>
             <p className="font-display text-xl">M-Pesa accepted 💳</p>
+            <p className="mt-1 text-xs text-muted-foreground">60% deposit to begin production</p>
           </div>
           <div>
-            <p className="font-display text-xl">Cash on delivery 🚚</p>
+            <p className="font-display text-xl">Balance before delivery 🚚</p>
+            <p className="mt-1 text-xs text-muted-foreground">Full payment clears dispatch</p>
           </div>
         </div>
       </section>
