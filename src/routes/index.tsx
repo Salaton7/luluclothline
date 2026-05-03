@@ -142,19 +142,19 @@ function Index() {
       <section className="border-y border-border/60 bg-secondary/40">
         <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
           <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">Delivery</p>
-            <p className="font-display mt-2 text-xl">Worldwide shipping</p>
-            <p className="mt-1 text-xs text-muted-foreground">Delivery in 1 week</p>
+            <p className="tracking-luxury text-[10px] text-muted-foreground">DELIVERY</p>
+            <p className="font-display mt-2 text-xl">Worldwide Shipping</p>
+            <p className="mt-1 text-xs text-muted-foreground">Delivered within 1 week</p>
           </div>
           <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">Payment</p>
-            <p className="font-display mt-2 text-xl">M-Pesa accepted</p>
-            <p className="mt-1 text-xs text-muted-foreground">60% deposit to start production</p>
+            <p className="tracking-luxury text-[10px] text-muted-foreground">PAYMENT</p>
+            <p className="font-display mt-2 text-xl">60% Deposit</p>
+            <p className="mt-1 text-xs text-muted-foreground">Required to start production</p>
           </div>
           <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">Before delivery</p>
-            <p className="font-display mt-2 text-xl">Balance cleared</p>
-            <p className="mt-1 text-xs text-muted-foreground">Full payment before dispatch</p>
+            <p className="tracking-luxury text-[10px] text-muted-foreground">BEFORE DELIVERY</p>
+            <p className="font-display mt-2 text-xl">Balance Cleared</p>
+            <p className="mt-1 text-xs text-muted-foreground">Full payment required before dispatch</p>
           </div>
         </div>
       </section>
