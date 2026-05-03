@@ -48,6 +48,8 @@
   --color-ring-offset-background: var(--background);
   --color-whatsapp: var(--whatsapp);
   --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --color-mpesa: var(--mpesa);
+  --color-mpesa-foreground: var(--mpesa-foreground);
   --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --color-chart-1: var(--chart-1);
@@ -89,6 +91,8 @@
   --ring: oklch(0.45 0.015 65);
   --whatsapp: oklch(0.66 0.16 145);
   --whatsapp-foreground: oklch(0.99 0 0);
+  --mpesa: oklch(0.48 0.11 152);
+  --mpesa-foreground: oklch(0.99 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
