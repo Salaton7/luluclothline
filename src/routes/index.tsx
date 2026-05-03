@@ -31,7 +31,6 @@ const WHATSAPP_URL = `https://wa.me/254714844809?text=${encodeURIComponent(
 const worlds = [
   {
     title: "Lulu Sidai",
-    emoji: "👗",
     desc: "Everyday fashion made for confidence and style.",
     cta: "Shop Sidai",
     to: "/sidai" as const,
@@ -39,7 +38,6 @@ const worlds = [
   },
   {
     title: "Lulu Textile",
-    emoji: "🧵",
     desc: "Premium fabrics and materials for creators and designers.",
     cta: "Explore Textile",
     to: "/textile" as const,
@@ -47,7 +45,6 @@ const worlds = [
   },
   {
     title: "Lulu Collective",
-    emoji: "🎨",
     desc: "A creative space for fashion storytelling and collaborations.",
     cta: "Join Collective",
     to: "/collective" as const,
@@ -130,8 +127,7 @@ function Index() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/10 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7 text-background">
-                <span className="text-2xl">{w.emoji}</span>
-                <h3 className="font-display mt-2 text-3xl">{w.title}</h3>
+                <h3 className="font-display text-3xl">{w.title}</h3>
                 <p className="mt-2 max-w-xs text-sm text-background/85">{w.desc}</p>
                 <span className="tracking-luxury mt-5 inline-block border-b border-background/50 pb-1 text-[10px]">
                   {w.cta} →
@@ -147,17 +143,17 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
           <div>
             <p className="tracking-luxury text-[10px] text-muted-foreground">Delivery</p>
-            <p className="font-display mt-2 text-xl">Worldwide shipping 🌍</p>
+            <p className="font-display mt-2 text-xl">Worldwide shipping</p>
             <p className="mt-1 text-xs text-muted-foreground">Delivery in 1 week</p>
           </div>
           <div>
             <p className="tracking-luxury text-[10px] text-muted-foreground">Payment</p>
-            <p className="font-display mt-2 text-xl">M-Pesa accepted 💳</p>
+            <p className="font-display mt-2 text-xl">M-Pesa accepted</p>
             <p className="mt-1 text-xs text-muted-foreground">60% deposit to start production</p>
           </div>
           <div>
             <p className="tracking-luxury text-[10px] text-muted-foreground">Before delivery</p>
-            <p className="font-display mt-2 text-xl">Balance cleared 🚚</p>
+            <p className="font-display mt-2 text-xl">Balance cleared</p>
             <p className="mt-1 text-xs text-muted-foreground">Full payment before dispatch</p>
           </div>
         </div>
