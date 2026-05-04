@@ -3,8 +3,8 @@ import { ShoppingBag, X, Plus, Minus, Trash2, Check, Loader2 } from "lucide-reac
 import { useCart } from "@/lib/cart";
 
 const MPESA_BUSINESS_NAME = "Lulu Clothline";
-const MPESA_PAYBILL = "522522";
-const MPESA_ACCOUNT_PREFIX = "LULU";
+const MPESA_PAYBILL = "247247";
+const MPESA_ACCOUNT_NUMBER = "0714844809";
 
 export function CartTrigger({ className = "" }: { className?: string }) {
   const { totalItems, openCart } = useCart();
@@ -43,10 +43,6 @@ export function CartDrawer() {
   const [payOpen, setPayOpen] = React.useState(false);
   const [code, setCode] = React.useState("");
   const [status, setStatus] = React.useState<"idle" | "loading" | "success">("idle");
-  const orderId = React.useMemo(
-    () => `${MPESA_ACCOUNT_PREFIX}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`,
-    [payOpen],
-  );
 
   const openPayment = () => {
     setCode("");
@@ -217,7 +213,6 @@ export function CartDrawer() {
         open={payOpen}
         onClose={closePayment}
         amount={totalPrice}
-        orderId={orderId}
         code={code}
         setCode={setCode}
         status={status}
