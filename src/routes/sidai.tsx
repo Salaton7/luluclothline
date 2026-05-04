@@ -433,8 +433,6 @@ function SidaiPage() {
   );
 }
 
-type Product = (typeof products)[number];
-
 function ProductCard({ p }: { p: Product }) {
   const { addItem } = useCart();
   const [size, setSize] = useState(p.sizes[0]);
