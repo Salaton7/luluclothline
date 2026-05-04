@@ -174,6 +174,38 @@ const reels: { type: "video" | "poster"; src: string; poster?: string; caption: 
 ];
 
 function SidaiPage() {
+  const [dbProducts, setDbProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    supabase
+      .from("sidai_products")
+      .select("*")
+      .eq("is_published", true)
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (!active || !data) return;
+        const mapped: Product[] = data
+          .filter((p) => !!p.image_url)
+          .map((p) => ({
+            name: p.name,
+            tag: p.tag ?? "New",
+            price: p.price,
+            img: p.image_url as string,
+            desc: p.description ?? "",
+            sizes: p.sizes && p.sizes.length > 0 ? p.sizes : ["One size"],
+            colors: p.colors && p.colors.length > 0 ? p.colors : ["Default"],
+          }));
+        setDbProducts(mapped);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const allProducts = [...dbProducts, ...products];
+
   return (
     <>
       {/* Top shuka strip */}
