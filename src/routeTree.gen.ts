@@ -13,6 +13,7 @@ import { Route as TextileRouteImport } from './routes/textile'
 import { Route as SidaiRouteImport } from './routes/sidai'
 import { Route as CollectiveRouteImport } from './routes/collective'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
 const TextileRoute = TextileRouteImport.update({
   id: '/textile',
@@ -34,18 +35,25 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/collective' | '/sidai' | '/textile'
+  fullPaths: '/' | '/collective' | '/sidai' | '/textile' | '/admin/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/collective' | '/sidai' | '/textile'
-  id: '__root__' | '/' | '/collective' | '/sidai' | '/textile'
+  to: '/' | '/collective' | '/sidai' | '/textile' | '/admin/login'
+  id: '__root__' | '/' | '/collective' | '/sidai' | '/textile' | '/admin/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   CollectiveRoute: typeof CollectiveRoute
   SidaiRoute: typeof SidaiRoute
   TextileRoute: typeof TextileRoute
+  AdminLoginRoute: typeof AdminLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectiveRoute: CollectiveRoute,
   SidaiRoute: SidaiRoute,
   TextileRoute: TextileRoute,
+  AdminLoginRoute: AdminLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
