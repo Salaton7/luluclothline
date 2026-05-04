@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import sidai1 from "@/assets/sidai-1.jpg";
 import sidai2 from "@/assets/sidai-2.jpg";
 import sidai3 from "@/assets/sidai-3.jpg";
