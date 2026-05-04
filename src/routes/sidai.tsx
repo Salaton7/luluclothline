@@ -154,6 +154,8 @@ const products = [
   },
 ];
 
+type Product = (typeof products)[number];
+
 const reels: { type: "video" | "poster"; src: string; poster?: string; caption: string }[] = [
   {
     type: "poster",
