@@ -302,7 +302,7 @@ function SidaiPage() {
           </p>
         </div>
         <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((p) => (
+          {allProducts.map((p) => (
             <ProductCard key={p.name} p={p} />
           ))}
         </div>
