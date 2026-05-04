@@ -14,13 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          is_admin: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+          is_admin?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          is_admin?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sidai_products: {
+        Row: {
+          colors: string[]
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_published: boolean
+          name: string
+          price: number
+          sizes: string[]
+          sort_order: number
+          tag: string | null
+          updated_at: string
+        }
+        Insert: {
+          colors?: string[]
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_published?: boolean
+          name: string
+          price?: number
+          sizes?: string[]
+          sort_order?: number
+          tag?: string | null
+          updated_at?: string
+        }
+        Update: {
+          colors?: string[]
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_published?: boolean
+          name?: string
+          price?: number
+          sizes?: string[]
+          sort_order?: number
+          tag?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
