@@ -226,7 +226,6 @@ function MpesaPaymentModal({
   open,
   onClose,
   amount,
-  orderId,
   code,
   setCode,
   status,
@@ -235,7 +234,6 @@ function MpesaPaymentModal({
   open: boolean;
   onClose: () => void;
   amount: number;
-  orderId: string;
   code: string;
   setCode: (v: string) => void;
   status: "idle" | "loading" | "success";
@@ -291,7 +289,7 @@ function MpesaPaymentModal({
                 <Divider />
                 <DetailRow label="Paybill Number" value={MPESA_PAYBILL} mono />
                 <Divider />
-                <DetailRow label="Account Number" value={orderId} mono />
+                <DetailRow label="Account Number" value={MPESA_ACCOUNT_NUMBER} mono />
                 <Divider />
                 <DetailRow
                   label="Amount"
@@ -308,7 +306,7 @@ function MpesaPaymentModal({
                   <Step n={1}>Open M-Pesa on your phone</Step>
                   <Step n={2}>Select Lipa na M-Pesa</Step>
                   <Step n={3}>Choose Pay Bill and enter {MPESA_PAYBILL}</Step>
-                  <Step n={4}>Enter Account Number {orderId}</Step>
+                  <Step n={4}>Enter Account Number {MPESA_ACCOUNT_NUMBER}</Step>
                   <Step n={5}>Enter Amount KSh {amount.toLocaleString()}</Step>
                   <Step n={6}>Enter your PIN and confirm</Step>
                 </ol>
