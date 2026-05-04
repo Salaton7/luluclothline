@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import sidai1 from "@/assets/sidai-1.jpg";
 import sidai2 from "@/assets/sidai-2.jpg";
 import sidai3 from "@/assets/sidai-3.jpg";
@@ -153,6 +154,8 @@ const products = [
   },
 ];
 
+type Product = (typeof products)[number];
+
 const reels: { type: "video" | "poster"; src: string; poster?: string; caption: string }[] = [
   {
     type: "poster",
@@ -173,6 +176,38 @@ const reels: { type: "video" | "poster"; src: string; poster?: string; caption: 
 ];
 
 function SidaiPage() {
+  const [dbProducts, setDbProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    supabase
+      .from("sidai_products")
+      .select("*")
+      .eq("is_published", true)
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (!active || !data) return;
+        const mapped: Product[] = data
+          .filter((p) => !!p.image_url)
+          .map((p) => ({
+            name: p.name,
+            tag: p.tag ?? "New",
+            price: p.price,
+            img: p.image_url as string,
+            desc: p.description ?? "",
+            sizes: p.sizes && p.sizes.length > 0 ? p.sizes : ["One size"],
+            colors: p.colors && p.colors.length > 0 ? p.colors : ["Default"],
+          }));
+        setDbProducts(mapped);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const allProducts = [...dbProducts, ...products];
+
   return (
     <>
       {/* Top shuka strip */}
@@ -269,7 +304,7 @@ function SidaiPage() {
           </p>
         </div>
         <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((p) => (
+          {allProducts.map((p) => (
             <ProductCard key={p.name} p={p} />
           ))}
         </div>
@@ -397,8 +432,6 @@ function SidaiPage() {
     </>
   );
 }
-
-type Product = (typeof products)[number];
 
 function ProductCard({ p }: { p: Product }) {
   const { addItem } = useCart();
