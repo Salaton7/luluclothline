@@ -6,15 +6,21 @@ export type WishlistItem = {
   price: number;
   img?: string;
   desc?: string;
+  quantity: number;
 };
 
 type WishlistContextValue = {
   items: WishlistItem[];
   has: (id: string) => boolean;
-  toggle: (item: WishlistItem) => void;
+  toggle: (item: Omit<WishlistItem, "quantity"> & { quantity?: number }) => void;
+  add: (item: Omit<WishlistItem, "quantity"> & { quantity?: number }) => void;
+  setQuantity: (id: string, quantity: number) => void;
+  increment: (id: string) => void;
+  decrement: (id: string) => void;
   remove: (id: string) => void;
   clear: () => void;
   totalItems: number;
+  totalUnique: number;
 };
 
 const WishlistContext = React.createContext<WishlistContextValue | null>(null);
@@ -31,7 +37,14 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) setItems(parsed);
+        if (Array.isArray(parsed)) {
+          setItems(
+            parsed.map((p: WishlistItem) => ({
+              ...p,
+              quantity: typeof p.quantity === "number" && p.quantity > 0 ? p.quantity : 1,
+            })),
+          );
+        }
       }
     } catch {}
     setHydrated(true);
@@ -46,13 +59,46 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
 
   const has = (id: string) => items.some((i) => i.id === id);
 
-  const toggle = (item: WishlistItem) => {
+  const toggle: WishlistContextValue["toggle"] = (item) => {
     setItems((prev) =>
       prev.some((p) => p.id === item.id)
         ? prev.filter((p) => p.id !== item.id)
-        : [...prev, item],
+        : [...prev, { ...item, quantity: item.quantity ?? 1 }],
     );
   };
+
+  const add: WishlistContextValue["add"] = (item) => {
+    const qty = item.quantity ?? 1;
+    setItems((prev) => {
+      const existing = prev.find((p) => p.id === item.id);
+      if (existing) {
+        return prev.map((p) =>
+          p.id === item.id ? { ...p, quantity: p.quantity + qty } : p,
+        );
+      }
+      return [...prev, { ...item, quantity: qty }];
+    });
+  };
+
+  const setQuantity = (id: string, quantity: number) => {
+    if (quantity <= 0) {
+      setItems((prev) => prev.filter((p) => p.id !== id));
+      return;
+    }
+    setItems((prev) => prev.map((p) => (p.id === id ? { ...p, quantity } : p)));
+  };
+
+  const increment = (id: string) =>
+    setItems((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, quantity: p.quantity + 1 } : p)),
+    );
+
+  const decrement = (id: string) =>
+    setItems((prev) =>
+      prev
+        .map((p) => (p.id === id ? { ...p, quantity: p.quantity - 1 } : p))
+        .filter((p) => p.quantity > 0),
+    );
 
   const remove = (id: string) =>
     setItems((prev) => prev.filter((p) => p.id !== id));
@@ -63,9 +109,14 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     items,
     has,
     toggle,
+    add,
+    setQuantity,
+    increment,
+    decrement,
     remove,
     clear,
-    totalItems: items.length,
+    totalItems: items.reduce((sum, i) => sum + i.quantity, 0),
+    totalUnique: items.length,
   };
 
   return <WishlistContext.Provider value={value}>{children}</WishlistContext.Provider>;
