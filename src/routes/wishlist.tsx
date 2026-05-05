@@ -196,59 +196,63 @@ function WishlistPage() {
         </div>
       ) : (
         <div className="grid gap-10 md:grid-cols-[1fr_320px]">
-          <ul className="flex flex-col gap-3">
+          <ul className="divide-y divide-border/60">
             {items.map((it) => (
-              <li
-                key={it.id}
-                className="group flex flex-col gap-4 rounded-xl border border-border/60 bg-card p-4 transition-all hover:border-foreground/30 hover:bg-secondary/40 hover:shadow-md sm:flex-row sm:items-center"
-              >
-                <div className="h-40 w-full shrink-0 overflow-hidden rounded-lg bg-muted ring-1 ring-foreground/10 sm:h-24 sm:w-20">
-                  {it.img ? (
+              <li key={it.id} className="flex gap-4 py-4">
+                {it.img && (
+                  <div className="h-24 w-20 shrink-0 overflow-hidden bg-muted">
                     <img
                       src={it.img}
                       alt={it.name}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="h-full w-full object-cover"
                     />
-                  ) : null}
-                </div>
-
-                <div className="flex flex-1 flex-col gap-1">
-                  <h2 className="font-display text-base leading-tight sm:text-lg">{it.name}</h2>
-                  {it.desc && (
-                    <p className="line-clamp-2 text-xs text-muted-foreground">{it.desc}</p>
-                  )}
-                  <p className="mt-1 text-sm">
-                    KSh {it.price.toLocaleString()}
-                    {it.quantity > 1 && (
-                      <span className="ml-1 text-muted-foreground">
-                        · KSh {(it.price * it.quantity).toLocaleString()}
-                      </span>
-                    )}
-                  </p>
-                  <div className="mt-2 inline-flex w-fit items-center rounded-full border border-border">
+                  </div>
+                )}
+                <div className="flex flex-1 flex-col">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h2 className="font-display text-lg leading-tight">{it.name}</h2>
+                      {it.desc && (
+                        <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
+                          {it.desc}
+                        </p>
+                      )}
+                    </div>
                     <button
                       type="button"
-                      onClick={() => decrement(it.id)}
-                      aria-label="Decrease quantity"
-                      className="inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-secondary"
+                      onClick={() => remove(it.id)}
+                      aria-label={`Remove ${it.name}`}
+                      className="text-muted-foreground transition-colors hover:text-destructive"
                     >
-                      <Minus className="h-3 w-3" />
-                    </button>
-                    <span className="min-w-7 text-center text-xs tabular-nums">
-                      {it.quantity}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => increment(it.id)}
-                      aria-label="Increase quantity"
-                      className="inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-secondary"
-                    >
-                      <Plus className="h-3 w-3" />
+                      <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
-                </div>
-
-                <div className="flex items-center justify-between gap-2 sm:flex-col sm:items-end sm:justify-center">
+                  <div className="mt-auto flex items-end justify-between pt-3">
+                    <div className="inline-flex items-center rounded-full border border-border">
+                      <button
+                        type="button"
+                        onClick={() => decrement(it.id)}
+                        aria-label="Decrease quantity"
+                        className="inline-flex h-8 w-8 items-center justify-center hover:bg-secondary"
+                      >
+                        <Minus className="h-3.5 w-3.5" />
+                      </button>
+                      <span className="w-8 text-center text-sm tabular-nums">
+                        {it.quantity}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => increment(it.id)}
+                        aria-label="Increase quantity"
+                        className="inline-flex h-8 w-8 items-center justify-center hover:bg-secondary"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                    <p className="text-sm tabular-nums">
+                      KSh {(it.price * it.quantity).toLocaleString()}
+                    </p>
+                  </div>
                   <button
                     type="button"
                     onClick={() => {
@@ -262,18 +266,10 @@ function WishlistPage() {
                       });
                       remove(it.id);
                     }}
-                    className="tracking-luxury inline-flex items-center gap-1.5 rounded-full border border-foreground/30 px-3 py-1.5 text-[10px] hover:bg-foreground hover:text-background"
+                    className="tracking-luxury mt-3 inline-flex items-center gap-1.5 self-start rounded-full border border-foreground/30 px-3 py-1.5 text-[10px] hover:bg-foreground hover:text-background"
                   >
                     <ShoppingBag className="h-3 w-3" />
                     Move to cart
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => remove(it.id)}
-                    aria-label="Remove from wishlist"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
-                  >
-                    <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
               </li>
