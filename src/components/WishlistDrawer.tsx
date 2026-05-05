@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Heart, X, Trash2, ShoppingBag } from "lucide-react";
+import { Heart, X, Trash2, ShoppingBag, Minus, Plus } from "lucide-react";
 import { useWishlist, wishlistId, type WishlistItem } from "@/lib/wishlist";
 import { useCart } from "@/lib/cart";
 
@@ -29,7 +29,11 @@ export function WishlistTrigger({ className = "" }: { className?: string }) {
   );
 }
 
-export function WishlistButton({ item }: { item: Omit<WishlistItem, "id"> }) {
+export function WishlistButton({
+  item,
+}: {
+  item: Omit<WishlistItem, "id" | "quantity">;
+}) {
   const { has, toggle } = useWishlist();
   const id = wishlistId(item.name);
   const active = has(id);
@@ -39,7 +43,7 @@ export function WishlistButton({ item }: { item: Omit<WishlistItem, "id"> }) {
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        toggle({ id, ...item });
+        toggle({ id, ...item, quantity: 1 });
       }}
       aria-label={active ? "Remove from wishlist" : "Add to wishlist"}
       aria-pressed={active}
@@ -53,7 +57,7 @@ export function WishlistButton({ item }: { item: Omit<WishlistItem, "id"> }) {
 }
 
 function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { items, remove, clear, totalItems } = useWishlist();
+  const { items, remove, clear, totalItems, increment, decrement } = useWishlist();
   const { addItem } = useCart();
 
   React.useEffect(() => {
@@ -128,7 +132,35 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
                       KSh {it.price.toLocaleString()}
+                      {it.quantity > 1 && (
+                        <span className="ml-1 text-foreground">
+                          · KSh {(it.price * it.quantity).toLocaleString()}
+                        </span>
+                      )}
                     </p>
+                    <div className="mt-2 flex items-center gap-2">
+                      <div className="inline-flex items-center rounded-full border border-border">
+                        <button
+                          type="button"
+                          onClick={() => decrement(it.id)}
+                          aria-label="Decrease quantity"
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-secondary"
+                        >
+                          <Minus className="h-3 w-3" />
+                        </button>
+                        <span className="min-w-6 text-center text-xs tabular-nums">
+                          {it.quantity}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => increment(it.id)}
+                          aria-label="Increase quantity"
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-full hover:bg-secondary"
+                        >
+                          <Plus className="h-3 w-3" />
+                        </button>
+                      </div>
+                    </div>
                     <button
                       type="button"
                       onClick={() => {
@@ -138,6 +170,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                           size: "One size",
                           color: "Default",
                           img: it.img,
+                          quantity: it.quantity,
                         });
                         remove(it.id);
                       }}
@@ -155,6 +188,17 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 
         {items.length > 0 && (
           <div className="border-t border-border/60 px-5 py-4">
+            <div className="mb-3 flex items-center justify-between text-sm">
+              <span className="tracking-luxury text-[10px] text-muted-foreground">
+                Total ({totalItems} {totalItems === 1 ? "item" : "items"})
+              </span>
+              <span className="font-display text-lg">
+                KSh{" "}
+                {items
+                  .reduce((sum, i) => sum + i.price * i.quantity, 0)
+                  .toLocaleString()}
+              </span>
+            </div>
             <button
               type="button"
               onClick={clear}
