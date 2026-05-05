@@ -83,14 +83,6 @@ function Index() {
             >
               Explore Sidai
             </Link>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tracking-luxury rounded-full border border-background/50 bg-background/10 px-7 py-4 text-[11px] text-background backdrop-blur transition-colors hover:bg-background hover:text-foreground"
-            >
-              Shop on WhatsApp
-            </a>
           </div>
         </div>
       </section>
