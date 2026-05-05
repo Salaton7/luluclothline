@@ -365,28 +365,6 @@ function SidaiPage() {
         </div>
       </section>
 
-      {/* HOW TO ORDER */}
-      <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-        <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Simple as that</p>
-        <h2 className="font-display text-4xl md:text-5xl">How to order</h2>
-        <div className="maasai-beads mt-4 h-3 w-32" aria-hidden="true" />
-        <div className="mt-14 grid gap-10 md:grid-cols-4">
-          {[
-            { n: "01", t: "Choose your outfit", d: "Browse the Sidai collection." },
-            { n: "02", t: "Tap WhatsApp", d: "Click 'Order' on any piece." },
-            { n: "03", t: "Confirm details", d: "Share your size and location." },
-            { n: "04", t: "Receive it", d: "Delivery in 24–48 hours within Nairobi." },
-          ].map((s) => (
-            <div key={s.n} className="relative pt-6">
-              <div className="maasai-triangles absolute left-0 right-0 top-0 h-2" aria-hidden="true" />
-              <p className="font-display text-3xl text-accent">{s.n}</p>
-              <h3 className="font-display mt-3 text-xl">{s.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* TRUST */}
       <section className="border-y border-border/60 bg-secondary/40">
         <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
