@@ -405,15 +405,16 @@ function ProductCard({ p }: { p: Product }) {
 
   return (
     <div className="group">
-      <div className="relative overflow-hidden bg-muted ring-1 ring-foreground/10">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted ring-1 ring-foreground/10">
         <img
           src={p.img}
           alt={p.name}
           loading="lazy"
           width={900}
-          height={1200}
-          className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          height={1125}
+          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/15 via-transparent to-transparent" aria-hidden="true" />
         <div className="maasai-shuka absolute inset-x-0 top-0 h-1.5" aria-hidden="true" />
         <span className="tracking-luxury absolute left-3 top-4 rounded-full bg-background/90 px-3 py-1 text-[9px] text-foreground backdrop-blur">
           {p.tag}
