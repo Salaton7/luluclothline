@@ -17,6 +17,7 @@ import sidaiNew4 from "@/assets/sidai-new-4.jpg";
 import sidaiNew5 from "@/assets/sidai-new-5.webp";
 import sidaiNew6 from "@/assets/sidai-new-6.webp";
 import { useCart } from "@/lib/cart";
+import { WishlistButton } from "@/components/WishlistDrawer";
 
 export const Route = createFileRoute("/sidai")({
   head: () => ({
@@ -419,6 +420,7 @@ function ProductCard({ p }: { p: Product }) {
         <span className="tracking-luxury absolute left-3 top-4 rounded-full bg-background/90 px-3 py-1 text-[9px] text-foreground backdrop-blur">
           {p.tag}
         </span>
+        <WishlistButton item={{ name: p.name, price: p.price, img: p.img, desc: p.desc }} />
         <div className="maasai-beads absolute inset-x-0 bottom-0 h-2 opacity-90" aria-hidden="true" />
       </div>
       <div className="mt-5">
