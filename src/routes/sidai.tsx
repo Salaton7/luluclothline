@@ -258,29 +258,6 @@ function SidaiPage() {
       {/* Chevron beadwork divider */}
       <div className="maasai-chevron h-6 w-full" aria-hidden="true" />
 
-      {/* EDITORIAL HERO PAIR */}
-      <section className="grid grid-cols-1 gap-1 bg-foreground md:grid-cols-2">
-        <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
-          <img
-            src={sidai1}
-            alt="Nashipai Beaded Gown — signature crimson Maasai couture"
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
-          <img
-            src={sidai4}
-            alt="Naipanoi Stage Gown — ceremonial Maasai couture"
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </section>
-
-      {/* Blue shuka strip */}
-      <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
-
       {/* PRODUCT GRID */}
       <section id="collection" className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
         <div className="mb-12 flex items-end justify-between">
@@ -299,6 +276,29 @@ function SidaiPage() {
           {allProducts.map((p) => (
             <ProductCard key={p.name} p={p} />
           ))}
+        </div>
+      </section>
+
+      {/* Blue shuka strip */}
+      <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
+
+      {/* EDITORIAL HERO PAIR */}
+      <section className="grid grid-cols-1 gap-1 bg-foreground md:grid-cols-2">
+        <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
+          <img
+            src={sidai1}
+            alt="Nashipai Beaded Gown — signature crimson Maasai couture"
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
+          <img
+            src={sidai4}
+            alt="Naipanoi Stage Gown — ceremonial Maasai couture"
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         </div>
       </section>
 
