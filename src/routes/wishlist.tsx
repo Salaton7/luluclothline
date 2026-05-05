@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
+import * as React from "react";
+import { Heart, Trash2, Minus, Plus, ShoppingBag, Share2, Check, Copy, MessageCircle } from "lucide-react";
 import { useWishlist } from "@/lib/wishlist";
 import { useCart } from "@/lib/cart";
 
@@ -25,6 +26,41 @@ function WishlistPage() {
   const { items, remove, clear, increment, decrement, totalItems } = useWishlist();
   const { addItem } = useCart();
   const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const [shareOpen, setShareOpen] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
+
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareTitle = "My Lulu Clothline wishlist";
+  const shareText = items.length
+    ? `Check out my Lulu Clothline wishlist:\n\n${items
+        .map((i) => `• ${i.name}${i.quantity > 1 ? ` ×${i.quantity}` : ""} — KSh ${i.price.toLocaleString()}`)
+        .join("\n")}\n\nTotal: KSh ${subtotal.toLocaleString()}\n${shareUrl}`
+    : `Check out Lulu Clothline: ${shareUrl}`;
+
+  const handleShare = async () => {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+        return;
+      } catch {
+        // user cancelled or unsupported — fall through to dialog
+      }
+    }
+    setShareOpen(true);
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shareText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {}
+  };
+
+  const waHref = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+  const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+  const fbHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+  const mailHref = `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareText)}`;
 
   return (
     <main className="mx-auto w-full max-w-5xl px-5 py-12 md:py-16">
@@ -36,15 +72,111 @@ function WishlistPage() {
           </h1>
         </div>
         {items.length > 0 && (
-          <button
-            type="button"
-            onClick={clear}
-            className="tracking-luxury rounded-full border border-border px-4 py-2 text-[10px] text-muted-foreground hover:border-foreground/60 hover:text-foreground"
-          >
-            Clear all
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleShare}
+              className="tracking-luxury inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-[10px] text-background hover:opacity-90"
+            >
+              <Share2 className="h-3 w-3" />
+              Share
+            </button>
+            <button
+              type="button"
+              onClick={clear}
+              className="tracking-luxury rounded-full border border-border px-4 py-2 text-[10px] text-muted-foreground hover:border-foreground/60 hover:text-foreground"
+            >
+              Clear all
+            </button>
+          </div>
         )}
       </header>
+
+      {shareOpen && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
+          <button
+            aria-label="Close share"
+            onClick={() => setShareOpen(false)}
+            className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
+          />
+          <div
+            role="dialog"
+            aria-label="Share wishlist"
+            className="relative w-full max-w-md rounded-t-2xl bg-background p-6 shadow-xl sm:rounded-2xl"
+          >
+            <p className="tracking-luxury text-[10px] text-muted-foreground">Share with friends</p>
+            <h2 className="mt-1 font-display text-xl">Send your wishlist</h2>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Pick how you'd like to share these {totalItems} {totalItems === 1 ? "piece" : "pieces"}.
+            </p>
+
+            <div className="mt-5 grid grid-cols-4 gap-3">
+              <a
+                href={waHref}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex flex-col items-center gap-2"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary transition-colors group-hover:bg-foreground group-hover:text-background">
+                  <MessageCircle className="h-5 w-5" />
+                </span>
+                <span className="text-[10px] text-muted-foreground">WhatsApp</span>
+              </a>
+              <a
+                href={xHref}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex flex-col items-center gap-2"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-sm font-semibold transition-colors group-hover:bg-foreground group-hover:text-background">
+                  𝕏
+                </span>
+                <span className="text-[10px] text-muted-foreground">Twitter</span>
+              </a>
+              <a
+                href={fbHref}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex flex-col items-center gap-2"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary font-display text-base transition-colors group-hover:bg-foreground group-hover:text-background">
+                  f
+                </span>
+                <span className="text-[10px] text-muted-foreground">Facebook</span>
+              </a>
+              <a
+                href={mailHref}
+                className="group flex flex-col items-center gap-2"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-xs transition-colors group-hover:bg-foreground group-hover:text-background">
+                  @
+                </span>
+                <span className="text-[10px] text-muted-foreground">Email</span>
+              </a>
+            </div>
+
+            <div className="mt-5 flex items-center gap-2 rounded-full border border-border bg-secondary/40 p-1 pl-4">
+              <span className="flex-1 truncate text-xs text-muted-foreground">{shareUrl}</span>
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="tracking-luxury inline-flex items-center gap-1.5 rounded-full bg-foreground px-3 py-2 text-[10px] text-background hover:opacity-90"
+              >
+                {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                {copied ? "Copied" : "Copy link"}
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShareOpen(false)}
+              className="tracking-luxury mt-4 w-full rounded-full border border-border px-4 py-2.5 text-[10px] text-muted-foreground hover:border-foreground/60 hover:text-foreground"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       {items.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/60 bg-secondary/30 py-24 text-center">
