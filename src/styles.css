@@ -256,6 +256,31 @@
     );
 }
 
+/* Deep red Maasai shuka — for hero sections with light text */
+.maasai-shuka-red {
+  background-color: #7a1812;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.55) 0 2px,
+      transparent 2px 42px,
+      rgba(0, 0, 0, 0.55) 42px 44px,
+      transparent 44px 86px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.55) 0 2px,
+      transparent 2px 42px,
+      rgba(0, 0, 0, 0.55) 42px 44px,
+      transparent 44px 86px
+    ),
+    radial-gradient(
+      ellipse at center,
+      rgba(122, 24, 18, 0.35) 0%,
+      rgba(60, 10, 8, 0.85) 100%
+    );
+}
+
 /* Beaded chevron / triangle band */
 .maasai-chevron {
   background-color: #0d0d0d;

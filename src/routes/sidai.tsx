@@ -213,18 +213,18 @@ function SidaiPage() {
       {/* Top shuka strip */}
       <div className="maasai-shuka h-3 w-full" aria-hidden="true" />
 
-      <section className="relative overflow-hidden border-b border-border/60 maasai-shuka-soft">
+      <section className="relative overflow-hidden border-b border-black/30 maasai-shuka-red text-[#f8efe6]">
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-20 md:grid-cols-2 md:items-center md:px-10 md:py-28">
           <div>
-          <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">
+          <p className="tracking-luxury mb-4 text-[10px] text-[#f5c518]">
             Maasai Couture · Made in Kenya 🇰🇪
           </p>
-          <h1 className="font-display text-5xl leading-[0.95] md:text-7xl">
+          <h1 className="font-display text-5xl leading-[0.95] md:text-7xl text-[#f8efe6]">
             Lulu Sidai
             <br />
-            <span className="italic text-accent">Heritage in every stitch.</span>
+            <span className="italic text-[#f5c518]">Heritage in every stitch.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-muted-foreground">
+          <p className="mt-6 max-w-xl text-[#f8efe6]/80">
             A couture line rooted in Maasai craftsmanship — handcrafted gowns, beaded capes
             and cultural statement pieces, designed and made in Kenya. Each piece is
             tailored on order.
@@ -233,15 +233,15 @@ function SidaiPage() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="#collection"
-              className="tracking-luxury rounded-full border border-foreground/30 px-6 py-3 text-[11px] hover:bg-foreground hover:text-background"
+              className="tracking-luxury rounded-full border border-[#f8efe6]/50 px-6 py-3 text-[11px] text-[#f8efe6] hover:bg-[#f8efe6] hover:text-[#7a1812]"
             >
               View Collection
             </a>
           </div>
           </div>
           <div className="relative">
-            <div className="maasai-shuka absolute -inset-2 -z-10 opacity-40" aria-hidden="true" />
-            <div className="aspect-[4/5] overflow-hidden bg-muted ring-1 ring-foreground/10">
+            <div className="maasai-shuka absolute -inset-2 -z-10 opacity-60" aria-hidden="true" />
+            <div className="aspect-[4/5] overflow-hidden bg-muted ring-1 ring-black/20">
               <img
                 src={sidaiCover}
                 alt="Lulu Sidai cover — model in Maasai beaded headband, statement collar and dress"
