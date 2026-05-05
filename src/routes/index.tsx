@@ -24,10 +24,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WHATSAPP_URL = `https://wa.me/254714844809?text=${encodeURIComponent(
-  "Hi Lulu Clothline! I'd like to place an order.",
-)}`;
-
 const worlds = [
   {
     title: "Lulu Sidai",
