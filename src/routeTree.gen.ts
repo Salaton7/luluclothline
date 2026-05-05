@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as TextileRouteImport } from './routes/textile'
 import { Route as SidaiRouteImport } from './routes/sidai'
 import { Route as CollectiveRouteImport } from './routes/collective'
@@ -16,6 +17,11 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
+const WishlistRoute = WishlistRouteImport.update({
+  id: '/wishlist',
+  path: '/wishlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TextileRoute = TextileRouteImport.update({
   id: '/textile',
   path: '/textile',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/wishlist': typeof WishlistRoute
   '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/wishlist': typeof WishlistRoute
   '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/wishlist': typeof WishlistRoute
   '/admin/login': typeof AdminLoginRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +89,17 @@ export interface FileRouteTypes {
     | '/collective'
     | '/sidai'
     | '/textile'
+    | '/wishlist'
     | '/admin/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/collective' | '/sidai' | '/textile' | '/admin/login'
+  to:
+    | '/'
+    | '/admin'
+    | '/collective'
+    | '/sidai'
+    | '/textile'
+    | '/wishlist'
+    | '/admin/login'
   id:
     | '__root__'
     | '/'
@@ -90,6 +107,7 @@ export interface FileRouteTypes {
     | '/collective'
     | '/sidai'
     | '/textile'
+    | '/wishlist'
     | '/admin/login'
   fileRoutesById: FileRoutesById
 }
@@ -99,10 +117,18 @@ export interface RootRouteChildren {
   CollectiveRoute: typeof CollectiveRoute
   SidaiRoute: typeof SidaiRoute
   TextileRoute: typeof TextileRoute
+  WishlistRoute: typeof WishlistRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/textile': {
       id: '/textile'
       path: '/textile'
@@ -164,7 +190,17 @@ const rootRouteChildren: RootRouteChildren = {
   CollectiveRoute: CollectiveRoute,
   SidaiRoute: SidaiRoute,
   TextileRoute: TextileRoute,
+  WishlistRoute: WishlistRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
