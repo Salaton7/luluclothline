@@ -141,14 +141,6 @@ function SiteHeader() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="tracking-luxury hidden rounded-full bg-foreground px-5 py-2.5 text-[10px] text-background transition-opacity hover:opacity-90 md:inline-block"
-          >
-            Order on WhatsApp
-          </a>
           <CartTrigger />
         </div>
       </div>

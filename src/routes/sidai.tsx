@@ -232,14 +232,6 @@ function SidaiPage() {
           <div className="maasai-beads mt-8 h-4 w-40" aria-hidden="true" />
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
-              href={wa("a Lulu Sidai piece")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tracking-luxury rounded-full bg-foreground px-6 py-3 text-[11px] text-background transition-opacity hover:opacity-90"
-            >
-              Order on WhatsApp
-            </a>
-            <a
               href="#collection"
               className="tracking-luxury rounded-full border border-foreground/30 px-6 py-3 text-[11px] hover:bg-foreground hover:text-background"
             >
@@ -419,14 +411,6 @@ function SidaiPage() {
         <h2 className="font-display text-4xl md:text-6xl">Ready to wear it?</h2>
         <p className="mt-4 text-muted-foreground">DM us and we'll style you.</p>
         <div className="maasai-beads mx-auto mt-6 h-3 w-40" aria-hidden="true" />
-        <a
-          href={wa("a piece from the Sidai collection")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="tracking-luxury mt-8 inline-block rounded-full bg-whatsapp px-8 py-4 text-[11px] text-whatsapp-foreground transition-transform hover:scale-105"
-        >
-          Order on WhatsApp
-        </a>
       </section>
       <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
     </>
