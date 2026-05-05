@@ -398,10 +398,9 @@ function SidaiPage() {
 function ProductCard({ p }: { p: Product }) {
   const { addItem } = useCart();
   const [size, setSize] = useState(p.sizes[0]);
-  const [color, setColor] = useState(p.colors[0]);
 
   const handleAdd = () => {
-    addItem({ name: p.name, price: p.price, size, color, img: p.img });
+    addItem({ name: p.name, price: p.price, size, color: p.colors[0], img: p.img });
   };
 
   return (
@@ -450,27 +449,6 @@ function ProductCard({ p }: { p: Product }) {
                 }`}
               >
                 {s}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Color selector */}
-        <div className="mt-3">
-          <p className="tracking-luxury mb-2 text-[9px] text-muted-foreground">Color</p>
-          <div className="flex flex-wrap gap-1.5">
-            {p.colors.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setColor(c)}
-                className={`rounded-full border px-3 py-1 text-[11px] transition-colors ${
-                  color === c
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border hover:border-foreground/60"
-                }`}
-              >
-                {c}
               </button>
             ))}
           </div>
