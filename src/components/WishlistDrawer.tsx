@@ -57,7 +57,6 @@ export function WishlistDrawer() {
   const { items, isOpen, closeWishlist, removeItem, totalItems } = useWishlist();
   const { addItem } = useCart();
   const [copied, setCopied] = useState(false);
-  const [sharing, setSharing] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   const buildShareText = () => {
@@ -250,42 +249,6 @@ export function WishlistDrawer() {
     return await new Promise<Blob | null>((resolve) =>
       canvas.toBlob((b) => resolve(b), "image/png"),
     );
-  };
-
-  const handleExportImage = async () => {
-    if (items.length === 0) return;
-    setSharing(true);
-    try {
-      const blob = await buildImage();
-      if (!blob) return;
-      const filename = "lulu-wishlist.png";
-      const file = new File([blob], filename, { type: "image/png" });
-      const nav = navigator as Navigator & {
-        canShare?: (data: { files: File[] }) => boolean;
-      };
-      if (nav.canShare && nav.canShare({ files: [file] }) && nav.share) {
-        try {
-          await nav.share({
-            files: [file],
-            title: "My Lulu Clothline wishlist",
-            text: buildShareText(),
-          });
-          return;
-        } catch {
-          /* fall through to download */
-        }
-      }
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    } finally {
-      setSharing(false);
-    }
   };
 
   const handleDownloadImage = async () => {
