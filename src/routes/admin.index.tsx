@@ -16,6 +16,7 @@ type FormState = {
   id?: string;
   name: string;
   tag: string;
+  category: "sidai" | "textile" | "collective";
   price: string;
   description: string;
   image_url: string;
@@ -28,6 +29,7 @@ type FormState = {
 const emptyForm: FormState = {
   name: "",
   tag: "",
+  category: "sidai",
   price: "",
   description: "",
   image_url: "",
@@ -135,6 +137,7 @@ function AdminPage() {
       id: p.id,
       name: p.name,
       tag: p.tag ?? "",
+      category: ((p as unknown as { category?: string }).category ?? "sidai") as FormState["category"],
       price: String(p.price),
       description: p.description ?? "",
       image_url: p.image_url ?? "",
@@ -151,6 +154,7 @@ function AdminPage() {
     const payload = {
       name: form.name.trim(),
       tag: form.tag.trim() || null,
+      category: form.category,
       price: parseInt(form.price, 10) || 0,
       description: form.description.trim() || null,
       image_url: form.image_url.trim() || null,
@@ -301,6 +305,20 @@ function AdminPage() {
                 className={inputCls}
               />
             </Field>
+            <Field label="Division *" className="md:col-span-2">
+              <select
+                required
+                value={form.category}
+                onChange={(e) =>
+                  setForm({ ...form, category: e.target.value as FormState["category"] })
+                }
+                className={inputCls}
+              >
+                <option value="sidai">Sidai — Couture & ready-to-wear</option>
+                <option value="textile">Textile — Fabrics & materials</option>
+                <option value="collective">Collective — Creative pieces</option>
+              </select>
+            </Field>
             <Field label="Price (KSh)">
               <input
                 type="number"
@@ -437,6 +455,9 @@ function AdminPage() {
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-baseline gap-2">
                       <p className="font-display text-base">{p.name}</p>
+                      <span className="tracking-luxury rounded-full bg-foreground/10 px-2 py-0.5 text-[9px] uppercase">
+                        {((p as unknown as { category?: string }).category ?? "sidai")}
+                      </span>
                       {p.tag && (
                         <span className="tracking-luxury rounded-full bg-secondary px-2 py-0.5 text-[9px] text-secondary-foreground">
                           {p.tag}

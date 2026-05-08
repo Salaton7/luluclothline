@@ -40,6 +40,7 @@ export type Database = {
       }
       sidai_products: {
         Row: {
+          category: string
           colors: string[]
           created_at: string
           description: string | null
@@ -54,6 +55,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          category?: string
           colors?: string[]
           created_at?: string
           description?: string | null
@@ -68,6 +70,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          category?: string
           colors?: string[]
           created_at?: string
           description?: string | null

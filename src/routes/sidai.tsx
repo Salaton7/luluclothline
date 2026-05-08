@@ -184,6 +184,7 @@ function SidaiPage() {
       .from("sidai_products")
       .select("*")
       .eq("is_published", true)
+      .eq("category", "sidai")
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false })
       .then(({ data }) => {
