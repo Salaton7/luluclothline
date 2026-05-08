@@ -219,13 +219,13 @@ function SidaiPage() {
         <div className="mb-16 flex items-end justify-between">
           <div>
             <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
-              The Sidai Collection
+              Shop Sidai
             </p>
-            <h2 className="font-display text-4xl md:text-5xl">Featured pieces</h2>
+            <h2 className="font-display text-4xl md:text-5xl">Our outfits</h2>
             <div className="maasai-beads mt-4 h-3 w-32" aria-hidden="true" />
           </div>
           <p className="hidden max-w-xs text-sm text-muted-foreground md:block">
-            Each piece is made-to-order. Delivery 7–14 days within Kenya.
+            We make each outfit just for you. Ready in 1–2 weeks within Kenya.
           </p>
         </div>
         <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
