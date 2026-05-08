@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, ImageDown, Download } from "lucide-react";
+import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, Download } from "lucide-react";
 import { useWishlist } from "@/lib/wishlist";
 import { useCart } from "@/lib/cart";
 
