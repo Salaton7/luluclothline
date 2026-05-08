@@ -6,16 +6,16 @@ import textileImg from "@/assets/textile.jpg";
 export const Route = createFileRoute("/textile")({
   head: () => ({
     meta: [
-      { title: "Lulu Textile — Premium Fabrics for Creators · Lulu Clothline" },
+      { title: "Lulu Textile — Quality fabric for sewists · Lulu Clothline" },
       {
         name: "description",
         content:
-          "High-quality fabrics and materials for designers, tailors, and fashion creatives across Kenya.",
+          "Quality fabric for tailors, designers, and home sewists across Kenya.",
       },
       { property: "og:title", content: "Lulu Textile" },
       {
         property: "og:description",
-        content: "Premium fabrics and materials for creators and designers.",
+        content: "Quality fabric for tailors, designers, and home sewists.",
       },
     ],
   }),
@@ -62,12 +62,11 @@ function TextilePage() {
         <div className="flex items-center px-5 py-20 md:px-16 md:py-28">
           <div>
             <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">
-              The Material
+              Fabric
             </p>
             <h1 className="font-display text-5xl md:text-7xl">Lulu Textile</h1>
             <p className="mt-6 max-w-md text-muted-foreground">
-              High-quality fabrics and materials for designers, tailors, and fashion creatives
-              across Kenya.
+              Quality fabric for tailors, designers, and home sewists — anywhere in Kenya.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -76,7 +75,7 @@ function TextilePage() {
                 rel="noopener noreferrer"
                 className="tracking-luxury rounded-full bg-foreground px-7 py-4 text-[11px] text-background hover:opacity-90"
               >
-                Request Fabric on WhatsApp
+                Ask about fabric
               </a>
               <a
                 href={inquire("a custom inquiry")}
@@ -84,7 +83,7 @@ function TextilePage() {
                 rel="noopener noreferrer"
                 className="tracking-luxury rounded-full border border-foreground/30 px-7 py-4 text-[11px] hover:bg-foreground hover:text-background"
               >
-                Send Inquiry
+                Ask a question
               </a>
             </div>
           </div>
@@ -103,9 +102,9 @@ function TextilePage() {
       {/* BULK */}
       <section className="border-t border-border/60 bg-secondary/40">
         <div className="mx-auto max-w-4xl px-5 py-20 text-center md:px-10 md:py-28">
-          <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">For the trade</p>
+          <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">Buying in bulk</p>
           <h2 className="font-display text-3xl md:text-5xl">
-            Minimum order support available for designers and boutiques.
+            Bulk orders for shops and tailors — just ask.
           </h2>
           <a
             href={inquire("bulk fabric orders for my boutique")}
@@ -113,7 +112,7 @@ function TextilePage() {
             rel="noopener noreferrer"
             className="tracking-luxury mt-10 inline-block rounded-full bg-whatsapp px-8 py-4 text-[11px] text-whatsapp-foreground transition-transform hover:scale-105"
           >
-            Talk to us on WhatsApp
+            Chat with us on WhatsApp
           </a>
         </div>
       </section>
@@ -122,8 +121,8 @@ function TextilePage() {
       {items.length > 0 && (
         <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
           <div className="mb-12">
-            <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">In stock</p>
-            <h2 className="font-display text-4xl md:text-5xl">From the catalog.</h2>
+            <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Available now</p>
+            <h2 className="font-display text-4xl md:text-5xl">In stock fabric</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((p) => (
@@ -163,7 +162,7 @@ function TextilePage() {
                   </p>
                 )}
                 <span className="tracking-luxury mt-3 inline-block text-[10px] text-muted-foreground transition-colors group-hover:text-accent">
-                  Inquire →
+                  Ask about this →
                 </span>
               </a>
             ))}
