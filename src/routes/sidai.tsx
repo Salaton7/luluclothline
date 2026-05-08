@@ -20,16 +20,16 @@ import { useCart } from "@/lib/cart";
 export const Route = createFileRoute("/sidai")({
   head: () => ({
     meta: [
-      { title: "Lulu Sidai — Maasai Couture · Lulu Clothline" },
+      { title: "Lulu Sidai — Handmade Maasai outfits · Lulu Clothline" },
       {
         name: "description",
         content:
-          "Lulu Sidai — handcrafted Maasai-inspired couture. Beaded gowns, capes, and cultural statement pieces, made in Kenya. Order on WhatsApp.",
+          "Handmade Maasai-inspired outfits. Beaded dresses, capes, and special-day pieces, made in Kenya. Order on WhatsApp.",
       },
-      { property: "og:title", content: "Lulu Sidai — Maasai Couture" },
+      { property: "og:title", content: "Lulu Sidai — Handmade Maasai outfits" },
       {
         property: "og:description",
-        content: "Handcrafted Maasai-inspired couture. Made in Kenya 🇰🇪",
+        content: "Handmade Maasai-inspired outfits. Made in Kenya.",
       },
       { property: "og:image", content: "/og-sidai.jpg" },
     ],
