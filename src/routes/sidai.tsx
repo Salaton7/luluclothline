@@ -9,7 +9,6 @@ import sidai5 from "@/assets/sidai-5.jpg";
 import sidai6 from "@/assets/sidai-6.jpg";
 import sidai7 from "@/assets/sidai-7.jpg";
 import sidaiReel1 from "@/assets/sidai-reel-1.mp4";
-import sidaiCover from "@/assets/sidai-cover.webp";
 import sidaiNew1 from "@/assets/sidai-new-1.jpeg";
 import sidaiNew2 from "@/assets/sidai-new-2.jpeg";
 import sidaiNew3 from "@/assets/sidai-new-3.jpg";
@@ -237,19 +236,6 @@ function SidaiPage() {
               View Collection
             </a>
           </div>
-          </div>
-          <div className="relative">
-            <div className="maasai-shuka absolute -inset-2 -z-10 opacity-60" aria-hidden="true" />
-            <div className="aspect-[4/5] overflow-hidden bg-muted ring-1 ring-black/20">
-              <img
-                src={sidaiCover}
-                alt="Lulu Sidai cover — model in Maasai beaded headband, statement collar and dress"
-                className="h-full w-full object-cover"
-                loading="eager"
-                fetchPriority="high"
-              />
-            </div>
-            <div className="maasai-beads mt-3 h-3 w-full" aria-hidden="true" />
           </div>
         </div>
       </section>
