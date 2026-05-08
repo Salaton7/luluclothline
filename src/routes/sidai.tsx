@@ -214,9 +214,6 @@ function SidaiPage() {
       <div className="maasai-shuka h-3 w-full" aria-hidden="true" />
 
 
-      {/* Chevron beadwork divider */}
-      <div className="maasai-chevron h-6 w-full" aria-hidden="true" />
-
       {/* PRODUCT GRID */}
       <section id="collection" className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
         <div className="mb-12 flex items-end justify-between">
