@@ -381,7 +381,7 @@ export function WishlistDrawer() {
                           removeItem(it.id);
                           closeWishlist();
                         }}
-                        className="tracking-luxury inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-[10px] text-background hover:opacity-90"
+                        className="tracking-luxury inline-flex items-center gap-2 rounded-full bg-rose-900 px-4 py-2 text-[10px] text-background hover:opacity-90"
                       >
                         <ShoppingBag className="h-3.5 w-3.5" />
                         Move to cart
