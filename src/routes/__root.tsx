@@ -39,23 +39,23 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lulu Clothline — A Modern Maasai Fashion Ecosystem" },
+      { title: "Lulu Clothline — Kenyan fashion made simple" },
       {
         name: "description",
         content:
-          "Lulu Clothline — Sidai fashion, premium textiles, and the creative collective. Made in Kenya.",
+          "Lulu Clothline — outfits, fabric, and stories. Made in Kenya.",
       },
       { name: "author", content: "Lulu Clothline" },
-      { property: "og:title", content: "Lulu Clothline — A Modern Maasai Fashion Ecosystem" },
+      { property: "og:title", content: "Lulu Clothline — Kenyan fashion made simple" },
       {
         property: "og:description",
-        content: "Shop fashion. Source textiles. Join the collective.",
+        content: "Shop outfits. Buy fabric. Work with us.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { property: "og:image", content: luluLogo },
       { name: "twitter:image", content: luluLogo },
-      { name: "twitter:title", content: "Lulu Clothline — A Modern Maasai Fashion Ecosystem" },
+      { name: "twitter:title", content: "Lulu Clothline — Kenyan fashion made simple" },
       { name: "description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
       { property: "og:description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
       { name: "twitter:description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
@@ -164,7 +164,7 @@ function SiteFooter() {
             <div className="font-display text-2xl">Lulu Clothline</div>
           </div>
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-            A modern Kenyan fashion ecosystem of style, fabric, and creative culture.
+            Outfits, fabric, and stories — made in Kenya.
           </p>
         </div>
         <div>
