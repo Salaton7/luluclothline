@@ -128,7 +128,7 @@ export function WishlistDrawer() {
     ctx.fillStyle = C.ink;
     ctx.font = "700 76px Georgia, 'Times New Roman', serif";
     ctx.textAlign = "left";
-    ctx.fillText("Your Bag", padX, headerY + 80);
+    ctx.fillText("My Lulu Wishlist", padX, headerY + 80);
 
     ctx.fillStyle = C.muted;
     ctx.font = "400 20px Helvetica, Arial, sans-serif";
