@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, FileDown } from "lucide-react";
+import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, ImageDown } from "lucide-react";
 import { useWishlist } from "@/lib/wishlist";
 import { useCart } from "@/lib/cart";
-import jsPDF from "jspdf";
 
 export function WishlistTrigger({ className = "" }: { className?: string }) {
   const { totalItems, openWishlist } = useWishlist();
@@ -75,110 +74,99 @@ export function WishlistDrawer() {
   const whatsappShareUrl = () =>
     `https://wa.me/?text=${encodeURIComponent(buildShareText())}`;
 
-  const loadImageAsDataUrl = (
-    url: string,
-  ): Promise<{ data: string; w: number; h: number } | null> =>
+  const loadImage = (url: string): Promise<HTMLImageElement | null> =>
     new Promise((resolve) => {
       const img = new Image();
       img.crossOrigin = "anonymous";
-      img.onload = () => {
-        try {
-          const max = 900;
-          const scale = Math.min(1, max / Math.max(img.width, img.height));
-          const w = Math.round(img.width * scale);
-          const h = Math.round(img.height * scale);
-          const canvas = document.createElement("canvas");
-          canvas.width = w;
-          canvas.height = h;
-          const ctx = canvas.getContext("2d");
-          if (!ctx) return resolve(null);
-          ctx.drawImage(img, 0, 0, w, h);
-          resolve({ data: canvas.toDataURL("image/jpeg", 0.85), w, h });
-        } catch {
-          resolve(null);
-        }
-      };
+      img.onload = () => resolve(img);
       img.onerror = () => resolve(null);
       img.src = url;
     });
 
-  const buildPdf = async () => {
-    // Single page, social-share friendly portrait. Mirrors the wishlist
-    // drawer: thumbnail (4:5) on the left, name + price on the right,
-    // hairline dividers between rows.
+  const buildImage = async (): Promise<Blob | null> => {
+    // Single portrait canvas mirroring the wishlist drawer layout.
     const W = 1080;
     const H = 1350;
-    const doc = new jsPDF({ unit: "pt", format: [W, H], orientation: "portrait" });
+    const canvas = document.createElement("canvas");
+    canvas.width = W;
+    canvas.height = H;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
 
     const C = {
-      bg: "#F7F2E8",      // soft cream (matches site background)
-      ink: "#1A1612",     // foreground
-      muted: "#7A6F5E",   // muted text
-      hair: "#D9CFBF",    // divider
-      accent: "#9B2D20",  // single understated accent
+      bg: "#F7F2E8",
+      ink: "#1A1612",
+      muted: "#7A6F5E",
+      hair: "#D9CFBF",
+      accent: "#9B2D20",
+      thumb: "#EDE6D6",
     };
 
-    // Background
-    doc.setFillColor(C.bg);
-    doc.rect(0, 0, W, H, "F");
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 0, W, H);
 
-    // Pre-load images
-    const imageData = await Promise.all(
-      items.map((it) => (it.img ? loadImageAsDataUrl(it.img) : Promise.resolve(null))),
+    const images = await Promise.all(
+      items.map((it) => (it.img ? loadImage(it.img) : Promise.resolve(null))),
     );
 
-    // ── Header ─────────────────────────────────────────────
     const padX = 80;
     const headerY = 110;
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(C.muted);
-    doc.text("LULU  ·  CLOTHLINE", padX, headerY);
+    // Header eyebrow
+    ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = C.muted;
+    ctx.font = "500 16px Helvetica, Arial, sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("LULU  ·  CLOTHLINE", padX, headerY);
 
     const count = items.length;
     const countLabel = `${count} ${count === 1 ? "ITEM" : "ITEMS"}`;
-    const cw = doc.getTextWidth(countLabel);
-    doc.text(countLabel, W - padX - cw, headerY);
+    ctx.textAlign = "right";
+    ctx.fillText(countLabel, W - padX, headerY);
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(56);
-    doc.setTextColor(C.ink);
-    doc.text("Your Bag", padX, headerY + 70);
+    // Title
+    ctx.fillStyle = C.ink;
+    ctx.font = "700 76px Georgia, 'Times New Roman', serif";
+    ctx.textAlign = "left";
+    ctx.fillText("Your Bag", padX, headerY + 80);
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(14);
-    doc.setTextColor(C.muted);
-    doc.text("Saved pieces from luluclothline.com", padX, headerY + 100);
+    ctx.fillStyle = C.muted;
+    ctx.font = "400 20px Helvetica, Arial, sans-serif";
+    ctx.fillText("Saved pieces from luluclothline.com", padX, headerY + 115);
 
-    // Divider under header
-    doc.setDrawColor(C.hair);
-    doc.setLineWidth(0.6);
-    doc.line(padX, headerY + 130, W - padX, headerY + 130);
+    // Divider
+    ctx.strokeStyle = C.hair;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padX, headerY + 145);
+    ctx.lineTo(W - padX, headerY + 145);
+    ctx.stroke();
 
-    // ── Items list ─────────────────────────────────────────
-    const listTop = headerY + 160;
-    const listBottom = H - 200; // leaves room for total + footer
+    const listTop = headerY + 175;
+    const listBottom = H - 200;
     const availH = listBottom - listTop;
 
-    // Row height tuned to fit on one page; thumbnail is 4:5 like the drawer
-    const minRow = 70;
-    const maxRow = 170;
+    const minRow = 90;
+    const maxRow = 200;
     const rowH = Math.max(minRow, Math.min(maxRow, availH / Math.max(count, 1)));
-    const thumbH = rowH - 16;
-    const thumbW = thumbH * (20 / 24); // matches w-20/h-24 in drawer
+    const thumbH = rowH - 20;
+    const thumbW = thumbH * (20 / 24);
 
     let total = 0;
     items.forEach((it, idx) => {
       const y = listTop + idx * rowH;
-      if (y + thumbH > listBottom + 4) return; // safety
+      if (y + thumbH > listBottom + 4) return;
 
-      // Thumbnail
-      doc.setFillColor("#EDE6D6");
-      doc.rect(padX, y, thumbW, thumbH, "F");
-      const img = imageData[idx];
-      if (img) {
-        const ratio = img.w / img.h;
+      // Thumbnail with object-cover clipping
+      ctx.fillStyle = C.thumb;
+      ctx.fillRect(padX, y, thumbW, thumbH);
+      const img = images[idx];
+      if (img && img.width && img.height) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(padX, y, thumbW, thumbH);
+        ctx.clip();
+        const ratio = img.width / img.height;
         let drawW = thumbW;
         let drawH = thumbW / ratio;
         if (drawH < thumbH) {
@@ -187,98 +175,90 @@ export function WishlistDrawer() {
         }
         const dx = padX + (thumbW - drawW) / 2;
         const dy = y + (thumbH - drawH) / 2;
-        doc.addImage(img.data, "JPEG", dx, dy, drawW, drawH, undefined, "FAST");
-        // Mask any overflow with bg color so the image looks clipped to the box
-        doc.setFillColor(C.bg);
-        if (dy < y) doc.rect(padX - 2, y - rowH, thumbW + 4, y - dy + 2, "F");
-        if (dy + drawH > y + thumbH)
-          doc.rect(padX - 2, y + thumbH, thumbW + 4, dy + drawH - (y + thumbH) + 4, "F");
-        if (dx < padX) doc.rect(dx - 2, y, padX - dx + 2, thumbH, "F");
-        if (dx + drawW > padX + thumbW)
-          doc.rect(padX + thumbW, y, dx + drawW - (padX + thumbW) + 4, thumbH, "F");
+        ctx.drawImage(img, dx, dy, drawW, drawH);
+        ctx.restore();
       }
 
       // Text block
       const textX = padX + thumbW + 28;
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(Math.min(22, Math.max(15, rowH * 0.18)));
-      doc.setTextColor(C.ink);
-      const maxNameW = W - textX - padX - 160;
+      ctx.fillStyle = C.ink;
+      ctx.font = `700 ${Math.round(Math.min(28, Math.max(20, rowH * 0.18)))}px Georgia, 'Times New Roman', serif`;
+      ctx.textAlign = "left";
+      const maxNameW = W - textX - padX - 200;
       let name = it.name;
-      while (doc.getTextWidth(name) > maxNameW && name.length > 4) {
+      while (ctx.measureText(name).width > maxNameW && name.length > 4) {
         name = name.slice(0, -1);
       }
       if (name !== it.name) name = name.slice(0, -1) + "…";
-      doc.text(name, textX, y + thumbH * 0.45);
+      ctx.fillText(name, textX, y + thumbH * 0.45);
 
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(11);
-      doc.setTextColor(C.muted);
-      doc.text(`Item ${String(idx + 1).padStart(2, "0")}`, textX, y + thumbH * 0.7);
+      ctx.fillStyle = C.muted;
+      ctx.font = "400 15px Helvetica, Arial, sans-serif";
+      ctx.fillText(`Item ${String(idx + 1).padStart(2, "0")}`, textX, y + thumbH * 0.7);
 
-      // Price (right aligned)
       if (it.price > 0) {
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(14);
-        doc.setTextColor(C.ink);
-        const priceStr = `KSh ${it.price.toLocaleString()}`;
-        const pw = doc.getTextWidth(priceStr);
-        doc.text(priceStr, W - padX - pw, y + thumbH * 0.45);
+        ctx.fillStyle = C.ink;
+        ctx.font = "700 20px Helvetica, Arial, sans-serif";
+        ctx.textAlign = "right";
+        ctx.fillText(`KSh ${it.price.toLocaleString()}`, W - padX, y + thumbH * 0.45);
         total += it.price;
       }
 
-      // Hairline divider between rows
       if (idx < count - 1) {
-        doc.setDrawColor(C.hair);
-        doc.setLineWidth(0.4);
-        doc.line(padX, y + rowH - 4, W - padX, y + rowH - 4);
+        ctx.strokeStyle = C.hair;
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        ctx.moveTo(padX, y + rowH - 6);
+        ctx.lineTo(W - padX, y + rowH - 6);
+        ctx.stroke();
       }
     });
 
-    // ── Total ──────────────────────────────────────────────
+    // Total
     if (total > 0) {
       const ty = listBottom + 30;
-      doc.setDrawColor(C.hair);
-      doc.setLineWidth(0.6);
-      doc.line(padX, ty - 20, W - padX, ty - 20);
+      ctx.strokeStyle = C.hair;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(padX, ty - 20);
+      ctx.lineTo(W - padX, ty - 20);
+      ctx.stroke();
 
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(11);
-      doc.setTextColor(C.muted);
-      doc.text("TOTAL", padX, ty + 10);
+      ctx.fillStyle = C.muted;
+      ctx.font = "500 15px Helvetica, Arial, sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText("TOTAL", padX, ty + 14);
 
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(34);
-      doc.setTextColor(C.ink);
-      const tStr = `KSh ${total.toLocaleString()}`;
-      const tw = doc.getTextWidth(tStr);
-      doc.text(tStr, W - padX - tw, ty + 14);
+      ctx.fillStyle = C.ink;
+      ctx.font = "700 46px Georgia, 'Times New Roman', serif";
+      ctx.textAlign = "right";
+      ctx.fillText(`KSh ${total.toLocaleString()}`, W - padX, ty + 18);
     }
 
-    // ── Footer ─────────────────────────────────────────────
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(C.muted);
-    doc.text("luluclothline.com", padX, H - 70);
-    const handle = "@lulu_clothline  ·  WhatsApp 0714 844 809";
-    const hw = doc.getTextWidth(handle);
-    doc.text(handle, W - padX - hw, H - 70);
+    // Footer
+    ctx.fillStyle = C.muted;
+    ctx.font = "400 15px Helvetica, Arial, sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("luluclothline.com", padX, H - 70);
+    ctx.textAlign = "right";
+    ctx.fillText("@lulu_clothline  ·  WhatsApp 0714 844 809", W - padX, H - 70);
 
-    // Tiny accent mark
-    doc.setFillColor(C.accent);
-    doc.rect(padX, H - 60, 24, 3, "F");
+    ctx.fillStyle = C.accent;
+    ctx.fillRect(padX, H - 60, 28, 4);
 
-    return doc;
+    return await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob((b) => resolve(b), "image/png"),
+    );
   };
 
-  const handleExportPdf = async () => {
+  const handleExportImage = async () => {
     if (items.length === 0) return;
     setSharing(true);
     try {
-      const doc = await buildPdf();
-      const blob = doc.output("blob");
-      const filename = "lulu-wishlist.pdf";
-      const file = new File([blob], filename, { type: "application/pdf" });
+      const blob = await buildImage();
+      if (!blob) return;
+      const filename = "lulu-wishlist.png";
+      const file = new File([blob], filename, { type: "image/png" });
       const nav = navigator as Navigator & {
         canShare?: (data: { files: File[] }) => boolean;
       };
@@ -294,7 +274,14 @@ export function WishlistDrawer() {
           /* fall through to download */
         }
       }
-      doc.save(filename);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     } finally {
       setSharing(false);
     }
@@ -463,12 +450,12 @@ export function WishlistDrawer() {
             </div>
             <button
               type="button"
-              onClick={handleExportPdf}
+              onClick={handleExportImage}
               disabled={sharing}
               className="tracking-luxury mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-4 py-3 text-[10px] text-background hover:opacity-90 disabled:opacity-60"
             >
-              <FileDown className="h-3.5 w-3.5" />
-              {sharing ? "Preparing PDF..." : "Export & share as PDF"}
+              <ImageDown className="h-3.5 w-3.5" />
+              {sharing ? "Preparing image..." : "Export & share as image"}
             </button>
           </div>
         )}
