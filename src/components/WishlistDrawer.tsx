@@ -1,4 +1,5 @@
-import { Heart, X, Trash2, ShoppingBag } from "lucide-react";
+import { useState } from "react";
+import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle } from "lucide-react";
 import { useWishlist } from "@/lib/wishlist";
 import { useCart } from "@/lib/cart";
 
@@ -55,6 +56,41 @@ export function WishlistHeartButton({
 export function WishlistDrawer() {
   const { items, isOpen, closeWishlist, removeItem, totalItems } = useWishlist();
   const { addItem } = useCart();
+  const [copied, setCopied] = useState(false);
+
+  const buildShareText = () => {
+    const lines = ["My Lulu Clothline wishlist:", ""];
+    items.forEach((it) => {
+      lines.push(
+        `• ${it.name}${it.price > 0 ? ` — KSh ${it.price.toLocaleString()}` : ""}`,
+      );
+    });
+    lines.push("");
+    lines.push("Browse: https://luluclothline.com");
+    return lines.join("\n");
+  };
+
+  const whatsappShareUrl = () =>
+    `https://wa.me/?text=${encodeURIComponent(buildShareText())}`;
+
+  const handleNativeShare = async () => {
+    const text = buildShareText();
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({ title: "My Lulu Clothline wishlist", text });
+        return;
+      } catch {
+        /* user cancelled — fall through */
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* ignore */
+    }
+  };
 
   return (
     <>
@@ -160,6 +196,46 @@ export function WishlistDrawer() {
             </ul>
           )}
         </div>
+
+        {items.length > 0 && (
+          <div className="border-t border-border/60 bg-secondary/30 px-5 py-4">
+            <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
+              Share your wishlist
+            </p>
+            <div className="flex gap-2">
+              <a
+                href={whatsappShareUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="tracking-luxury inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-whatsapp px-4 py-3 text-[10px] text-whatsapp-foreground hover:opacity-90"
+              >
+                <MessageCircle className="h-3.5 w-3.5" />
+                WhatsApp
+              </a>
+              <button
+                type="button"
+                onClick={handleNativeShare}
+                className="tracking-luxury inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-foreground/30 px-4 py-3 text-[10px] hover:bg-foreground hover:text-background"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    {typeof navigator !== "undefined" && (navigator as Navigator).share ? (
+                      <Share2 className="h-3.5 w-3.5" />
+                    ) : (
+                      <Copy className="h-3.5 w-3.5" />
+                    )}
+                    Share
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
       </aside>
     </>
   );
