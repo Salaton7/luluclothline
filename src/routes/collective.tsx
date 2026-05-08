@@ -171,6 +171,62 @@ function CollectivePage() {
       </section>
 
       {/* CTA */}
+      {items.length > 0 && (
+        <section className="border-y border-border/60 bg-secondary/20">
+          <div className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
+            <div className="mb-12">
+              <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
+                Available pieces
+              </p>
+              <h2 className="font-display text-4xl md:text-5xl">From the collective.</h2>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {items.map((p) => (
+                <a
+                  key={p.id}
+                  href={inquire(p.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <div className="aspect-[4/5] overflow-hidden bg-muted">
+                    {p.image_url && (
+                      <img
+                        src={p.image_url}
+                        alt={p.name}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
+                  </div>
+                  <div className="mt-4 flex items-baseline justify-between gap-3">
+                    <h3 className="font-display text-2xl">{p.name}</h3>
+                    {p.price > 0 && (
+                      <span className="text-sm text-muted-foreground">
+                        KSh {p.price.toLocaleString()}
+                      </span>
+                    )}
+                  </div>
+                  {p.tag && (
+                    <span className="tracking-luxury mt-1 inline-block text-[10px] text-muted-foreground">
+                      {p.tag}
+                    </span>
+                  )}
+                  {p.description && (
+                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                      {p.description}
+                    </p>
+                  )}
+                  <span className="tracking-luxury mt-3 inline-block text-[10px] text-muted-foreground transition-colors group-hover:text-accent">
+                    Inquire →
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="mx-auto max-w-3xl px-5 py-24 text-center md:px-10 md:py-32">
         <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">Open Calls</p>
         <h2 className="font-display text-4xl md:text-6xl">Collaborate with us.</h2>
