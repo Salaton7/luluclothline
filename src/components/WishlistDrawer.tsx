@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle } from "lucide-react";
+import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, FileDown } from "lucide-react";
 import { useWishlist } from "@/lib/wishlist";
 import { useCart } from "@/lib/cart";
+import jsPDF from "jspdf";
 
 export function WishlistTrigger({ className = "" }: { className?: string }) {
   const { totalItems, openWishlist } = useWishlist();
@@ -57,6 +58,7 @@ export function WishlistDrawer() {
   const { items, isOpen, closeWishlist, removeItem, totalItems } = useWishlist();
   const { addItem } = useCart();
   const [copied, setCopied] = useState(false);
+  const [sharing, setSharing] = useState(false);
 
   const buildShareText = () => {
     const lines = ["My Lulu Clothline wishlist:", ""];
@@ -72,6 +74,99 @@ export function WishlistDrawer() {
 
   const whatsappShareUrl = () =>
     `https://wa.me/?text=${encodeURIComponent(buildShareText())}`;
+
+  const buildPdf = () => {
+    const doc = new jsPDF({ unit: "pt", format: "a4" });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const marginX = 56;
+    let y = 72;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(22);
+    doc.text("Lulu Clothline", marginX, y);
+    y += 22;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.setTextColor(120);
+    doc.text("My Wishlist", marginX, y);
+    y += 28;
+
+    doc.setDrawColor(200);
+    doc.line(marginX, y, pageWidth - marginX, y);
+    y += 24;
+
+    doc.setTextColor(20);
+    doc.setFontSize(12);
+
+    let total = 0;
+    items.forEach((it, i) => {
+      if (y > pageHeight - 80) {
+        doc.addPage();
+        y = 72;
+      }
+      doc.setFont("helvetica", "bold");
+      doc.text(`${i + 1}. ${it.name}`, marginX, y);
+      if (it.price > 0) {
+        const price = `KSh ${it.price.toLocaleString()}`;
+        const w = doc.getTextWidth(price);
+        doc.setFont("helvetica", "normal");
+        doc.text(price, pageWidth - marginX - w, y);
+        total += it.price;
+      }
+      y += 22;
+    });
+
+    if (total > 0) {
+      y += 8;
+      doc.setDrawColor(200);
+      doc.line(marginX, y, pageWidth - marginX, y);
+      y += 22;
+      doc.setFont("helvetica", "bold");
+      doc.text("Estimated total", marginX, y);
+      const totalStr = `KSh ${total.toLocaleString()}`;
+      const w = doc.getTextWidth(totalStr);
+      doc.text(totalStr, pageWidth - marginX - w, y);
+    }
+
+    // Footer
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(140);
+    doc.text("luluclothline.com  ·  WhatsApp 0714 844 809", marginX, pageHeight - 40);
+
+    return doc;
+  };
+
+  const handleExportPdf = async () => {
+    if (items.length === 0) return;
+    setSharing(true);
+    try {
+      const doc = buildPdf();
+      const blob = doc.output("blob");
+      const filename = "lulu-wishlist.pdf";
+      const file = new File([blob], filename, { type: "application/pdf" });
+      const nav = navigator as Navigator & {
+        canShare?: (data: { files: File[] }) => boolean;
+      };
+      if (nav.canShare && nav.canShare({ files: [file] }) && nav.share) {
+        try {
+          await nav.share({
+            files: [file],
+            title: "My Lulu Clothline wishlist",
+            text: buildShareText(),
+          });
+          return;
+        } catch {
+          /* fall through to download */
+        }
+      }
+      doc.save(filename);
+    } finally {
+      setSharing(false);
+    }
+  };
 
   const handleNativeShare = async () => {
     const text = buildShareText();
@@ -202,7 +297,7 @@ export function WishlistDrawer() {
             <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
               Share your wishlist
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <a
                 href={whatsappShareUrl()}
                 target="_blank"
@@ -234,6 +329,15 @@ export function WishlistDrawer() {
                 )}
               </button>
             </div>
+            <button
+              type="button"
+              onClick={handleExportPdf}
+              disabled={sharing}
+              className="tracking-luxury mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-4 py-3 text-[10px] text-background hover:opacity-90 disabled:opacity-60"
+            >
+              <FileDown className="h-3.5 w-3.5" />
+              {sharing ? "Preparing PDF..." : "Export & share as PDF"}
+            </button>
           </div>
         )}
       </aside>
