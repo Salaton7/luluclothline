@@ -137,6 +137,7 @@ function AdminPage() {
       id: p.id,
       name: p.name,
       tag: p.tag ?? "",
+      category: ((p as unknown as { category?: string }).category ?? "sidai") as FormState["category"],
       price: String(p.price),
       description: p.description ?? "",
       image_url: p.image_url ?? "",
@@ -153,6 +154,7 @@ function AdminPage() {
     const payload = {
       name: form.name.trim(),
       tag: form.tag.trim() || null,
+      category: form.category,
       price: parseInt(form.price, 10) || 0,
       description: form.description.trim() || null,
       image_url: form.image_url.trim() || null,
