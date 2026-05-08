@@ -1,11 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import cotton from "@/assets/fabric-cotton.jpg";
-import ankara from "@/assets/fabric-ankara.jpg";
-import linen from "@/assets/fabric-linen.jpg";
-import silk from "@/assets/fabric-silk.jpg";
-import textileImg from "@/assets/textile.jpg";
 
 export const Route = createFileRoute("/textile")({
   head: () => ({
@@ -32,10 +27,10 @@ const inquire = (fabric: string) =>
   )}`;
 
 const fabrics = [
-  { name: "Cotton", desc: "Soft, breathable, daily wear", img: cotton },
-  { name: "Ankara", desc: "Bold prints, rich heritage", img: ankara },
-  { name: "Linen", desc: "Natural texture, easy drape", img: linen },
-  { name: "Silk", desc: "Fluid, refined, luxurious", img: silk },
+  { name: "Cotton", desc: "Soft, breathable, daily wear" },
+  { name: "Ankara", desc: "Bold prints, rich heritage" },
+  { name: "Linen", desc: "Natural texture, easy drape" },
+  { name: "Silk", desc: "Fluid, refined, luxurious" },
 ];
 
 function TextilePage() {
@@ -69,9 +64,8 @@ function TextilePage() {
 
   return (
     <>
-      <section className="grid border-b border-border/60 md:grid-cols-2">
-        <div className="flex items-center px-5 py-20 md:px-16 md:py-28">
-          <div>
+      <section className="border-b border-border/60">
+        <div className="mx-auto max-w-4xl px-5 py-20 md:px-10 md:py-28">
             <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">
               The Material
             </p>
@@ -98,16 +92,6 @@ function TextilePage() {
                 Send Inquiry
               </a>
             </div>
-          </div>
-        </div>
-        <div className="aspect-[4/3] md:aspect-auto">
-          <img
-            src={textileImg}
-            alt="Stack of premium fabrics"
-            width={1024}
-            height={1280}
-            className="h-full w-full object-cover"
-          />
         </div>
       </section>
 
@@ -124,19 +108,9 @@ function TextilePage() {
               href={inquire(f.name)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block"
+              className="group block border border-border/60 p-6 transition-colors hover:border-foreground/40"
             >
-              <div className="aspect-square overflow-hidden bg-muted">
-                <img
-                  src={f.img}
-                  alt={f.name}
-                  loading="lazy"
-                  width={900}
-                  height={900}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <h3 className="font-display mt-4 text-2xl">{f.name}</h3>
+              <h3 className="font-display text-2xl">{f.name}</h3>
               <p className="text-sm text-muted-foreground">{f.desc}</p>
               <span className="tracking-luxury mt-3 inline-block text-[10px] text-muted-foreground transition-colors group-hover:text-accent">
                 Inquire →
