@@ -67,7 +67,7 @@ function Index() {
           </p>
           <h1 className="font-display text-5xl leading-[1.05] text-background md:text-7xl lg:text-8xl">
             Style. Fabric.<br />
-            <span className="italic text-accent">Creative culture.</span>
+            <span className="italic text-accent">​</span>
           </h1>
           <p className="mt-6 max-w-xl text-base text-background/85 md:text-lg">
             Shop fashion. Source textiles. Join the collective.
