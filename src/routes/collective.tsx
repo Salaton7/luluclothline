@@ -14,16 +14,16 @@ import cNew8 from "@/assets/collective-new-8.webp";
 export const Route = createFileRoute("/collective")({
   head: () => ({
     meta: [
-      { title: "Lulu Collective — Fashion Storytelling · Lulu Clothline" },
+      { title: "Lulu Collective — Our work and stories · Lulu Clothline" },
       {
         name: "description",
         content:
-          "A creative space for fashion storytelling, collaborations, and cultural expression.",
+          "Photoshoots, partners, and stories from our work in Kenyan fashion.",
       },
       { property: "og:title", content: "Lulu Collective" },
       {
         property: "og:description",
-        content: "Fashion storytelling, collaborations, and cultural expression — from Kenya.",
+        content: "Photoshoots, partners, and stories — from Kenya.",
       },
     ],
   }),
@@ -82,11 +82,11 @@ function CollectivePage() {
         <div className="relative mx-auto flex h-full max-w-7xl items-end px-5 pb-16 md:px-10 md:pb-24">
           <div className="text-background">
             <p className="tracking-luxury mb-4 text-[10px] text-background/80">
-              The Creative Arm
+              Our work
             </p>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl">Lulu Collective</h1>
             <p className="mt-6 max-w-xl text-background/85">
-              A fashion creative space for storytelling, collaborations, and cultural expression.
+              Photoshoots, partners, and stories — the people and moments behind our outfits.
             </p>
           </div>
         </div>
@@ -97,9 +97,9 @@ function CollectivePage() {
         <div className="mb-12 flex items-end justify-between">
           <div>
             <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
-              Campaigns
+              Photoshoots
             </p>
-            <h2 className="font-display text-4xl md:text-5xl">Featured collaborations.</h2>
+            <h2 className="font-display text-4xl md:text-5xl">People we've worked with.</h2>
           </div>
         </div>
         <div className="grid gap-6 md:grid-cols-12">
@@ -120,7 +120,7 @@ function CollectivePage() {
       {/* BTS */}
       <section className="border-y border-border/60 bg-secondary/30">
         <div className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-          <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Process</p>
+          <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">How we work</p>
           <h2 className="font-display text-4xl md:text-5xl">Behind the scenes.</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             <div className="overflow-hidden bg-muted">
@@ -137,9 +137,9 @@ function CollectivePage() {
       <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
         <div className="mb-12">
           <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Gallery</p>
-          <h2 className="font-display text-4xl md:text-5xl">Cultural expression.</h2>
+          <h2 className="font-display text-4xl md:text-5xl">Our story in pictures.</h2>
           <p className="mt-5 max-w-xl text-muted-foreground">
-            Stories of heritage, craftsmanship, and modern Kenyan style.
+            Real moments — culture, craft, and modern Kenyan style.
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-3 md:gap-6">
@@ -176,9 +176,9 @@ function CollectivePage() {
           <div className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
             <div className="mb-12">
               <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
-                Available pieces
+                Available now
               </p>
-              <h2 className="font-display text-4xl md:text-5xl">From the collective.</h2>
+              <h2 className="font-display text-4xl md:text-5xl">Outfits you can buy.</h2>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((p) => (
@@ -218,7 +218,7 @@ function CollectivePage() {
                     </p>
                   )}
                   <span className="tracking-luxury mt-3 inline-block text-[10px] text-muted-foreground transition-colors group-hover:text-accent">
-                    Inquire →
+                    Ask about this →
                   </span>
                 </a>
               ))}
@@ -228,11 +228,10 @@ function CollectivePage() {
       )}
 
       <section className="mx-auto max-w-3xl px-5 py-24 text-center md:px-10 md:py-32">
-        <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">Open Calls</p>
-        <h2 className="font-display text-4xl md:text-6xl">Collaborate with us.</h2>
+        <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">Work with us</p>
+        <h2 className="font-display text-4xl md:text-6xl">Want to team up?</h2>
         <p className="mt-5 text-muted-foreground">
-          Photographers, stylists, models, designers — let's make something honest, Kenyan,
-          and beautiful together.
+          Photographers, stylists, models, designers — let's make something good together.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a
@@ -241,7 +240,7 @@ function CollectivePage() {
             rel="noopener noreferrer"
             className="tracking-luxury rounded-full bg-foreground px-7 py-4 text-[11px] text-background hover:opacity-90"
           >
-            Collaborate With Us
+            Work with us
           </a>
           <a
             href={collab}
@@ -249,7 +248,7 @@ function CollectivePage() {
             rel="noopener noreferrer"
             className="tracking-luxury rounded-full bg-whatsapp px-7 py-4 text-[11px] text-whatsapp-foreground hover:opacity-90"
           >
-            Join the Collective (WhatsApp)
+            Chat on WhatsApp
           </a>
         </div>
       </section>

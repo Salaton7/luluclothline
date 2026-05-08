@@ -8,16 +8,16 @@ import collectiveImg from "@/assets/collective-hero.webp";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Lulu Clothline — Modern Kenyan Fashion" },
+      { title: "Lulu Clothline — Kenyan fashion made simple" },
       {
         name: "description",
         content:
-          "Shop fashion. Source textiles. Join the collective. A modern Kenyan fashion ecosystem.",
+          "Shop outfits, buy fabric, and work with us. Made in Kenya.",
       },
       { property: "og:title", content: "Lulu Clothline" },
       {
         property: "og:description",
-        content: "A modern Kenyan fashion ecosystem of style, fabric, and creative culture.",
+        content: "Outfits, fabric, and stories — made in Kenya.",
       },
     ],
   }),
@@ -27,22 +27,22 @@ export const Route = createFileRoute("/")({
 const worlds = [
   {
     title: "Lulu Sidai",
-    desc: "Everyday fashion made for confidence and style.",
-    cta: "Shop Sidai",
+    desc: "Handmade outfits for everyday and special days.",
+    cta: "Shop outfits",
     to: "/sidai" as const,
     img: sidaiImg,
   },
   {
     title: "Lulu Textile",
-    desc: "Premium fabrics and materials for creators and designers.",
-    cta: "Explore Textile",
+    desc: "Quality fabric for tailors, designers, and home sewists.",
+    cta: "Buy fabric",
     to: "/textile" as const,
     img: textileImg,
   },
   {
     title: "Lulu Collective",
-    desc: "A creative space for fashion storytelling and collaborations.",
-    cta: "Join Collective",
+    desc: "Photoshoots, stories, and people we work with.",
+    cta: "See our work",
     to: "/collective" as const,
     img: collectiveImg,
   },
@@ -64,14 +64,14 @@ function Index() {
         <div className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-5 pb-16 md:px-10 md:pb-24">
           <p className="tracking-luxury mb-6 text-[11px] text-background/85">​</p>
           <p className="mt-6 max-w-xl text-base text-background/85 md:text-lg">
-            Shop fashion. Source textiles. Join the collective.
+            Shop outfits. Buy fabric. Work with us.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
               to="/sidai"
               className="tracking-luxury rounded-full bg-foreground px-7 py-4 text-[11px] text-background transition-opacity hover:opacity-90"
             >
-              Explore Sidai
+              Shop outfits
             </Link>
           </div>
         </div>
@@ -82,12 +82,12 @@ function Index() {
         <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
-              The Ecosystem
+              What we do
             </p>
-            <h2 className="font-display text-4xl md:text-6xl">Choose your world.</h2>
+            <h2 className="font-display text-4xl md:text-6xl">Pick what you need.</h2>
           </div>
           <p className="max-w-md text-sm text-muted-foreground">
-            Three divisions, one creative vision — rooted in Kenya, designed for the world.
+            Three things we do, all made in Kenya: outfits to wear, fabric to sew, and stories we share.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
@@ -124,19 +124,19 @@ function Index() {
       <section className="border-y border-border/60 bg-secondary/40">
         <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
           <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">DELIVERY</p>
-            <p className="font-display mt-2 text-xl">Worldwide Shipping</p>
-            <p className="mt-1 text-xs text-muted-foreground">Delivered within 1 week</p>
+            <p className="tracking-luxury text-[10px] text-muted-foreground">SHIPPING</p>
+            <p className="font-display mt-2 text-xl">We ship worldwide</p>
+            <p className="mt-1 text-xs text-muted-foreground">Arrives in about a week</p>
           </div>
           <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">PAYMENT</p>
-            <p className="font-display mt-2 text-xl">60% Deposit</p>
-            <p className="mt-1 text-xs text-muted-foreground">Required to start production</p>
+            <p className="tracking-luxury text-[10px] text-muted-foreground">TO START</p>
+            <p className="font-display mt-2 text-xl">Pay half upfront</p>
+            <p className="mt-1 text-xs text-muted-foreground">So we can start sewing</p>
           </div>
           <div>
             <p className="tracking-luxury text-[10px] text-muted-foreground">BEFORE DELIVERY</p>
-            <p className="font-display mt-2 text-xl">Balance Cleared</p>
-            <p className="mt-1 text-xs text-muted-foreground">Full payment required before dispatch</p>
+            <p className="font-display mt-2 text-xl">Pay the rest</p>
+            <p className="mt-1 text-xs text-muted-foreground">Then we send it out</p>
           </div>
         </div>
       </section>
