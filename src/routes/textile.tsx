@@ -27,13 +27,6 @@ const inquire = (fabric: string) =>
     `Hi Lulu Textile, I'd like to inquire about ${fabric}.`,
   )}`;
 
-const fabrics = [
-  { name: "Cotton", desc: "Soft, breathable, daily wear" },
-  { name: "Ankara", desc: "Bold prints, rich heritage" },
-  { name: "Linen", desc: "Natural texture, easy drape" },
-  { name: "Silk", desc: "Fluid, refined, luxurious" },
-];
-
 function TextilePage() {
   const [items, setItems] = useState<
     Array<{
