@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import collectiveImg from "@/assets/collective.jpg";
 import cNew1 from "@/assets/collective-new-1.jpeg";
 import cNew2 from "@/assets/collective-new-2.jpg";
 import cNew3 from "@/assets/collective-new-3.jpg";
@@ -72,7 +71,7 @@ function CollectivePage() {
     <>
       <section className="relative h-[70vh] overflow-hidden border-b border-border/60">
         <img
-          src={collectiveImg}
+          src={cNew1}
           alt="Lulu Collective"
           width={1024}
           height={1280}
