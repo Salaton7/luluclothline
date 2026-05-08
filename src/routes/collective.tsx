@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import collectiveImg from "@/assets/collective.jpg";
 import cNew1 from "@/assets/collective-new-1.jpeg";
 import cNew2 from "@/assets/collective-new-2.jpg";
@@ -33,6 +35,39 @@ const collab = `https://wa.me/254714844809?text=${encodeURIComponent(
 )}`;
 
 function CollectivePage() {
+  const [items, setItems] = useState<
+    Array<{
+      id: string;
+      name: string;
+      tag: string | null;
+      price: number;
+      description: string | null;
+      image_url: string | null;
+    }>
+  >([]);
+
+  useEffect(() => {
+    let active = true;
+    supabase
+      .from("sidai_products")
+      .select("id, name, tag, price, description, image_url")
+      .eq("is_published", true)
+      .eq("category", "collective")
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (active && data) setItems(data);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const inquire = (name: string) =>
+    `https://wa.me/254714844809?text=${encodeURIComponent(
+      `Hi Lulu Collective, I'd like to inquire about ${name}.`,
+    )}`;
+
   return (
     <>
       <section className="relative h-[70vh] overflow-hidden border-b border-border/60">
