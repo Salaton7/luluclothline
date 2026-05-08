@@ -266,8 +266,8 @@ function SidaiPage() {
         <div className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
           <div className="mb-10 flex items-end justify-between">
             <div>
-              <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">In Motion</p>
-              <h2 className="font-display text-4xl md:text-5xl">Sidai, on screen</h2>
+              <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Watch</p>
+              <h2 className="font-display text-4xl md:text-5xl">See it in action</h2>
             </div>
             <a
               href="https://www.tiktok.com/@luluclothline"
@@ -325,16 +325,16 @@ function SidaiPage() {
       <section className="border-y border-border/60 bg-secondary/40">
         <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
           <div>
-            <p className="font-display text-xl">Worldwide delivery</p>
-            <p className="mt-1 text-xs text-muted-foreground">Arrives in ~1 week</p>
+            <p className="font-display text-xl">We ship worldwide</p>
+            <p className="mt-1 text-xs text-muted-foreground">Arrives in about a week</p>
           </div>
           <div>
-            <p className="font-display text-xl">M-Pesa accepted</p>
-            <p className="mt-1 text-xs text-muted-foreground">60% deposit to begin production</p>
+            <p className="font-display text-xl">Pay with M-Pesa</p>
+            <p className="mt-1 text-xs text-muted-foreground">Pay half to start sewing</p>
           </div>
           <div>
-            <p className="font-display text-xl">Balance before delivery</p>
-            <p className="mt-1 text-xs text-muted-foreground">Full payment clears dispatch</p>
+            <p className="font-display text-xl">Pay the rest later</p>
+            <p className="mt-1 text-xs text-muted-foreground">Before we send it out</p>
           </div>
         </div>
       </section>
@@ -342,8 +342,8 @@ function SidaiPage() {
       {/* CTA */}
       <div className="maasai-shuka h-3 w-full" aria-hidden="true" />
       <section className="mx-auto max-w-7xl px-5 py-24 text-center md:px-10">
-        <h2 className="font-display text-4xl md:text-6xl">Ready to wear it?</h2>
-        <p className="mt-4 text-muted-foreground">DM us and we'll style you.</p>
+        <h2 className="font-display text-4xl md:text-6xl">Like what you see?</h2>
+        <p className="mt-4 text-muted-foreground">Message us — we'll help you pick.</p>
         <div className="maasai-beads mx-auto mt-6 h-3 w-40" aria-hidden="true" />
       </section>
       <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
