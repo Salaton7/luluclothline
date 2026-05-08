@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import textileImg from "@/assets/textile.jpg";
 
 export const Route = createFileRoute("/textile")({
   head: () => ({
@@ -64,8 +65,9 @@ function TextilePage() {
 
   return (
     <>
-      <section className="border-b border-border/60">
-        <div className="mx-auto max-w-4xl px-5 py-20 md:px-10 md:py-28">
+      <section className="grid border-b border-border/60 md:grid-cols-2">
+        <div className="flex items-center px-5 py-20 md:px-16 md:py-28">
+          <div>
             <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">
               The Material
             </p>
@@ -92,31 +94,16 @@ function TextilePage() {
                 Send Inquiry
               </a>
             </div>
+          </div>
         </div>
-      </section>
-
-      {/* CATEGORIES */}
-      <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-        <div className="mb-12">
-          <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Categories</p>
-          <h2 className="font-display text-4xl md:text-5xl">Fabric library.</h2>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {fabrics.map((f) => (
-            <a
-              key={f.name}
-              href={inquire(f.name)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block border border-border/60 p-6 transition-colors hover:border-foreground/40"
-            >
-              <h3 className="font-display text-2xl">{f.name}</h3>
-              <p className="text-sm text-muted-foreground">{f.desc}</p>
-              <span className="tracking-luxury mt-3 inline-block text-[10px] text-muted-foreground transition-colors group-hover:text-accent">
-                Inquire →
-              </span>
-            </a>
-          ))}
+        <div className="aspect-[4/3] md:aspect-auto">
+          <img
+            src={textileImg}
+            alt="Lulu Textile fabrics"
+            width={1024}
+            height={1280}
+            className="h-full w-full object-cover"
+          />
         </div>
       </section>
 
