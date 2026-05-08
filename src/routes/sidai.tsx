@@ -16,6 +16,8 @@ import sidaiNew4 from "@/assets/sidai-new-4.jpg";
 import sidaiNew5 from "@/assets/sidai-new-5.webp";
 import sidaiNew6 from "@/assets/sidai-new-6.webp";
 import { useCart } from "@/lib/cart";
+import { WishlistHeartButton } from "@/components/WishlistDrawer";
+import { wishlistId } from "@/lib/wishlist";
 
 export const Route = createFileRoute("/sidai")({
   head: () => ({
@@ -373,6 +375,10 @@ function ProductCard({ p }: { p: Product }) {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/15 via-transparent to-transparent" aria-hidden="true" />
         <div className="maasai-shuka absolute inset-x-0 top-0 h-1.5" aria-hidden="true" />
         <div className="maasai-beads absolute inset-x-0 bottom-0 h-2 opacity-90" aria-hidden="true" />
+        <WishlistHeartButton
+          item={{ id: wishlistId(p.name), name: p.name, price: p.price, img: p.img }}
+          className="absolute right-3 top-3"
+        />
       </div>
       <div className="mt-5">
         <div className="flex items-start justify-between gap-4">

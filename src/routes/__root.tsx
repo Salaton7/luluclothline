@@ -4,6 +4,8 @@ import appCss from "../styles.css?url";
 import luluLogo from "@/assets/lulu-logo.jpg";
 import { CartProvider } from "@/lib/cart";
 import { CartDrawer, CartTrigger } from "@/components/CartDrawer";
+import { WishlistProvider } from "@/lib/wishlist";
+import { WishlistDrawer, WishlistTrigger } from "@/components/WishlistDrawer";
 
 const WHATSAPP_NUMBER = "254714844809";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -98,15 +100,18 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <CartProvider>
-      <div className="flex min-h-screen flex-col bg-background text-foreground">
-        <SiteHeader />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <SiteFooter />
-        <StickyWhatsApp />
-        <CartDrawer />
-      </div>
+      <WishlistProvider>
+        <div className="flex min-h-screen flex-col bg-background text-foreground">
+          <SiteHeader />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <SiteFooter />
+          <StickyWhatsApp />
+          <CartDrawer />
+          <WishlistDrawer />
+        </div>
+      </WishlistProvider>
     </CartProvider>
   );
 }
@@ -141,6 +146,7 @@ function SiteHeader() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
+          <WishlistTrigger />
           <CartTrigger />
         </div>
       </div>
