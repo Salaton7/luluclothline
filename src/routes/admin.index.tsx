@@ -305,6 +305,20 @@ function AdminPage() {
                 className={inputCls}
               />
             </Field>
+            <Field label="Division *" className="md:col-span-2">
+              <select
+                required
+                value={form.category}
+                onChange={(e) =>
+                  setForm({ ...form, category: e.target.value as FormState["category"] })
+                }
+                className={inputCls}
+              >
+                <option value="sidai">Sidai — Couture & ready-to-wear</option>
+                <option value="textile">Textile — Fabrics & materials</option>
+                <option value="collective">Collective — Creative pieces</option>
+              </select>
+            </Field>
             <Field label="Price (KSh)">
               <input
                 type="number"
