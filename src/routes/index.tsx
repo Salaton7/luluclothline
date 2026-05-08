@@ -86,9 +86,7 @@ function Index() {
             </p>
             <h2 className="font-display text-4xl md:text-6xl">Pick what you need.</h2>
           </div>
-          <p className="max-w-md text-sm text-muted-foreground">
-            Three things we do, all made in Kenya: outfits to wear, fabric to sew, and stories we share.
-          </p>
+          <p className="max-w-md text-sm text-muted-foreground">​Explore the Lulu Clothline divisions</p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {worlds.map((w) => (
