@@ -455,6 +455,9 @@ function AdminPage() {
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-baseline gap-2">
                       <p className="font-display text-base">{p.name}</p>
+                      <span className="tracking-luxury rounded-full bg-foreground/10 px-2 py-0.5 text-[9px] uppercase">
+                        {((p as unknown as { category?: string }).category ?? "sidai")}
+                      </span>
                       {p.tag && (
                         <span className="tracking-luxury rounded-full bg-secondary px-2 py-0.5 text-[9px] text-secondary-foreground">
                           {p.tag}
