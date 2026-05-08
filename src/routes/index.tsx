@@ -120,22 +120,10 @@ function Index() {
 
       {/* TRUST STRIP */}
       <section className="border-y border-border/60 bg-secondary/40">
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
-          <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">SHIPPING</p>
-            <p className="font-display mt-2 text-xl">We ship worldwide</p>
-            <p className="mt-1 text-xs text-muted-foreground">Arrives in about a week</p>
-          </div>
-          <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">TO START</p>
-            <p className="font-display mt-2 text-xl">Pay half upfront</p>
-            <p className="mt-1 text-xs text-muted-foreground">So we can start sewing</p>
-          </div>
-          <div>
-            <p className="tracking-luxury text-[10px] text-muted-foreground">BEFORE DELIVERY</p>
-            <p className="font-display mt-2 text-xl">Pay the rest</p>
-            <p className="mt-1 text-xs text-muted-foreground">Then we send it out</p>
-          </div>
+        <div className="mx-auto max-w-7xl px-5 py-8 text-center md:px-10">
+          <p className="text-sm text-muted-foreground md:text-base">
+            We ship worldwide in about a week — pay half upfront so we can start sewing, and the rest before delivery.
+          </p>
         </div>
       </section>
     </>
