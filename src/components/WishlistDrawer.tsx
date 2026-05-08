@@ -75,16 +75,6 @@ export function WishlistDrawer() {
   const whatsappShareUrl = () =>
     `https://wa.me/?text=${encodeURIComponent(buildShareText())}`;
 
-  // Maasai palette
-  const MAASAI = {
-    red: "#C8102E",
-    black: "#0B0B0B",
-    blue: "#1F4FA8",
-    white: "#F7F1E6",
-    cream: "#FBF6EB",
-    ink: "#1A1612",
-  };
-
   const loadImageAsDataUrl = (
     url: string,
   ): Promise<{ data: string; w: number; h: number } | null> =>
@@ -112,279 +102,171 @@ export function WishlistDrawer() {
       img.src = url;
     });
 
-  // Draw a Maasai shuka-style stripe band
-  const drawShukaBand = (
-    doc: jsPDF,
-    x: number,
-    y: number,
-    w: number,
-    h: number,
-  ) => {
-    // Base red
-    doc.setFillColor(MAASAI.red);
-    doc.rect(x, y, w, h, "F");
-    // Thick black stripes
-    doc.setFillColor(MAASAI.black);
-    doc.rect(x, y + h * 0.15, w, h * 0.08, "F");
-    doc.rect(x, y + h * 0.62, w, h * 0.08, "F");
-    // Blue accent
-    doc.setFillColor(MAASAI.blue);
-    doc.rect(x, y + h * 0.4, w, h * 0.06, "F");
-    // Cream pinstripe checks
-    doc.setFillColor(MAASAI.cream);
-    const checkH = h * 0.04;
-    doc.rect(x, y + h * 0.27, w, checkH, "F");
-    doc.rect(x, y + h * 0.78, w, checkH, "F");
-    // Tiny check pattern in the cream pinstripes
-    doc.setFillColor(MAASAI.black);
-    const step = 18;
-    for (let cx = x; cx < x + w; cx += step * 2) {
-      doc.rect(cx, y + h * 0.27, step, checkH, "F");
-      doc.rect(cx + step, y + h * 0.78, step, checkH, "F");
-    }
-  };
-
-  // Beaded dot border around a rect
-  const drawBeadedFrame = (
-    doc: jsPDF,
-    x: number,
-    y: number,
-    w: number,
-    h: number,
-  ) => {
-    const palette = [MAASAI.red, MAASAI.white, MAASAI.blue, MAASAI.black];
-    const r = 3;
-    const step = 12;
-    let i = 0;
-    const dot = (cx: number, cy: number) => {
-      doc.setFillColor(palette[i % palette.length]);
-      doc.circle(cx, cy, r, "F");
-      i++;
-    };
-    for (let cx = x; cx <= x + w; cx += step) dot(cx, y);
-    for (let cy = y; cy <= y + h; cy += step) dot(x + w, cy);
-    for (let cx = x + w; cx >= x; cx -= step) dot(cx, y + h);
-    for (let cy = y + h; cy >= y; cy -= step) dot(x, cy);
-  };
-
   const buildPdf = async () => {
+    // Single page, social-share friendly portrait. Mirrors the wishlist
+    // drawer: thumbnail (4:5) on the left, name + price on the right,
+    // hairline dividers between rows.
     const W = 1080;
     const H = 1350;
     const doc = new jsPDF({ unit: "pt", format: [W, H], orientation: "portrait" });
 
-    // Pre-load images in parallel
+    const C = {
+      bg: "#F7F2E8",      // soft cream (matches site background)
+      ink: "#1A1612",     // foreground
+      muted: "#7A6F5E",   // muted text
+      hair: "#D9CFBF",    // divider
+      accent: "#9B2D20",  // single understated accent
+    };
+
+    // Background
+    doc.setFillColor(C.bg);
+    doc.rect(0, 0, W, H, "F");
+
+    // Pre-load images
     const imageData = await Promise.all(
       items.map((it) => (it.img ? loadImageAsDataUrl(it.img) : Promise.resolve(null))),
     );
 
-    const drawPageChrome = (pageLabel: string) => {
-      // Cream background
-      doc.setFillColor(MAASAI.cream);
-      doc.rect(0, 0, W, H, "F");
-      // Top shuka band
-      drawShukaBand(doc, 0, 0, W, 70);
-      // Bottom shuka band
-      drawShukaBand(doc, 0, H - 70, W, 70);
-      // Footer text strip
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(11);
-      doc.setTextColor(MAASAI.cream);
-      doc.text("LULUCLOTHLINE.COM", 60, H - 30);
-      const handle = "@LULU_CLOTHLINE  ·  WHATSAPP 0714 844 809";
-      const hw = doc.getTextWidth(handle);
-      doc.text(handle, W - 60 - hw, H - 30);
-      // Page label
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(9);
-      doc.setTextColor(MAASAI.cream);
-      const plw = doc.getTextWidth(pageLabel);
-      doc.text(pageLabel, (W - plw) / 2, 42);
-    };
+    // ── Header ─────────────────────────────────────────────
+    const padX = 80;
+    const headerY = 110;
 
-    const drawHeader = () => {
-      // Title block
-      doc.setTextColor(MAASAI.ink);
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(72);
-      doc.text("MY WISHLIST", 60, 200);
-      // Red underline
-      doc.setFillColor(MAASAI.red);
-      doc.rect(60, 215, 220, 8, "F");
-      doc.setFillColor(MAASAI.blue);
-      doc.rect(285, 215, 80, 8, "F");
-      doc.setFillColor(MAASAI.black);
-      doc.rect(370, 215, 40, 8, "F");
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(C.muted);
+    doc.text("LULU  ·  CLOTHLINE", padX, headerY);
 
-      // Subtitle
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(18);
-      doc.setTextColor(MAASAI.ink);
-      doc.text("Lulu Clothline  ·  Maasai-inspired couture", 60, 260);
+    const count = items.length;
+    const countLabel = `${count} ${count === 1 ? "ITEM" : "ITEMS"}`;
+    const cw = doc.getTextWidth(countLabel);
+    doc.text(countLabel, W - padX - cw, headerY);
 
-      // Right-side stamp
-      doc.setDrawColor(MAASAI.red);
-      doc.setLineWidth(2);
-      doc.circle(W - 140, 200, 70, "S");
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(12);
-      doc.setTextColor(MAASAI.red);
-      const stamp1 = `${items.length}`;
-      doc.setFontSize(56);
-      const sw = doc.getTextWidth(stamp1);
-      doc.text(stamp1, W - 140 - sw / 2, 210);
-      doc.setFontSize(10);
-      const stamp2 = items.length === 1 ? "PIECE" : "PIECES";
-      const sw2 = doc.getTextWidth(stamp2);
-      doc.text(stamp2, W - 140 - sw2 / 2, 235);
-    };
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(56);
+    doc.setTextColor(C.ink);
+    doc.text("Your Bag", padX, headerY + 70);
 
-    // Layout: 2 columns of cards
-    const startY = 310;
-    const gridLeft = 60;
-    const gridRight = W - 60;
-    const colGap = 40;
-    const cols = 2;
-    const cardW = (gridRight - gridLeft - colGap * (cols - 1)) / cols;
-    const imgH = cardW; // square
-    const cardH = imgH + 90; // image + caption
-    const rowGap = 50;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(14);
+    doc.setTextColor(C.muted);
+    doc.text("Saved pieces from luluclothline.com", padX, headerY + 100);
 
-    let pageNum = 1;
-    const totalPagesEst = Math.max(
-      1,
-      Math.ceil(items.length / 4), // first page fits 4 (after header)
-    );
-    drawPageChrome(`PAGE 01 / ${String(totalPagesEst).padStart(2, "0")}`);
-    drawHeader();
+    // Divider under header
+    doc.setDrawColor(C.hair);
+    doc.setLineWidth(0.6);
+    doc.line(padX, headerY + 130, W - padX, headerY + 130);
 
-    let cursorY = startY;
-    let col = 0;
+    // ── Items list ─────────────────────────────────────────
+    const listTop = headerY + 160;
+    const listBottom = H - 200; // leaves room for total + footer
+    const availH = listBottom - listTop;
+
+    // Row height tuned to fit on one page; thumbnail is 4:5 like the drawer
+    const minRow = 70;
+    const maxRow = 170;
+    const rowH = Math.max(minRow, Math.min(maxRow, availH / Math.max(count, 1)));
+    const thumbH = rowH - 16;
+    const thumbW = thumbH * (20 / 24); // matches w-20/h-24 in drawer
+
     let total = 0;
-
-    const startNewPage = () => {
-      doc.addPage();
-      pageNum += 1;
-      drawPageChrome(`PAGE ${String(pageNum).padStart(2, "0")} / ${String(totalPagesEst).padStart(2, "0")}`);
-      cursorY = 130;
-      col = 0;
-    };
-
     items.forEach((it, idx) => {
-      // Page break check (need cardH + bottom band space)
-      if (cursorY + cardH > H - 110) {
-        startNewPage();
-      }
+      const y = listTop + idx * rowH;
+      if (y + thumbH > listBottom + 4) return; // safety
 
-      const x = gridLeft + col * (cardW + colGap);
-      const y = cursorY;
-
-      // Image area background
-      doc.setFillColor(MAASAI.white);
-      doc.rect(x, y, cardW, imgH, "F");
+      // Thumbnail
+      doc.setFillColor("#EDE6D6");
+      doc.rect(padX, y, thumbW, thumbH, "F");
       const img = imageData[idx];
       if (img) {
-        // Cover-fit: keep aspect, center-crop into the square
         const ratio = img.w / img.h;
-        let drawW = cardW;
-        let drawH = cardW / ratio;
-        if (drawH < imgH) {
-          drawH = imgH;
-          drawW = imgH * ratio;
+        let drawW = thumbW;
+        let drawH = thumbW / ratio;
+        if (drawH < thumbH) {
+          drawH = thumbH;
+          drawW = thumbH * ratio;
         }
-        const dx = x + (cardW - drawW) / 2;
-        const dy = y + (imgH - drawH) / 2;
-        // clip to square
-        const ctx = (doc as unknown as { internal: { pageSize: { getWidth: () => number } } });
-        void ctx;
-        // jsPDF doesn't easily clip, so draw image then cover edges with cream rectangles
+        const dx = padX + (thumbW - drawW) / 2;
+        const dy = y + (thumbH - drawH) / 2;
         doc.addImage(img.data, "JPEG", dx, dy, drawW, drawH, undefined, "FAST");
-        // Mask overflow on top/bottom/sides with cream
-        doc.setFillColor(MAASAI.cream);
-        if (dy < y) doc.rect(x - 2, y - 2, cardW + 4, y - dy + 2, "F");
-        if (dy + drawH > y + imgH)
-          doc.rect(x - 2, y + imgH, cardW + 4, dy + drawH - (y + imgH) + 4, "F");
-        if (dx < x) doc.rect(x - (x - dx) - 2, y, x - dx + 2, imgH, "F");
-        if (dx + drawW > x + cardW)
-          doc.rect(x + cardW, y, dx + drawW - (x + cardW) + 4, imgH, "F");
-      } else {
-        doc.setTextColor(MAASAI.ink);
-        doc.setFontSize(14);
-        doc.text("(image)", x + cardW / 2 - 20, y + imgH / 2);
+        // Mask any overflow with bg color so the image looks clipped to the box
+        doc.setFillColor(C.bg);
+        if (dy < y) doc.rect(padX - 2, y - rowH, thumbW + 4, y - dy + 2, "F");
+        if (dy + drawH > y + thumbH)
+          doc.rect(padX - 2, y + thumbH, thumbW + 4, dy + drawH - (y + thumbH) + 4, "F");
+        if (dx < padX) doc.rect(dx - 2, y, padX - dx + 2, thumbH, "F");
+        if (dx + drawW > padX + thumbW)
+          doc.rect(padX + thumbW, y, dx + drawW - (padX + thumbW) + 4, thumbH, "F");
       }
 
-      // Beaded frame around image
-      drawBeadedFrame(doc, x, y, cardW, imgH);
-
-      // Index badge
-      const badgeR = 22;
-      doc.setFillColor(MAASAI.red);
-      doc.circle(x + badgeR, y + badgeR, badgeR, "F");
-      doc.setTextColor(MAASAI.cream);
+      // Text block
+      const textX = padX + thumbW + 28;
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(16);
-      const numStr = String(idx + 1).padStart(2, "0");
-      const numW = doc.getTextWidth(numStr);
-      doc.text(numStr, x + badgeR - numW / 2, y + badgeR + 5);
+      doc.setFontSize(Math.min(22, Math.max(15, rowH * 0.18)));
+      doc.setTextColor(C.ink);
+      const maxNameW = W - textX - padX - 160;
+      let name = it.name;
+      while (doc.getTextWidth(name) > maxNameW && name.length > 4) {
+        name = name.slice(0, -1);
+      }
+      if (name !== it.name) name = name.slice(0, -1) + "…";
+      doc.text(name, textX, y + thumbH * 0.45);
 
-      // Caption
-      doc.setTextColor(MAASAI.ink);
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(20);
-      const name = it.name.length > 32 ? it.name.slice(0, 30) + "…" : it.name;
-      doc.text(name, x, y + imgH + 36);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(11);
+      doc.setTextColor(C.muted);
+      doc.text(`Item ${String(idx + 1).padStart(2, "0")}`, textX, y + thumbH * 0.7);
 
-      // Price
+      // Price (right aligned)
       if (it.price > 0) {
-        doc.setFont("helvetica", "normal");
+        doc.setFont("helvetica", "bold");
         doc.setFontSize(14);
-        doc.setTextColor(MAASAI.red);
-        doc.text(`KSh ${it.price.toLocaleString()}`, x, y + imgH + 60);
+        doc.setTextColor(C.ink);
+        const priceStr = `KSh ${it.price.toLocaleString()}`;
+        const pw = doc.getTextWidth(priceStr);
+        doc.text(priceStr, W - padX - pw, y + thumbH * 0.45);
         total += it.price;
       }
 
-      // Tiny chevron divider
-      doc.setFillColor(MAASAI.black);
-      doc.rect(x, y + imgH + 76, 36, 3, "F");
-      doc.setFillColor(MAASAI.blue);
-      doc.rect(x + 40, y + imgH + 76, 18, 3, "F");
-
-      col += 1;
-      if (col >= cols) {
-        col = 0;
-        cursorY += cardH + rowGap;
+      // Hairline divider between rows
+      if (idx < count - 1) {
+        doc.setDrawColor(C.hair);
+        doc.setLineWidth(0.4);
+        doc.line(padX, y + rowH - 4, W - padX, y + rowH - 4);
       }
     });
 
-    // Total summary card on last page (if room, else new page)
+    // ── Total ──────────────────────────────────────────────
     if (total > 0) {
-      const summaryH = 110;
-      if (cursorY + summaryH > H - 110) startNewPage();
-      const sy = cursorY + (col === 0 ? 0 : cardH + rowGap);
-      const sx = gridLeft;
-      const sw = gridRight - gridLeft;
-      doc.setFillColor(MAASAI.ink);
-      doc.rect(sx, sy, sw, summaryH, "F");
-      // Shuka accent strip on left edge
-      doc.setFillColor(MAASAI.red);
-      doc.rect(sx, sy, 14, summaryH, "F");
-      doc.setFillColor(MAASAI.blue);
-      doc.rect(sx + 14, sy, 6, summaryH, "F");
-      // Text
-      doc.setTextColor(MAASAI.cream);
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(12);
-      doc.text("ESTIMATED TOTAL", sx + 40, sy + 38);
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(36);
-      doc.text(`KSh ${total.toLocaleString()}`, sx + 40, sy + 80);
-      // CTA
+      const ty = listBottom + 30;
+      doc.setDrawColor(C.hair);
+      doc.setLineWidth(0.6);
+      doc.line(padX, ty - 20, W - padX, ty - 20);
+
       doc.setFont("helvetica", "normal");
       doc.setFontSize(11);
-      const cta = "DM @LULU_CLOTHLINE TO ORDER →";
-      const cw = doc.getTextWidth(cta);
-      doc.setTextColor(MAASAI.red);
-      doc.text(cta, sx + sw - 30 - cw, sy + 70);
+      doc.setTextColor(C.muted);
+      doc.text("TOTAL", padX, ty + 10);
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(34);
+      doc.setTextColor(C.ink);
+      const tStr = `KSh ${total.toLocaleString()}`;
+      const tw = doc.getTextWidth(tStr);
+      doc.text(tStr, W - padX - tw, ty + 14);
     }
+
+    // ── Footer ─────────────────────────────────────────────
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(C.muted);
+    doc.text("luluclothline.com", padX, H - 70);
+    const handle = "@lulu_clothline  ·  WhatsApp 0714 844 809";
+    const hw = doc.getTextWidth(handle);
+    doc.text(handle, W - padX - hw, H - 70);
+
+    // Tiny accent mark
+    doc.setFillColor(C.accent);
+    doc.rect(padX, H - 60, 24, 3, "F");
 
     return doc;
   };
