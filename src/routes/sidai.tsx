@@ -217,9 +217,7 @@ function SidaiPage() {
       <section className="relative overflow-hidden border-b border-black/30 maasai-shuka-red text-[#f8efe6]">
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-20 md:grid-cols-2 md:items-center md:px-10 md:py-28">
           <div>
-          <p className="tracking-luxury mb-4 text-[10px] text-[#f5c518]">
-            Maasai Couture · Made in Kenya 🇰🇪
-          </p>
+          <p className="tracking-luxury mb-4 text-[10px] text-[#f5c518]">​</p>
           <h1 className="font-display text-5xl leading-[0.95] md:text-7xl text-[#f8efe6]">
             Lulu Sidai
             <br />
