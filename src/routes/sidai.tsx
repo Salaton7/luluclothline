@@ -238,19 +238,6 @@ function SidaiPage() {
             </a>
           </div>
           </div>
-          <div className="relative">
-            <div className="maasai-shuka absolute -inset-2 -z-10 opacity-60" aria-hidden="true" />
-            <div className="aspect-[4/5] overflow-hidden bg-muted ring-1 ring-black/20">
-              <img
-                src={sidaiCover}
-                alt="Lulu Sidai cover — model in Maasai beaded headband, statement collar and dress"
-                className="h-full w-full object-cover"
-                loading="eager"
-                fetchPriority="high"
-              />
-            </div>
-            <div className="maasai-beads mt-3 h-3 w-full" aria-hidden="true" />
-          </div>
         </div>
       </section>
 
