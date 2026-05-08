@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, ImageDown } from "lucide-react";
+import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, ImageDown, Download } from "lucide-react";
 import { useWishlist } from "@/lib/wishlist";
 import { useCart } from "@/lib/cart";
 
@@ -58,6 +58,7 @@ export function WishlistDrawer() {
   const { addItem } = useCart();
   const [copied, setCopied] = useState(false);
   const [sharing, setSharing] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   const buildShareText = () => {
     const lines = ["My Lulu Clothline wishlist:", ""];
@@ -287,6 +288,25 @@ export function WishlistDrawer() {
     }
   };
 
+  const handleDownloadImage = async () => {
+    if (items.length === 0) return;
+    setDownloading(true);
+    try {
+      const blob = await buildImage();
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "lulu-wishlist.png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   const handleNativeShare = async () => {
     const text = buildShareText();
     if (typeof navigator !== "undefined" && navigator.share) {
@@ -456,6 +476,15 @@ export function WishlistDrawer() {
             >
               <ImageDown className="h-3.5 w-3.5" />
               {sharing ? "Preparing image..." : "Export & share as image"}
+            </button>
+            <button
+              type="button"
+              onClick={handleDownloadImage}
+              disabled={downloading}
+              className="tracking-luxury mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full border border-foreground/30 px-4 py-3 text-[10px] hover:bg-foreground hover:text-background disabled:opacity-60"
+            >
+              <Download className="h-3.5 w-3.5" />
+              {downloading ? "Preparing PNG..." : "Download as PNG"}
             </button>
           </div>
         )}
