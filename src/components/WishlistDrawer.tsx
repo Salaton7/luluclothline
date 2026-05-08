@@ -435,7 +435,7 @@ export function WishlistDrawer() {
               type="button"
               onClick={handleDownloadImage}
               disabled={downloading}
-              className="tracking-luxury mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-4 py-3 text-[10px] text-background hover:opacity-90 disabled:opacity-60"
+              className="tracking-luxury mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-red-900 px-4 py-3 text-[10px] text-background hover:opacity-90 disabled:opacity-60"
             >
               <Download className="h-3.5 w-3.5" />
               {downloading ? "Preparing PNG..." : "Download as PNG"}
