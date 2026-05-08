@@ -215,8 +215,8 @@ function SidaiPage() {
 
 
       {/* PRODUCT GRID */}
-      <section id="collection" className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
-        <div className="mb-12 flex items-end justify-between">
+      <section id="collection" className="mx-auto max-w-7xl px-5 pt-28 pb-24 md:px-10 md:pt-36 md:pb-32">
+        <div className="mb-16 flex items-end justify-between">
           <div>
             <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
               The Sidai Collection
@@ -228,7 +228,7 @@ function SidaiPage() {
             Each piece is made-to-order. Delivery 7–14 days within Kenya.
           </p>
         </div>
-        <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {allProducts.map((p) => (
             <ProductCard key={p.name} p={p} />
           ))}
