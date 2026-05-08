@@ -16,6 +16,7 @@ type FormState = {
   id?: string;
   name: string;
   tag: string;
+  category: "sidai" | "textile" | "collective";
   price: string;
   description: string;
   image_url: string;
@@ -28,6 +29,7 @@ type FormState = {
 const emptyForm: FormState = {
   name: "",
   tag: "",
+  category: "sidai",
   price: "",
   description: "",
   image_url: "",
