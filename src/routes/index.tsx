@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero.jpg";
 import sidaiImg from "@/assets/sidai.jpg";
-import textileImg from "@/assets/textile.jpg";
+import textileImg from "@/assets/textile-card.jpg";
 import collectiveImg from "@/assets/collective-hero.webp";
 
 export const Route = createFileRoute("/")({
