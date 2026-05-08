@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, ImageDown, Download } from "lucide-react";
+import { Heart, X, Trash2, ShoppingBag, Share2, Check, Copy, MessageCircle, Download } from "lucide-react";
 import { useWishlist } from "@/lib/wishlist";
 import { useCart } from "@/lib/cart";
 
@@ -57,7 +57,6 @@ export function WishlistDrawer() {
   const { items, isOpen, closeWishlist, removeItem, totalItems } = useWishlist();
   const { addItem } = useCart();
   const [copied, setCopied] = useState(false);
-  const [sharing, setSharing] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   const buildShareText = () => {
@@ -252,42 +251,6 @@ export function WishlistDrawer() {
     );
   };
 
-  const handleExportImage = async () => {
-    if (items.length === 0) return;
-    setSharing(true);
-    try {
-      const blob = await buildImage();
-      if (!blob) return;
-      const filename = "lulu-wishlist.png";
-      const file = new File([blob], filename, { type: "image/png" });
-      const nav = navigator as Navigator & {
-        canShare?: (data: { files: File[] }) => boolean;
-      };
-      if (nav.canShare && nav.canShare({ files: [file] }) && nav.share) {
-        try {
-          await nav.share({
-            files: [file],
-            title: "My Lulu Clothline wishlist",
-            text: buildShareText(),
-          });
-          return;
-        } catch {
-          /* fall through to download */
-        }
-      }
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    } finally {
-      setSharing(false);
-    }
-  };
-
   const handleDownloadImage = async () => {
     if (items.length === 0) return;
     setDownloading(true);
@@ -470,18 +433,9 @@ export function WishlistDrawer() {
             </div>
             <button
               type="button"
-              onClick={handleExportImage}
-              disabled={sharing}
-              className="tracking-luxury mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-4 py-3 text-[10px] text-background hover:opacity-90 disabled:opacity-60"
-            >
-              <ImageDown className="h-3.5 w-3.5" />
-              {sharing ? "Preparing image..." : "Export & share as image"}
-            </button>
-            <button
-              type="button"
               onClick={handleDownloadImage}
               disabled={downloading}
-              className="tracking-luxury mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full border border-foreground/30 px-4 py-3 text-[10px] hover:bg-foreground hover:text-background disabled:opacity-60"
+              className="tracking-luxury mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-4 py-3 text-[10px] text-background hover:opacity-90 disabled:opacity-60"
             >
               <Download className="h-3.5 w-3.5" />
               {downloading ? "Preparing PNG..." : "Download as PNG"}
