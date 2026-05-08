@@ -372,9 +372,6 @@ function ProductCard({ p }: { p: Product }) {
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/15 via-transparent to-transparent" aria-hidden="true" />
         <div className="maasai-shuka absolute inset-x-0 top-0 h-1.5" aria-hidden="true" />
-        <span className="tracking-luxury absolute left-3 top-4 rounded-full bg-background/90 px-3 py-1 text-[9px] text-foreground backdrop-blur">
-          {p.tag}
-        </span>
         <div className="maasai-beads absolute inset-x-0 bottom-0 h-2 opacity-90" aria-hidden="true" />
       </div>
       <div className="mt-5">
