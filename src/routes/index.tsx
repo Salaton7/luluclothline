@@ -63,10 +63,6 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-foreground/20 to-foreground/80" />
         <div className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-5 pb-16 md:px-10 md:pb-24">
           <p className="tracking-luxury mb-6 text-[11px] text-background/85">​</p>
-          <h1 className="font-display text-5xl leading-[1.05] text-background md:text-7xl lg:text-8xl">
-            Style. Fabric.<br />
-            <span className="italic text-accent">​</span>
-          </h1>
           <p className="mt-6 max-w-xl text-base text-background/85 md:text-lg">
             Shop fashion. Source textiles. Join the collective.
           </p>
