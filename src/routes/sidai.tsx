@@ -9,7 +9,6 @@ import sidai5 from "@/assets/sidai-5.jpg";
 import sidai6 from "@/assets/sidai-6.jpg";
 import sidai7 from "@/assets/sidai-7.jpg";
 import sidaiReel1 from "@/assets/sidai-reel-1.mp4";
-import sidaiCover from "@/assets/sidai-cover.webp";
 import sidaiNew1 from "@/assets/sidai-new-1.jpeg";
 import sidaiNew2 from "@/assets/sidai-new-2.jpeg";
 import sidaiNew3 from "@/assets/sidai-new-3.jpg";
