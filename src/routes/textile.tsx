@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import cotton from "@/assets/fabric-cotton.jpg";
 import ankara from "@/assets/fabric-ankara.jpg";
 import linen from "@/assets/fabric-linen.jpg";
@@ -37,6 +39,34 @@ const fabrics = [
 ];
 
 function TextilePage() {
+  const [items, setItems] = useState<
+    Array<{
+      id: string;
+      name: string;
+      tag: string | null;
+      price: number;
+      description: string | null;
+      image_url: string | null;
+    }>
+  >([]);
+
+  useEffect(() => {
+    let active = true;
+    supabase
+      .from("sidai_products")
+      .select("id, name, tag, price, description, image_url")
+      .eq("is_published", true)
+      .eq("category", "textile")
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (active && data) setItems(data);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <>
       <section className="grid border-b border-border/60 md:grid-cols-2">
