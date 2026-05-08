@@ -176,7 +176,7 @@ function SiteFooter() {
           </ul>
         </div>
         <div>
-          <div className="tracking-luxury mb-4 text-[10px] text-muted-foreground">Connect</div>
+           <div className="tracking-luxury mb-4 text-[10px] text-muted-foreground">More on Social Media</div>
           <ul className="space-y-2 text-sm">
             <li>
               <a href="https://www.instagram.com/lulu_clothline/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
