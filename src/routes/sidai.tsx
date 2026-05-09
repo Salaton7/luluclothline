@@ -40,11 +40,6 @@ type Product = {
 const reels: { type: "video" | "poster"; src: string; poster?: string; caption: string }[] = [
   {
     type: "poster",
-    src: sidai6,
-    caption: "Lavie Mermaid Gown — featured on @lulu_clothline",
-  },
-  {
-    type: "poster",
     src: sidai3,
     caption: "Resian Heritage Maxi — Universal Day of Culture",
   },
