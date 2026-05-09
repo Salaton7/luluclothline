@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
+import { AdminInvitesPanel } from "@/components/AdminInvitesPanel";
 
 export const Route = createFileRoute("/admin/")({
   head: () => ({
@@ -285,6 +286,8 @@ function AdminPage() {
         )}
 
         {/* FORM */}
+        <AdminInvitesPanel />
+
         <section className="mb-12 rounded-2xl border border-border bg-card p-6 md:p-8">
           <h2 className="font-display text-xl">
             {editingId ? "Edit product" : "Add new product"}
