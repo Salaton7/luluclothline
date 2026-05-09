@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import sidai3 from "@/assets/sidai-3.jpg";
 import { useCart } from "@/lib/cart";
 import { WishlistHeartButton } from "@/components/WishlistDrawer";
 import { wishlistId } from "@/lib/wishlist";
@@ -35,14 +34,6 @@ type Product = {
   sizes: string[];
   colors: string[];
 };
-
-const reels: { type: "video" | "poster"; src: string; poster?: string; caption: string }[] = [
-  {
-    type: "poster",
-    src: sidai3,
-    caption: "Resian Heritage Maxi — Universal Day of Culture",
-  },
-];
 
 function SidaiPage() {
   const [dbProducts, setDbProducts] = useState<Product[]>([]);
