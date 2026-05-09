@@ -2,19 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import sidai1 from "@/assets/sidai-1.jpg";
-import sidai2 from "@/assets/sidai-2.jpg";
 import sidai3 from "@/assets/sidai-3.jpg";
 import sidai4 from "@/assets/sidai-4.jpg";
-import sidai5 from "@/assets/sidai-5.jpg";
 import sidai6 from "@/assets/sidai-6.jpg";
-import sidai7 from "@/assets/sidai-7.jpg";
 import sidaiReel1 from "@/assets/sidai-reel-1.mp4";
-import sidaiNew1 from "@/assets/sidai-new-1.jpeg";
-import sidaiNew2 from "@/assets/sidai-new-2.jpeg";
-import sidaiNew3 from "@/assets/sidai-new-3.jpg";
-import sidaiNew4 from "@/assets/sidai-new-4.jpg";
-import sidaiNew5 from "@/assets/sidai-new-5.webp";
-import sidaiNew6 from "@/assets/sidai-new-6.webp";
 import { useCart } from "@/lib/cart";
 import { WishlistHeartButton } from "@/components/WishlistDrawer";
 import { wishlistId } from "@/lib/wishlist";
@@ -39,123 +30,15 @@ export const Route = createFileRoute("/sidai")({
   component: SidaiPage,
 });
 
-const wa = (item: string) =>
-  `https://wa.me/254714844809?text=${encodeURIComponent(
-    `Hi Lulu Clothline! I'd like to order: ${item}.`,
-  )}`;
-
-const products = [
-  {
-    name: "Nashipai Beaded Gown",
-    tag: "Signature",
-    price: 12500,
-    img: sidai1,
-    desc: "Crimson maxi with hand-beaded chevron detailing and matching shawl.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Crimson", "Black", "Ivory"],
-  },
-  {
-    name: "Naserian Cape Dress",
-    tag: "Bridal",
-    price: 14800,
-    img: sidai2,
-    desc: "Scarlet mini with flowing white cape and beaded collar — statement piece.",
-    sizes: ["XS", "S", "M", "L"],
-    colors: ["Scarlet/White", "Black/White"],
-  },
-  {
-    name: "Resian Heritage Maxi",
-    tag: "Cultural",
-    price: 11200,
-    img: sidai3,
-    desc: "Soft sky-blue gown with red checked sleeve and tribal embroidery.",
-    sizes: ["S", "M", "L", "XL"],
-    colors: ["Sky Blue", "Sand", "Olive"],
-  },
-  {
-    name: "Naipanoi Stage Gown",
-    tag: "Couture",
-    price: 16500,
-    img: sidai4,
-    desc: "Ceremonial gown with vibrant Maasai motif embroidery and multicolour beadwork — available as a flowing gown or layered skirt and structured top set.",
-    sizes: ["S", "M", "L"],
-    colors: ["White/Blue", "White/Red", "White/Multi", "Black/Multi"],
-  },
-  {
-    name: "Lavie Mermaid Gown",
-    tag: "Featured on TikTok",
-    price: 13900,
-    img: sidai6,
-    desc: "Off-shoulder red corset with flowing white mermaid skirt.",
-    sizes: ["XS", "S", "M", "L"],
-    colors: ["Red/White", "Black/White"],
-  },
-  {
-    name: "Twin Flame Cape Set",
-    tag: "Duo",
-    price: 11800,
-    img: sidai7,
-    desc: "Matching beaded red gowns with optional white cape — perfect for sisters & bridal parties.",
-    sizes: ["S", "M", "L"],
-    colors: ["Red", "Red/White Cape"],
-  },
-  {
-    name: "Empress Royal Beaded Gown",
-    tag: "Bridal Couture",
-    price: 18500,
-    img: sidaiNew1,
-    desc: "Royal blue gown with red shuka cape, hand-beaded collar, headpiece and intricate Maasai motif detailing.",
-    sizes: ["S", "M", "L", "XL"],
-    colors: ["Royal Blue/Red"],
-  },
-  {
-    name: "Naimutie Cape Gown",
-    tag: "Bridal",
-    price: 13500,
-    img: sidaiNew2,
-    desc: "Sweetheart red maxi with flowing white cape and beaded collar — chevron embellishment from waist to hem.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Red/White"],
-  },
-  {
-    name: "Olosho Sisterhood Gown",
-    tag: "Group / Bridal Party",
-    price: 12800,
-    img: sidaiNew3,
-    desc: "Forest green off-shoulder gown with red beaded belt and statement collar — perfect for bridal parties and ceremonies.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Forest Green", "Burgundy", "Navy"],
-  },
-  {
-    name: "Ilayiok Boys Set",
-    tag: "Kids",
-    price: 4800,
-    img: sidaiNew4,
-    desc: "Royal blue and white asymmetric tunic with matching trousers for boys — perfect for ceremonies and family events.",
-    sizes: ["4Y", "6Y", "8Y", "10Y", "12Y"],
-    colors: ["Royal Blue/White"],
-  },
-  {
-    name: "Nasha Shuka Bustier",
-    tag: "Everyday",
-    price: 4500,
-    img: sidaiNew5,
-    desc: "Classic red Maasai-check shuka bustier top — strapless, structured and styled with a beaded choker.",
-    sizes: ["XS", "S", "M", "L"],
-    colors: ["Red Check"],
-  },
-  {
-    name: "Naserian Heart Corset Set",
-    tag: "Statement",
-    price: 9800,
-    img: sidaiNew6,
-    desc: "Off-shoulder red heart-cut corset with beaded fringe, paired with crisp white wide-leg trousers.",
-    sizes: ["XS", "S", "M", "L"],
-    colors: ["Red/White"],
-  },
-];
-
-type Product = (typeof products)[number];
+type Product = {
+  name: string;
+  tag: string;
+  price: number;
+  img: string;
+  desc: string;
+  sizes: string[];
+  colors: string[];
+};
 
 const reels: { type: "video" | "poster"; src: string; poster?: string; caption: string }[] = [
   {
@@ -208,7 +91,7 @@ function SidaiPage() {
     };
   }, []);
 
-  const allProducts = [...dbProducts, ...products];
+  const allProducts = dbProducts;
 
   return (
     <>
