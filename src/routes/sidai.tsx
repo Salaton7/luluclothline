@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import sidai3 from "@/assets/sidai-3.jpg";
-import sidai6 from "@/assets/sidai-6.jpg";
 import { useCart } from "@/lib/cart";
 import { WishlistHeartButton } from "@/components/WishlistDrawer";
 import { wishlistId } from "@/lib/wishlist";
@@ -38,11 +37,6 @@ type Product = {
 };
 
 const reels: { type: "video" | "poster"; src: string; poster?: string; caption: string }[] = [
-  {
-    type: "poster",
-    src: sidai6,
-    caption: "Lavie Mermaid Gown — featured on @lulu_clothline",
-  },
   {
     type: "poster",
     src: sidai3,
