@@ -41,14 +41,14 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lulu Clothline — Kenyan fashion made simple" },
+      { title: "Lulu Clothline" },
       {
         name: "description",
         content:
           "Lulu Clothline — outfits, fabric, and stories. Made in Kenya.",
       },
       { name: "author", content: "Lulu Clothline" },
-      { property: "og:title", content: "Lulu Clothline — Kenyan fashion made simple" },
+      { property: "og:title", content: "Lulu Clothline" },
       {
         property: "og:description",
         content: "Shop outfits. Buy fabric. Work with us.",
@@ -57,12 +57,12 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary" },
       { property: "og:image", content: luluLogo },
       { name: "twitter:image", content: luluLogo },
-      { name: "twitter:title", content: "Lulu Clothline — Kenyan fashion made simple" },
-      { name: "description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
-      { property: "og:description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
-      { name: "twitter:description", content: "Builds a Kenyan fashion brand website, showcasing clothing, textiles, and collaborations, with a focus on WhatsApp sales." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/debbfa9b-9167-4882-9fd7-598fd4a4e545/id-preview-504eae8d--69c252f2-ddb7-46f3-ab47-af2481951844.lovable.app-1777625810126.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/debbfa9b-9167-4882-9fd7-598fd4a4e545/id-preview-504eae8d--69c252f2-ddb7-46f3-ab47-af2481951844.lovable.app-1777625810126.png" },
+      { name: "twitter:title", content: "Lulu Clothline" },
+      { name: "description", content: "Boldly You, Beautifully Lulu" },
+      { property: "og:description", content: "Boldly You, Beautifully Lulu" },
+      { name: "twitter:description", content: "Boldly You, Beautifully Lulu" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/8JngLDq9baNj3z0TEGYMMQjYIwq2/social-images/social-1778323946280-Extract_only_the_clothing_outfits_from_202605020151_(1).webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/8JngLDq9baNj3z0TEGYMMQjYIwq2/social-images/social-1778323946280-Extract_only_the_clothing_outfits_from_202605020151_(1).webp" },
     ],
     links: [
       {
