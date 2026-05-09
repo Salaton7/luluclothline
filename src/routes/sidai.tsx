@@ -123,29 +123,6 @@ function SidaiPage() {
       {/* Blue shuka strip */}
       <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
 
-      {/* EDITORIAL HERO PAIR */}
-      <section className="grid grid-cols-1 gap-1 bg-foreground md:grid-cols-2">
-        <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
-          <img
-            src={sidai1}
-            alt="Nashipai Beaded Gown — signature crimson Maasai couture"
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="aspect-[4/5] overflow-hidden bg-muted md:aspect-auto">
-          <img
-            src={sidai4}
-            alt="Naipanoi Stage Gown — ceremonial Maasai couture"
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </section>
-
-      {/* Chevron divider */}
-      <div className="maasai-chevron h-5 w-full" aria-hidden="true" />
-
       {/* TIKTOK */}
       <section className="border-y border-border/60 bg-secondary/30">
         <div className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
