@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import heroImg from "@/assets/hero.jpg";
 import sidaiImg from "@/assets/sidai.jpg";
