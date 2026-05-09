@@ -30,11 +30,6 @@ export const Route = createFileRoute("/sidai")({
   component: SidaiPage,
 });
 
-const wa = (item: string) =>
-  `https://wa.me/254714844809?text=${encodeURIComponent(
-    `Hi Lulu Clothline! I'd like to order: ${item}.`,
-  )}`;
-
 type Product = {
   name: string;
   tag: string;
