@@ -64,7 +64,7 @@ function Index() {
         <div className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-5 pb-16 md:px-10 md:pb-24">
           <p className="tracking-luxury mb-6 text-[11px] text-background/85">​</p>
           <p className="mt-6 max-w-xl text-base text-background/85 md:text-lg">
-            Shop outfits. Buy fabric. Work with us.
+            Shop outfits. Buy fabric. Collaborate with us.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
