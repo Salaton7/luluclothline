@@ -190,7 +190,6 @@ function SidaiPage() {
       <div className="maasai-shuka h-3 w-full" aria-hidden="true" />
       <section className="mx-auto max-w-7xl px-5 py-24 text-center md:px-10">
         <h2 className="font-display text-4xl md:text-6xl">Like what you see?</h2>
-        <p className="mt-4 text-muted-foreground">​</p>
         <div className="maasai-beads mx-auto mt-6 h-3 w-40" aria-hidden="true" />
       </section>
       <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
