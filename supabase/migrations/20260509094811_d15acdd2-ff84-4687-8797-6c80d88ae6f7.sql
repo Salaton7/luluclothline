@@ -1,0 +1,1 @@
+DELETE FROM public.sidai_products WHERE id = 'a9f975ee-2295-48b2-b890-689e616ed4e4';
