@@ -97,7 +97,7 @@ function SidaiPage() {
       </section>
 
       {/* Blue shuka strip */}
-      <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
+      <div className="maasai-shuka-blue h-3 w-full text-red-900" aria-hidden="true" />
 
       <div className="maasai-shuka h-3 w-full text-red-900" aria-hidden="true" />
     </>
