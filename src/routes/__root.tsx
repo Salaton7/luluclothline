@@ -208,9 +208,7 @@ function SiteFooter() {
               </a>
             </li>
             <li>
-              <Link to="/admin/login" className="hover:text-accent">
-                Admin Login
-              </Link>
+              <Link to="/admin/login" className="hover:text-accent">​</Link>
             </li>
           </ul>
         </div>
