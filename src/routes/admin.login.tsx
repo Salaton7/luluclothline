@@ -5,7 +5,7 @@ import { lovable } from "@/integrations/lovable";
 
 export const Route = createFileRoute("/admin/login")({
   head: () => ({
-    meta: [{ title: "Admin Login · Lulu Clothline" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "​ · Lulu Clothline" }, { name: "robots", content: "noindex" }],
   }),
   component: AdminLoginPage,
 });
