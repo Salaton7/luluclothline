@@ -81,9 +81,7 @@ function Index() {
       <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
         <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">
-              What we do
-            </p>
+            <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">​</p>
             <h2 className="font-display text-4xl md:text-6xl">Pick what you need.</h2>
           </div>
           <p className="max-w-md text-sm text-muted-foreground">​Explore the Lulu Clothline divisions</p>
