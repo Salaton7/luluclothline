@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
 const worlds = [
   {
     title: "Lulu Sidai",
-    desc: "Handmade outfits for everyday and special days.",
+    desc: "Handmade Maasai outfits for everyday and special days.",
     cta: "Shop outfits",
     to: "/sidai" as const,
     img: sidaiImg,
