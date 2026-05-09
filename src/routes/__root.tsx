@@ -172,8 +172,8 @@ function SiteFooter() {
             />
             <div className="font-display text-2xl">Lulu Clothline</div>
           </div>
-          <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-            Outfits, fabric, and stories — made in Kenya.
+          <p className="mt-3 max-w-sm text-sm text-muted-foreground font-serif">
+            Boldly You, Beautifully Lulu
           </p>
         </div>
         <div>
