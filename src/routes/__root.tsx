@@ -144,6 +144,9 @@ function SiteHeader() {
           <Link to="/collective" className={linkClass} activeProps={{ className: "tracking-luxury text-[11px] text-foreground" }}>
             Collective
           </Link>
+          <Link to="/admin/login" className={linkClass} activeProps={{ className: "tracking-luxury text-[11px] text-foreground" }}>
+            Admin
+          </Link>
         </nav>
         <div className="flex items-center gap-2">
           <WishlistTrigger />
