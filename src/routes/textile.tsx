@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import textileImg from "@/assets/textile.jpg";
-
 export const Route = createFileRoute("/textile")({
   head: () => ({
     meta: [
@@ -58,65 +56,57 @@ function TextilePage() {
 
   return (
     <>
-      <section className="grid border-b border-border/60 md:grid-cols-2">
-        <div className="flex items-center px-5 py-20 md:px-16 md:py-28">
-          <div>
-            <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">
-              Fabric
-            </p>
-            <h1 className="font-display text-5xl md:text-7xl">Lulu Textile</h1>
-            <p className="mt-6 max-w-md text-muted-foreground">
-              Quality fabric for tailors, designers, and home sewists — anywhere in Kenya.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={inquire("your fabric collection")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tracking-luxury rounded-full bg-foreground px-7 py-4 text-[11px] text-background hover:opacity-90"
-              >
-                Ask about fabric
-              </a>
-              <a
-                href={inquire("a custom inquiry")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tracking-luxury rounded-full border border-foreground/30 px-7 py-4 text-[11px] hover:bg-foreground hover:text-background"
-              >
-                Ask a question
-              </a>
-            </div>
+      {items.length > 0 && (
+        <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
+          <div className="mb-12">
+            <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Available now</p>
+            <h2 className="font-display text-4xl md:text-5xl">In stock fabric</h2>
           </div>
-        </div>
-        <div className="aspect-[4/3] md:aspect-auto">
-          <img
-            src={textileImg}
-            alt="Lulu Textile fabrics"
-            width={1024}
-            height={1280}
-            className="h-full w-full object-cover"
-          />
-        </div>
-      </section>
-
-      {/* BULK */}
-      <section className="border-t border-border/60 bg-secondary/40">
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center md:px-10 md:py-28">
-          <p className="tracking-luxury mb-4 text-[10px] text-muted-foreground">Buying in bulk</p>
-          <h2 className="font-display text-3xl md:text-5xl">
-            Bulk orders for shops and tailors — just ask.
-          </h2>
-          <a
-            href={inquire("bulk fabric orders for my boutique")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="tracking-luxury mt-10 inline-block rounded-full bg-whatsapp px-8 py-4 text-[11px] text-whatsapp-foreground transition-transform hover:scale-105"
-          >
-            Chat with us on WhatsApp
-          </a>
-        </div>
-      </section>
-
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((p) => (
+              <a
+                key={p.id}
+                href={inquire(p.name)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block"
+              >
+                <div className="aspect-[4/5] overflow-hidden bg-muted">
+                  {p.image_url && (
+                    <img
+                      src={p.image_url}
+                      alt={p.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )}
+                </div>
+                <div className="mt-4 flex items-baseline justify-between gap-3">
+                  <h3 className="font-display text-2xl">{p.name}</h3>
+                  {p.price > 0 && (
+                    <span className="text-sm text-muted-foreground">
+                      KSh {p.price.toLocaleString()}
+                    </span>
+                  )}
+                </div>
+                {p.tag && (
+                  <span className="tracking-luxury mt-1 inline-block text-[10px] text-muted-foreground">
+                    {p.tag}
+                  </span>
+                )}
+                {p.description && (
+                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                    {p.description}
+                  </p>
+                )}
+                <span className="tracking-luxury mt-3 inline-block text-[10px] text-muted-foreground transition-colors group-hover:text-accent">
+                  Ask about this →
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
     </>
   );
 }
