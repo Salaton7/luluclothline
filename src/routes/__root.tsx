@@ -204,6 +204,9 @@ function SiteFooter() {
                 WhatsApp · 0714 844 809
               </a>
             </li>
+            <li>
+              <Link to="/admin/login" className="text-muted-foreground/60 hover:text-accent">Admin</Link>
+            </li>
           </ul>
         </div>
       </div>
