@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import sidai3 from "@/assets/sidai-3.jpg";
 import { useCart } from "@/lib/cart";
 import { WishlistHeartButton } from "@/components/WishlistDrawer";
 import { wishlistId } from "@/lib/wishlist";
@@ -35,14 +34,6 @@ type Product = {
   sizes: string[];
   colors: string[];
 };
-
-const reels: { type: "video" | "poster"; src: string; poster?: string; caption: string }[] = [
-  {
-    type: "poster",
-    src: sidai3,
-    caption: "Resian Heritage Maxi — Universal Day of Culture",
-  },
-];
 
 function SidaiPage() {
   const [dbProducts, setDbProducts] = useState<Product[]>([]);
@@ -107,66 +98,6 @@ function SidaiPage() {
 
       {/* Blue shuka strip */}
       <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
-
-      {/* TIKTOK */}
-      <section className="border-y border-border/60 bg-secondary/30">
-        <div className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
-          <div className="mb-10 flex items-end justify-between">
-            <div>
-              <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">Watch</p>
-              <h2 className="font-display text-4xl md:text-5xl">See it in action</h2>
-            </div>
-            <a
-              href="https://www.tiktok.com/@luluclothline"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tracking-luxury hidden text-[10px] text-muted-foreground hover:text-foreground md:inline"
-            >
-              @luluclothline →
-            </a>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {reels.map((r, i) => (
-              <figure key={i} className="group relative">
-                <div className="relative aspect-[9/16] overflow-hidden bg-muted">
-                  {r.type === "video" ? (
-                    <video
-                      src={r.src}
-                      poster={r.poster}
-                      className="h-full w-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                    />
-                  ) : (
-                    <img
-                      src={r.src}
-                      alt={r.caption}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  )}
-                </div>
-                <figcaption className="mt-3 text-xs text-muted-foreground">
-                  {r.caption}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          <div className="mt-10 flex justify-center md:hidden">
-            <a
-              href="https://www.tiktok.com/@luluclothline"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tracking-luxury text-[10px] text-muted-foreground hover:text-foreground"
-            >
-              @luluclothline on TikTok →
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* TRUST */}
       <section className="border-y border-border/60 bg-secondary/40">
