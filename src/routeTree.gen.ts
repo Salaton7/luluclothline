@@ -16,6 +16,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminAcceptInviteRouteImport } from './routes/admin.accept-invite'
 
 const TextileRoute = TextileRouteImport.update({
   id: '/textile',
@@ -52,6 +53,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAcceptInviteRoute = AdminAcceptInviteRouteImport.update({
+  id: '/accept-invite',
+  path: '/accept-invite',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/admin/accept-invite': typeof AdminAcceptInviteRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/admin/accept-invite': typeof AdminAcceptInviteRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/collective': typeof CollectiveRoute
   '/sidai': typeof SidaiRoute
   '/textile': typeof TextileRoute
+  '/admin/accept-invite': typeof AdminAcceptInviteRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -88,10 +97,18 @@ export interface FileRouteTypes {
     | '/collective'
     | '/sidai'
     | '/textile'
+    | '/admin/accept-invite'
     | '/admin/login'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/collective' | '/sidai' | '/textile' | '/admin/login' | '/admin'
+  to:
+    | '/'
+    | '/collective'
+    | '/sidai'
+    | '/textile'
+    | '/admin/accept-invite'
+    | '/admin/login'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -99,6 +116,7 @@ export interface FileRouteTypes {
     | '/collective'
     | '/sidai'
     | '/textile'
+    | '/admin/accept-invite'
     | '/admin/login'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -162,15 +180,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/accept-invite': {
+      id: '/admin/accept-invite'
+      path: '/accept-invite'
+      fullPath: '/admin/accept-invite'
+      preLoaderRoute: typeof AdminAcceptInviteRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminAcceptInviteRoute: typeof AdminAcceptInviteRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAcceptInviteRoute: AdminAcceptInviteRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
