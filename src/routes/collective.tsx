@@ -121,7 +121,7 @@ function CollectivePage() {
       <section className="border-y border-border/60 bg-secondary/30">
         <div className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
           <p className="tracking-luxury mb-3 text-[10px] text-muted-foreground">How we work</p>
-          <h2 className="font-display text-4xl md:text-5xl">Behind the scenes.</h2>
+          <h2 className="font-display text-4xl md:text-5xl">​</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             <div className="overflow-hidden bg-muted">
               <img src={cNew2} alt="On set" loading="lazy" width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
