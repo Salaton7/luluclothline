@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import heroImg from "@/assets/hero.jpg";
 import sidaiImg from "@/assets/sidai.jpg";
 import textileImg from "@/assets/textile-card.jpg";
@@ -74,6 +76,51 @@ function Index() {
               Shop outfits
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* DIVISIONS TABS — right below the hero */}
+      <section className="border-b border-border/60 bg-background">
+        <div className="mx-auto max-w-7xl px-5 py-10 md:px-10 md:py-14">
+          <Tabs defaultValue={worlds[0].title} className="w-full">
+            <TabsList className="flex h-auto w-full flex-wrap justify-start gap-2 rounded-none border-b border-border/60 bg-transparent p-0">
+              {worlds.map((w) => (
+                <TabsTrigger
+                  key={w.title}
+                  value={w.title}
+                  className="tracking-luxury rounded-none border-b-2 border-transparent bg-transparent px-4 py-3 text-[11px] text-muted-foreground data-[state=active]:border-foreground data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none"
+                >
+                  {w.title}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            {worlds.map((w) => (
+              <TabsContent key={w.title} value={w.title} className="mt-8">
+                <div className="grid items-center gap-8 md:grid-cols-2">
+                  <Link to={w.to} className="group block overflow-hidden bg-muted">
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img
+                        src={w.img}
+                        alt={w.title}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                  </Link>
+                  <div>
+                    <h3 className="font-display text-3xl md:text-5xl">{w.title}</h3>
+                    <p className="mt-4 max-w-md text-base text-muted-foreground">{w.desc}</p>
+                    <Link
+                      to={w.to}
+                      className="tracking-luxury mt-8 inline-block rounded-full bg-foreground px-7 py-4 text-[11px] text-background transition-opacity hover:opacity-90"
+                    >
+                      {w.cta} →
+                    </Link>
+                  </div>
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </section>
 
