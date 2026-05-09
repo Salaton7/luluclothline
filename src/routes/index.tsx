@@ -123,6 +123,44 @@ function Index() {
         </div>
       </section>
 
+      {/* CHOOSE YOUR WORLD */}
+      <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
+        <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <h2 className="font-display text-4xl md:text-6xl">Pick what you need.</h2>
+          </div>
+          <p className="max-w-md text-sm text-muted-foreground">​Explore the Lulu Clothline divisions</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {worlds.map((w) => (
+            <Link
+              key={w.title}
+              to={w.to}
+              className="group relative block overflow-hidden bg-muted"
+            >
+              <div className="aspect-[3/4] overflow-hidden">
+                <img
+                  src={w.img}
+                  alt={w.title}
+                  loading="lazy"
+                  width={900}
+                  height={1200}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-7 text-background">
+                <h3 className="font-display text-3xl text-slate-50">{w.title}</h3>
+                <p className="mt-2 max-w-xs text-sm text-background/85">{w.desc}</p>
+                <span className="tracking-luxury mt-5 inline-block border-b border-background/50 pb-1 text-[10px]">
+                  {w.cta} →
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* TRUST STRIP */}
       <section className="border-y border-border/60 bg-secondary/40">
         <div className="mx-auto max-w-7xl px-5 py-8 text-center md:px-10">
