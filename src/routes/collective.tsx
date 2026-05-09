@@ -70,28 +70,6 @@ function CollectivePage() {
 
   return (
     <>
-      <section className="relative h-[70vh] overflow-hidden border-b border-border/60">
-        <img
-          src={collectiveHero}
-          alt="Lulu Collective"
-          width={1024}
-          height={1280}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-foreground/40" />
-        <div className="relative mx-auto flex h-full max-w-7xl items-end px-5 pb-16 md:px-10 md:pb-24">
-          <div className="text-background">
-            <p className="tracking-luxury mb-4 text-[10px] text-background/80">
-              Our work
-            </p>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl">Lulu Collective</h1>
-            <p className="mt-6 max-w-xl text-background/85">
-              Photoshoots, partners, and stories — the people and moments behind our outfits.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* LOOKBOOK */}
       <section className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
         <div className="mb-12 flex items-end justify-between">
