@@ -144,9 +144,6 @@ function SiteHeader() {
           <Link to="/collective" className={linkClass} activeProps={{ className: "tracking-luxury text-[11px] text-foreground" }}>
             Collective
           </Link>
-          <Link to="/admin/login" className={linkClass} activeProps={{ className: "tracking-luxury text-[11px] text-foreground" }}>
-            Admin
-          </Link>
         </nav>
         <div className="flex items-center gap-2">
           <WishlistTrigger />
@@ -206,9 +203,6 @@ function SiteFooter() {
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
                 WhatsApp · 0714 844 809
               </a>
-            </li>
-            <li>
-              <Link to="/admin/login" className="hover:text-accent">​</Link>
             </li>
           </ul>
         </div>
