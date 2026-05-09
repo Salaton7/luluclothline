@@ -119,7 +119,7 @@ function Index() {
       <section className="border-y border-border/60 bg-secondary/40">
         <div className="mx-auto max-w-7xl px-5 py-8 text-center md:px-10">
           <p className="text-sm text-muted-foreground md:text-base">
-            We ship worldwide in about a week — pay half upfront so we can start sewing, and the rest before delivery.
+            We ship worldwide in about a week , pay 60% upfront so we can start sewing, and the rest before delivery.
           </p>
         </div>
       </section>
