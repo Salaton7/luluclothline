@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import sidai3 from "@/assets/sidai-3.jpg";
 import sidai6 from "@/assets/sidai-6.jpg";
-import sidai1 from "@/assets/sidai-1.jpg";
-import sidaiReel1 from "@/assets/sidai-reel-1.mp4";
 import { useCart } from "@/lib/cart";
 import { WishlistHeartButton } from "@/components/WishlistDrawer";
 import { wishlistId } from "@/lib/wishlist";
