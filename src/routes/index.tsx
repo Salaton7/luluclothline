@@ -104,7 +104,7 @@ function Index() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/10 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7 text-background">
-                <h3 className="font-display text-3xl">{w.title}</h3>
+                <h3 className="font-display text-3xl text-rose-800">{w.title}</h3>
                 <p className="mt-2 max-w-xs text-sm text-background/85">{w.desc}</p>
                 <span className="tracking-luxury mt-5 inline-block border-b border-background/50 pb-1 text-[10px]">
                   {w.cta} →
