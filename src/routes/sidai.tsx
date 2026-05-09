@@ -99,24 +99,6 @@ function SidaiPage() {
       {/* Blue shuka strip */}
       <div className="maasai-shuka-blue h-3 w-full" aria-hidden="true" />
 
-      {/* TRUST */}
-      <section className="border-y border-border/60 bg-secondary/40">
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 text-center md:grid-cols-3 md:px-10">
-          <div>
-            <p className="font-display text-xl">We ship worldwide</p>
-            <p className="mt-1 text-xs text-muted-foreground">Arrives in about a week</p>
-          </div>
-          <div>
-            <p className="font-display text-xl">Pay with M-Pesa</p>
-            <p className="mt-1 text-xs text-muted-foreground">Pay half to start sewing</p>
-          </div>
-          <div>
-            <p className="font-display text-xl">Pay the rest later</p>
-            <p className="mt-1 text-xs text-muted-foreground">Before we send it out</p>
-          </div>
-        </div>
-      </section>
-
       <div className="maasai-shuka h-3 w-full" aria-hidden="true" />
     </>
   );
