@@ -46,12 +46,6 @@ const reels: { type: "video" | "poster"; src: string; poster?: string; caption: 
     caption: "Lavie Mermaid Gown — featured on @lulu_clothline",
   },
   {
-    type: "video",
-    src: sidaiReel1,
-    poster: sidai1,
-    caption: "Behind the scenes — Nashipai gown in motion",
-  },
-  {
     type: "poster",
     src: sidai3,
     caption: "Resian Heritage Maxi — Universal Day of Culture",
