@@ -1,13 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useCart } from "@/lib/cart";
 import heroImg from "@/assets/hero.jpg";
 import sidaiImg from "@/assets/sidai.jpg";
 import textileImg from "@/assets/textile-card.jpg";
 import collectiveImg from "@/assets/collective-hero.webp";
+import sidaiNew1 from "@/assets/sidai-new-1.jpeg";
+import sidaiNew2 from "@/assets/sidai-new-2.jpeg";
+import sidaiNew3 from "@/assets/sidai-new-3.jpg";
+import sidaiNew4 from "@/assets/sidai-new-4.jpg";
+import sidaiNew5 from "@/assets/sidai-new-5.webp";
+import sidaiNew6 from "@/assets/sidai-new-6.webp";
+import fabricAnkara from "@/assets/fabric-ankara.jpg";
+import fabricCotton from "@/assets/fabric-cotton.jpg";
+import fabricLinen from "@/assets/fabric-linen.jpg";
+import fabricSilk from "@/assets/fabric-silk.jpg";
+import collectiveNew1 from "@/assets/collective-new-1.jpeg";
+import collectiveNew2 from "@/assets/collective-new-2.jpg";
+import collectiveNew3 from "@/assets/collective-new-3.jpg";
+import collectiveNew4 from "@/assets/collective-new-4.webp";
+import collectiveNew5 from "@/assets/collective-new-5.webp";
+import collectiveNew6 from "@/assets/collective-new-6.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
