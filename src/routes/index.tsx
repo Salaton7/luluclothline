@@ -1,13 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useCart } from "@/lib/cart";
 import heroImg from "@/assets/hero.jpg";
 import sidaiImg from "@/assets/sidai.jpg";
 import textileImg from "@/assets/textile-card.jpg";
 import collectiveImg from "@/assets/collective-hero.webp";
+import sidaiNew1 from "@/assets/sidai-new-1.jpeg";
+import sidaiNew2 from "@/assets/sidai-new-2.jpeg";
+import sidaiNew3 from "@/assets/sidai-new-3.jpg";
+import sidaiNew4 from "@/assets/sidai-new-4.jpg";
+import sidaiNew5 from "@/assets/sidai-new-5.webp";
+import sidaiNew6 from "@/assets/sidai-new-6.webp";
+import fabricAnkara from "@/assets/fabric-ankara.jpg";
+import fabricCotton from "@/assets/fabric-cotton.jpg";
+import fabricLinen from "@/assets/fabric-linen.jpg";
+import fabricSilk from "@/assets/fabric-silk.jpg";
+import collectiveNew1 from "@/assets/collective-new-1.jpeg";
+import collectiveNew2 from "@/assets/collective-new-2.jpg";
+import collectiveNew3 from "@/assets/collective-new-3.jpg";
+import collectiveNew4 from "@/assets/collective-new-4.webp";
+import collectiveNew5 from "@/assets/collective-new-5.webp";
+import collectiveNew6 from "@/assets/collective-new-6.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,53 +68,154 @@ const worlds = [
   },
 ];
 
-type Product = {
-  id: string;
-  name: string;
-  tag: string | null;
-  price: number;
-  description: string | null;
-  image_url: string | null;
-  sizes: string[] | null;
-  colors: string[] | null;
+type Card = {
+  title: string;
+  desc: string;
+  img: string;
+  cta: string;
+  to?: "/sidai" | "/textile" | "/collective";
+  href?: string;
 };
 
-const inquireUrl = (division: string, name: string) =>
-  `https://wa.me/254714844809?text=${encodeURIComponent(
-    `Hi ${division}, I'd like to inquire about ${name}.`,
-  )}`;
+const wa = (msg: string) =>
+  `https://wa.me/254714844809?text=${encodeURIComponent(msg)}`;
+
+const curated: Record<"sidai" | "textile" | "collective", Card[]> = {
+  sidai: [
+    {
+      title: "Maasai Beaded Dress",
+      desc: "Signature handbeaded silhouette in soft cotton.",
+      img: sidaiNew1,
+      cta: "Shop the look",
+      to: "/sidai",
+    },
+    {
+      title: "Heritage Shuka Set",
+      desc: "Two-piece tailored from authentic Maasai shuka.",
+      img: sidaiNew2,
+      cta: "Shop the look",
+      to: "/sidai",
+    },
+    {
+      title: "Ceremonial Wrap",
+      desc: "Statement wrap for weddings and special days.",
+      img: sidaiNew3,
+      cta: "Shop the look",
+      to: "/sidai",
+    },
+    {
+      title: "Everyday Sidai",
+      desc: "Easy, breathable outfits made for daily wear.",
+      img: sidaiNew4,
+      cta: "Shop the look",
+      to: "/sidai",
+    },
+    {
+      title: "Bridal Edit",
+      desc: "Hand-finished pieces for your big day.",
+      img: sidaiNew5,
+      cta: "Shop the look",
+      to: "/sidai",
+    },
+    {
+      title: "Festival Capsule",
+      desc: "Bold colour, bold beadwork, bold you.",
+      img: sidaiNew6,
+      cta: "Shop the look",
+      to: "/sidai",
+    },
+  ],
+  textile: [
+    {
+      title: "Ankara Print",
+      desc: "Vibrant wax-print cotton, sold per metre.",
+      img: fabricAnkara,
+      cta: "Inquire",
+      href: wa("Hi Lulu Textile, I'd like to inquire about Ankara Print fabric."),
+    },
+    {
+      title: "Pure Cotton",
+      desc: "Soft, breathable cotton for everyday tailoring.",
+      img: fabricCotton,
+      cta: "Inquire",
+      href: wa("Hi Lulu Textile, I'd like to inquire about Pure Cotton fabric."),
+    },
+    {
+      title: "Linen Blend",
+      desc: "Lightweight linen with a crisp natural feel.",
+      img: fabricLinen,
+      cta: "Inquire",
+      href: wa("Hi Lulu Textile, I'd like to inquire about Linen Blend fabric."),
+    },
+    {
+      title: "Silk Touch",
+      desc: "Luxe silk-touch fabric for special pieces.",
+      img: fabricSilk,
+      cta: "Inquire",
+      href: wa("Hi Lulu Textile, I'd like to inquire about Silk Touch fabric."),
+    },
+    {
+      title: "Maasai Shuka",
+      desc: "Authentic shuka in heritage red and check patterns.",
+      img: textileImg,
+      cta: "Inquire",
+      href: wa("Hi Lulu Textile, I'd like to inquire about Maasai Shuka fabric."),
+    },
+    {
+      title: "Custom Bulk Order",
+      desc: "Wholesale fabric for designers and studios.",
+      img: fabricAnkara,
+      cta: "Talk to us",
+      href: wa("Hi Lulu Textile, I'd like a bulk fabric quote."),
+    },
+  ],
+  collective: [
+    {
+      title: "Editorial: Heritage in Motion",
+      desc: "A photoshoot celebrating Maasai craft and modern silhouettes.",
+      img: collectiveNew1,
+      cta: "See the story",
+      to: "/collective",
+    },
+    {
+      title: "Behind the Beadwork",
+      desc: "The women and the hands shaping every Sidai piece.",
+      img: collectiveNew2,
+      cta: "See the story",
+      to: "/collective",
+    },
+    {
+      title: "Studio Sessions",
+      desc: "On set with our collaborators and creative partners.",
+      img: collectiveNew3,
+      cta: "See the story",
+      to: "/collective",
+    },
+    {
+      title: "Campaign: Sidai SS",
+      desc: "The seasonal campaign — colour, light, and culture.",
+      img: collectiveNew4,
+      cta: "See the story",
+      to: "/collective",
+    },
+    {
+      title: "Stories From Home",
+      desc: "Conversations with artisans across Kenya.",
+      img: collectiveNew5,
+      cta: "See the story",
+      to: "/collective",
+    },
+    {
+      title: "Work With Us",
+      desc: "Collaborations with brands, stylists, and creatives.",
+      img: collectiveNew6,
+      cta: "Get in touch",
+      to: "/collective",
+    },
+  ],
+};
 
 function Index() {
-  const [productsByCat, setProductsByCat] = useState<Record<string, Product[]>>({
-    sidai: [],
-    textile: [],
-    collective: [],
-  });
-  const { addItem } = useCart();
-
-  useEffect(() => {
-    let active = true;
-    supabase
-      .from("sidai_products")
-      .select("id, name, tag, price, description, image_url, sizes, colors, category")
-      .eq("is_published", true)
-      .in("category", ["sidai", "textile", "collective"])
-      .order("sort_order", { ascending: true })
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (!active || !data) return;
-        const grouped: Record<string, Product[]> = { sidai: [], textile: [], collective: [] };
-        for (const p of data) {
-          const cat = (p as { category: string }).category;
-          if (grouped[cat]) grouped[cat].push(p as Product);
-        }
-        setProductsByCat(grouped);
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
-
   return (
     <>
       {/* HERO */}
@@ -159,20 +273,7 @@ function Index() {
                     {w.cta} →
                   </Link>
                 </div>
-                <DivisionGrid
-                  division={w.key}
-                  title={w.title}
-                  products={productsByCat[w.key] ?? []}
-                  onAdd={(p) =>
-                    addItem({
-                      name: p.name,
-                      price: p.price,
-                      size: p.sizes?.[0] ?? "One size",
-                      color: p.colors?.[0] ?? "Default",
-                      img: p.image_url ?? undefined,
-                    })
-                  }
-                />
+                <DivisionGrid cards={curated[w.key]} />
               </TabsContent>
             ))}
           </Tabs>
@@ -229,89 +330,39 @@ function Index() {
   );
 }
 
-function DivisionGrid({
-  division,
-  title,
-  products,
-  onAdd,
-}: {
-  division: "sidai" | "textile" | "collective";
-  title: string;
-  products: Product[];
-  onAdd: (p: Product) => void;
-}) {
-  if (products.length === 0) {
-    const fallback = worlds.find((w) => w.key === division)!;
-    return (
-      <Link
-        to={fallback.to}
-        className="group relative block overflow-hidden bg-muted"
-      >
-        <div className="aspect-[16/9] overflow-hidden md:aspect-[21/9]">
-          <img
-            src={fallback.img}
-            alt={fallback.title}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-7 text-background md:p-10">
-          <h4 className="font-display text-3xl text-slate-50 md:text-4xl">
-            {fallback.title}
-          </h4>
-          <p className="mt-2 max-w-md text-sm text-background/85">
-            {fallback.desc}
-          </p>
-          <span className="tracking-luxury mt-5 inline-block border-b border-background/50 pb-1 text-[10px]">
-            {fallback.cta} →
-          </span>
-        </div>
-      </Link>
-    );
-  }
-
+function DivisionGrid({ cards }: { cards: Card[] }) {
   return (
     <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-      {products.map((p) => (
-        <div key={p.id} className="group">
+      {cards.map((c) => (
+        <article key={c.title} className="group flex flex-col">
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
-            {p.image_url && (
-              <img
-                src={p.image_url}
-                alt={p.name}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            )}
+            <img
+              src={c.img}
+              alt={c.title}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
           </div>
-          <div className="mt-4 flex items-start justify-between gap-3">
-            <h4 className="font-display text-lg leading-tight">{p.name}</h4>
-            {p.price > 0 && (
-              <span className="text-sm text-muted-foreground whitespace-nowrap">
-                KSh {p.price.toLocaleString()}
-              </span>
-            )}
-          </div>
-          {division === "sidai" ? (
-            <button
-              type="button"
-              onClick={() => onAdd(p)}
-              className="tracking-luxury mt-4 w-full rounded-full bg-foreground px-4 py-3 text-[10px] text-background transition-opacity hover:opacity-90"
+          <h4 className="font-display mt-4 text-lg leading-tight">{c.title}</h4>
+          <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
+          {c.to ? (
+            <Link
+              to={c.to}
+              className="tracking-luxury mt-4 inline-block w-full rounded-full bg-foreground px-4 py-3 text-center text-[10px] text-background transition-opacity hover:opacity-90"
             >
-              Add to cart
-            </button>
+              {c.cta} →
+            </Link>
           ) : (
             <a
-              href={inquireUrl(title, p.name)}
+              href={c.href}
               target="_blank"
               rel="noopener noreferrer"
               className="tracking-luxury mt-4 block w-full rounded-full border border-foreground px-4 py-3 text-center text-[10px] text-foreground transition-colors hover:bg-foreground hover:text-background"
             >
-              View product
+              {c.cta} →
             </a>
           )}
-        </div>
+        </article>
       ))}
     </div>
   );
