@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useCart } from "@/lib/cart";
 import heroImg from "@/assets/hero.jpg";
 import sidaiImg from "@/assets/sidai.jpg";
 import textileImg from "@/assets/textile-card.jpg";
@@ -27,6 +30,7 @@ export const Route = createFileRoute("/")({
 
 const worlds = [
   {
+    key: "sidai" as const,
     title: "Lulu Sidai",
     desc: "Handmade Maasai outfits for everyday and special days.",
     cta: "Shop outfits",
@@ -34,6 +38,7 @@ const worlds = [
     img: sidaiImg,
   },
   {
+    key: "textile" as const,
     title: "Lulu Textile",
     desc: "Quality fabric for tailors, designers, and home sewists.",
     cta: "Buy fabric",
@@ -41,6 +46,7 @@ const worlds = [
     img: textileImg,
   },
   {
+    key: "collective" as const,
     title: "Lulu Collective",
     desc: "Photoshoots, stories, and people we work with.",
     cta: "See our work",
@@ -49,7 +55,53 @@ const worlds = [
   },
 ];
 
+type Product = {
+  id: string;
+  name: string;
+  tag: string | null;
+  price: number;
+  description: string | null;
+  image_url: string | null;
+  sizes: string[] | null;
+  colors: string[] | null;
+};
+
+const inquireUrl = (division: string, name: string) =>
+  `https://wa.me/254714844809?text=${encodeURIComponent(
+    `Hi ${division}, I'd like to inquire about ${name}.`,
+  )}`;
+
 function Index() {
+  const [productsByCat, setProductsByCat] = useState<Record<string, Product[]>>({
+    sidai: [],
+    textile: [],
+    collective: [],
+  });
+  const { addItem } = useCart();
+
+  useEffect(() => {
+    let active = true;
+    supabase
+      .from("sidai_products")
+      .select("id, name, tag, price, description, image_url, sizes, colors, category")
+      .eq("is_published", true)
+      .in("category", ["sidai", "textile", "collective"])
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (!active || !data) return;
+        const grouped: Record<string, Product[]> = { sidai: [], textile: [], collective: [] };
+        for (const p of data) {
+          const cat = (p as { category: string }).category;
+          if (grouped[cat]) grouped[cat].push(p as Product);
+        }
+        setProductsByCat(grouped);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <>
       {/* HERO */}
@@ -95,28 +147,32 @@ function Index() {
             </TabsList>
             {worlds.map((w) => (
               <TabsContent key={w.title} value={w.title} className="mt-8">
-                <div className="grid items-center gap-8 md:grid-cols-2">
-                  <Link to={w.to} className="group block overflow-hidden bg-muted">
-                    <div className="aspect-[4/3] overflow-hidden">
-                      <img
-                        src={w.img}
-                        alt={w.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                  </Link>
+                <div className="mb-8 flex flex-col items-start justify-between gap-3 md:flex-row md:items-end">
                   <div>
-                    <h3 className="font-display text-3xl md:text-5xl">{w.title}</h3>
-                    <p className="mt-4 max-w-md text-base text-muted-foreground">{w.desc}</p>
-                    <Link
-                      to={w.to}
-                      className="tracking-luxury mt-8 inline-block rounded-full bg-foreground px-7 py-4 text-[11px] text-background transition-opacity hover:opacity-90"
-                    >
-                      {w.cta} →
-                    </Link>
+                    <h3 className="font-display text-3xl md:text-4xl">{w.title}</h3>
+                    <p className="mt-2 max-w-md text-sm text-muted-foreground">{w.desc}</p>
                   </div>
+                  <Link
+                    to={w.to}
+                    className="tracking-luxury inline-block rounded-full border border-foreground/20 px-5 py-2.5 text-[10px] text-foreground transition-colors hover:bg-foreground hover:text-background"
+                  >
+                    {w.cta} →
+                  </Link>
                 </div>
+                <DivisionGrid
+                  division={w.key}
+                  title={w.title}
+                  products={productsByCat[w.key] ?? []}
+                  onAdd={(p) =>
+                    addItem({
+                      name: p.name,
+                      price: p.price,
+                      size: p.sizes?.[0] ?? "One size",
+                      color: p.colors?.[0] ?? "Default",
+                      img: p.image_url ?? undefined,
+                    })
+                  }
+                />
               </TabsContent>
             ))}
           </Tabs>
@@ -170,5 +226,68 @@ function Index() {
         </div>
       </section>
     </>
+  );
+}
+
+function DivisionGrid({
+  division,
+  title,
+  products,
+  onAdd,
+}: {
+  division: "sidai" | "textile" | "collective";
+  title: string;
+  products: Product[];
+  onAdd: (p: Product) => void;
+}) {
+  if (products.length === 0) {
+    return (
+      <p className="text-sm text-muted-foreground">No products available yet.</p>
+    );
+  }
+
+  return (
+    <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      {products.map((p) => (
+        <div key={p.id} className="group">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+            {p.image_url && (
+              <img
+                src={p.image_url}
+                alt={p.name}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            )}
+          </div>
+          <div className="mt-4 flex items-start justify-between gap-3">
+            <h4 className="font-display text-lg leading-tight">{p.name}</h4>
+            {p.price > 0 && (
+              <span className="text-sm text-muted-foreground whitespace-nowrap">
+                KSh {p.price.toLocaleString()}
+              </span>
+            )}
+          </div>
+          {division === "sidai" ? (
+            <button
+              type="button"
+              onClick={() => onAdd(p)}
+              className="tracking-luxury mt-4 w-full rounded-full bg-foreground px-4 py-3 text-[10px] text-background transition-opacity hover:opacity-90"
+            >
+              Add to cart
+            </button>
+          ) : (
+            <a
+              href={inquireUrl(title, p.name)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tracking-luxury mt-4 block w-full rounded-full border border-foreground px-4 py-3 text-center text-[10px] text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              View product
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }
