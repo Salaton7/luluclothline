@@ -241,8 +241,33 @@ function DivisionGrid({
   onAdd: (p: Product) => void;
 }) {
   if (products.length === 0) {
+    const fallback = worlds.find((w) => w.key === division)!;
     return (
-      <p className="text-sm text-muted-foreground">No products available yet.</p>
+      <Link
+        to={fallback.to}
+        className="group relative block overflow-hidden bg-muted"
+      >
+        <div className="aspect-[16/9] overflow-hidden md:aspect-[21/9]">
+          <img
+            src={fallback.img}
+            alt={fallback.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-7 text-background md:p-10">
+          <h4 className="font-display text-3xl text-slate-50 md:text-4xl">
+            {fallback.title}
+          </h4>
+          <p className="mt-2 max-w-md text-sm text-background/85">
+            {fallback.desc}
+          </p>
+          <span className="tracking-luxury mt-5 inline-block border-b border-background/50 pb-1 text-[10px]">
+            {fallback.cta} →
+          </span>
+        </div>
+      </Link>
     );
   }
 
